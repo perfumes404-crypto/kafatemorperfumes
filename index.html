@@ -399,8 +399,37 @@ window.open(https://wa.me/59892436816?text=${message});
 }
 
 </script>
+<script>
 
+let cart = [];
+
+function addToCart(name, price){
+cart.push({name, price});
+updateCart();
+}
+
+function updateCart(){
+document.getElementById("cartCount").innerText = cart.length;
+}
+
+function toggleCart(){
+let message = "Hola! Quiero comprar:%0A%0A";
+let total = 0;
+
+cart.forEach(item=>{
+message += "- " + item.name + " $" + item.price + "%0A";
+total += item.price;
+});
+
+message += "%0ATotal: $" + total;
+
+window.open("https://wa.me/59892436816?text=" + message);
+
+}
+
+</script>
 </body>
 </html>
+
 
 

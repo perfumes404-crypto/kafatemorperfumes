@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Kafatemor Perfumes | Perfumes en Uruguay</title>
-
-<meta name="description" content="Perfumes originales en Uruguay. Envíos a Montevideo, Rocha y todo el país. Kafatemor Perfumes.">
+<title>Kafatemor Perfumes</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
@@ -27,22 +26,22 @@ color:white;
 .container{
 max-width:1200px;
 margin:auto;
-padding:40px 20px;
-}
-
-h1,h2,h3{
-font-weight:600;
+padding:60px 20px;
 }
 
 .gold{
 color:#d4af37;
 }
 
+h1,h2{
+margin-bottom:20px;
+}
+
 /* HERO */
 
 .hero{
 height:90vh;
-background:url("https://images.unsplash.com/photo-1594035910387-fea47794261f") center/cover;
+background:url("kafatemor.jpg") center/cover;
 display:flex;
 align-items:center;
 justify-content:center;
@@ -56,12 +55,7 @@ border-radius:10px;
 }
 
 .hero h1{
-font-size:40px;
-margin-bottom:10px;
-}
-
-.hero p{
-margin-bottom:20px;
+font-size:42px;
 }
 
 .btn{
@@ -71,12 +65,14 @@ border-radius:30px;
 text-decoration:none;
 margin:5px;
 font-weight:500;
+cursor:pointer;
 transition:0.3s;
 }
 
 .btn-primary{
 background:#d4af37;
 color:black;
+border:none;
 }
 
 .btn-primary:hover{
@@ -124,11 +120,6 @@ margin:10px 0;
 font-size:18px;
 }
 
-button{
-cursor:pointer;
-border:none;
-}
-
 /* BENEFICIOS */
 
 .benefits{
@@ -164,17 +155,13 @@ border-radius:10px;
 background:#d4af37;
 color:black;
 text-align:center;
-padding:60px 20px;
-}
-
-.cta h2{
-margin-bottom:20px;
+padding:70px 20px;
 }
 
 /* FOOTER */
 
 footer{
-background:#000;
+background:black;
 text-align:center;
 padding:30px;
 }
@@ -190,10 +177,6 @@ padding:20px;
 border-radius:10px;
 width:260px;
 box-shadow:0 5px 20px rgba(0,0,0,0.5);
-}
-
-.cart h3{
-margin-bottom:10px;
 }
 
 .item{
@@ -240,6 +223,7 @@ grid-template-columns:1fr;
 }
 
 </style>
+
 </head>
 
 <body>
@@ -268,9 +252,9 @@ grid-template-columns:1fr;
 
 <h2>Sobre <span class="gold">Kafatemor Perfumes</span></h2>
 
-<p style="margin-top:15px;max-width:700px;">
+<p>
 Kafatemor Perfumes es una empresa dedicada a la venta de perfumes originales y de alta calidad.
-Operamos desde Montevideo y Rocha realizando envíos a todo Uruguay. 
+Operamos desde Montevideo y Rocha realizando envíos a todo Uruguay.
 Nuestro objetivo es ofrecer fragancias increíbles a precios competitivos con atención rápida y confiable.
 </p>
 
@@ -285,38 +269,77 @@ Nuestro objetivo es ofrecer fragancias increíbles a precios competitivos con at
 <div class="grid">
 
 <div class="card">
-<img src="honor-glory.jpg">
+
+<img src=“honor-glory.jpg">
+
 <div class="card-body">
+
 <h3>Honor & Glory</h3>
+
 <p class="price">$1990</p>
-<button class="btn btn-primary" onclick="add('Honor & Glory',1990)">Agregar al carrito</button>
+
+<button class="btn btn-primary" onclick="addToCart('Honor & Glory',1990)">
+Agregar al carrito
+</button>
+
 </div>
+
 </div>
 
 <div class="card">
+
 <img src="khamrah.jpg">
+
 <div class="card-body">
+
 <h3>Khamrah</h3>
+
 <p class="price">$1990</p>
-<button class="btn btn-primary" onclick="add('Khamrah',1990)">Agregar al carrito</button>
+
+<button class="btn btn-primary" onclick="addToCart('Khamrah',1990)">
+Agregar al carrito
+</button>
+
 </div>
+
 </div>
-  
+
 <div class="card">
-<img src="fakhar-black.jpg">
-<div class="card-body">
-<h3>Fakhar Black</h3>
-<p class="price">$2090</p>
-<button class="btn btn-primary" onclick="add('Fakhar Black',2090)">Agregar al carrito</button>
-</div>
-</div>
-<div class="card">
+
 <img src="mandarin-sky.jpg">
+
 <div class="card-body">
+
 <h3>Mandarin Sky</h3>
+
 <p class="price">$1990</p>
-<button class="btn btn-primary" onclick="add('Mandarin Sky',1990)">Agregar al carrito</button>
+
+<button class="btn btn-primary" onclick="addToCart('Mandarin Sky',1990)">
+Agregar al carrito
+</button>
+
 </div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<img src="fakhar-black.jpg">
+
+<div class="card-body">
+
+<h3>Fakhar Black</h3>
+
+<p class="price">$2090</p>
+
+<button class="btn btn-primary" onclick="addToCart('Fakhar Blacj',2090)">
+Agregar al carrito
+</button>
+
+</div>
+
 </div>
 
 </div>
@@ -352,15 +375,15 @@ Nuestro objetivo es ofrecer fragancias increíbles a precios competitivos con at
 <div class="testimonials">
 
 <div class="testimonial">
-"Excelente atención y perfumes originales. Llegó rapidísimo."
+Excelente atención y perfumes originales.
 </div>
 
 <div class="testimonial">
-"Los mejores precios que encontré en Uruguay."
+Los mejores precios que encontré en Uruguay.
 </div>
 
 <div class="testimonial">
-"Compré Khamrah y el aroma dura todo el día. Recomendado."
+Compré Khamrah y el aroma dura todo el día.
 </div>
 
 </div>
@@ -373,8 +396,8 @@ Nuestro objetivo es ofrecer fragancias increíbles a precios competitivos con at
 
 <h2>Seguinos en Instagram</h2>
 
-<a href="https://www.instagram.com/kafatemorperfumes.uy" class="btn btn-primary" style="margin-top:20px;">
-Ver Instagram
+<a href="https://www.instagram.com/kafatemorperfumes.uy" class="btn btn-primary">
+Ir a Instagram
 </a>
 
 </section>
@@ -389,23 +412,13 @@ Ver Instagram
 
 </section>
 
-<!-- FOOTER -->
-
 <footer>
 
 <p>Kafatemor Perfumes</p>
 
-<p>Montevideo y Rocha, Uruguay</p>
+<p>Montevideo y Rocha - Uruguay</p>
 
-<p>
-<a href="https://www.instagram.com/kafatemorperfumes.uy" style="color:#d4af37;">
-Instagram
-</a>
-</p>
-
-<p style="margin-top:10px;">
-© 2026 Kafatemor Perfumes
-</p>
+<p>© 2026</p>
 
 </footer>
 
@@ -419,7 +432,9 @@ Instagram
 
 <p>Total: $<span id="total">0</span></p>
 
-<button class="btn btn-primary" onclick="send()">Enviar pedido</button>
+<button class="btn btn-primary" onclick="sendWhatsApp()">
+Enviar pedido
+</button>
 
 </div>
 
@@ -427,11 +442,9 @@ Instagram
 
 <script>
 
-<script>
+let cart=[];
 
-let cart = [];
-
-function add(name,price){
+function addToCart(name,price){
 
 cart.push({
 name:name,
@@ -442,7 +455,7 @@ updateCart();
 
 }
 
-function removeItem(index){
+function removeFromCart(index){
 
 cart.splice(index,1);
 
@@ -452,61 +465,64 @@ updateCart();
 
 function updateCart(){
 
-let items = document.getElementById("cartItems");
-items.innerHTML = "";
+let cartItems=document.getElementById("cartItems");
 
-let total = 0;
+cartItems.innerHTML="";
+
+let total=0;
 
 for(let i=0;i<cart.length;i++){
 
-let item = cart[i];
+let item=cart[i];
 
-total += item.price;
+total+=item.price;
 
-items.innerHTML += `
+cartItems.innerHTML+=`
 <div class="item">
-${item.name} - $${item.price}
-<span class="remove" onclick="removeItem(${i})">❌</span>
+${item.name} $${item.price}
+<span class="remove" onclick="removeFromCart(${i})">❌</span>
 </div>
 `;
 
 }
 
-document.getElementById("total").innerText = total;
+document.getElementById("total").innerText=total;
 
 }
 
-function send(){
+function sendWhatsApp(){
 
-if(cart.length === 0){
+if(cart.length===0){
+
 alert("Tu carrito está vacío");
+
 return;
+
 }
 
-let msg = "Hola! Quiero pedir:%0A";
+let msg="Hola! Quiero pedir:%0A";
 
 for(let i=0;i<cart.length;i++){
 
-msg += "- " + cart[i].name + " $" + cart[i].price + "%0A";
+msg+="- "+cart[i].name+" $"+cart[i].price+"%0A";
 
 }
 
-let total = 0;
+let total=0;
 
 for(let i=0;i<cart.length;i++){
 
-total += cart[i].price;
+total+=cart[i].price;
 
 }
 
-msg += "%0ATotal: $" + total;
+msg+="%0ATotal: $"+total;
 
-window.open("https://wa.me/59892436816?text=" + msg);
+window.open("https://wa.me/59892436816?text="+msg);
 
 }
 
 </script>
+
 </body>
 </html>
-
-

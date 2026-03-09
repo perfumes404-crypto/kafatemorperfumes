@@ -427,72 +427,86 @@ Instagram
 
 <script>
 
-let cart=[]
+<script>
+
+let cart = [];
 
 function add(name,price){
 
-cart.push({name,price})
+cart.push({
+name:name,
+price:price
+});
 
-render()
-
-}
-
-function remove(i){
-
-cart.splice(i,1)
-
-render()
+updateCart();
 
 }
 
-function render(){
+function removeItem(index){
 
-let items=document.getElementById("cartItems")
+cart.splice(index,1);
 
-items.innerHTML=""
+updateCart();
 
-let total=0
+}
 
-cart.forEach((p,i)=>{
+function updateCart(){
 
-total+=p.price
+let items = document.getElementById("cartItems");
+items.innerHTML = "";
 
-items.innerHTML+=`
+let total = 0;
+
+for(let i=0;i<cart.length;i++){
+
+let item = cart[i];
+
+total += item.price;
+
+items.innerHTML += `
 <div class="item">
-${p.name} $${p.price}
-<span class="remove" onclick="remove(${i})">❌</span>
+${item.name} - $${item.price}
+<span class="remove" onclick="removeItem(${i})">❌</span>
 </div>
-`
+`;
 
-})
+}
 
-document.getElementById("total").innerText=total
+document.getElementById("total").innerText = total;
 
 }
 
 function send(){
 
-if(cart.length==0){
-alert("Tu carrito está vacío")
-return
+if(cart.length === 0){
+alert("Tu carrito está vacío");
+return;
 }
 
-let msg="Hola! Quiero pedir:%0A"
+let msg = "Hola! Quiero pedir:%0A";
 
-cart.forEach(p=>{
-msg+=- ${p.name} $${p.price}%0A
-})
+for(let i=0;i<cart.length;i++){
 
-let total=cart.reduce((a,b)=>a+b.price,0)
+msg += "- " + cart[i].name + " $" + cart[i].price + "%0A";
 
-msg+=%0ATotal: $${total}
+}
 
-window.open(https://wa.me/59892436816?text=${msg})
+let total = 0;
+
+for(let i=0;i<cart.length;i++){
+
+total += cart[i].price;
+
+}
+
+msg += "%0ATotal: $" + total;
+
+window.open("https://wa.me/59892436816?text=" + msg);
 
 }
 
 </script>
-
 </body>
 </html>
+
 

@@ -4,112 +4,237 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Kafatemor Perfumes</title>
+<title>Kafatemor Perfumes | Perfumes en Uruguay</title>
+
+<meta name="description" content="Perfumes originales en Uruguay. Envíos a Montevideo, Rocha y todo el país. Kafatemor Perfumes.">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 
-body{
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 font-family:Poppins;
-margin:0;
-background:#f7f7f7;
 }
 
-header{
-background:black;
+body{
+background:#0f0f0f;
 color:white;
-text-align:center;
-padding:20px;
 }
 
-h1{
-margin:0;
-}
-
-.catalogo{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:20px;
-padding:30px;
-max-width:1000px;
+.container{
+max-width:1200px;
 margin:auto;
+padding:40px 20px;
 }
 
-.producto{
-background:white;
-border-radius:10px;
-padding:15px;
+h1,h2,h3{
+font-weight:600;
+}
+
+.gold{
+color:#d4af37;
+}
+
+/* HERO */
+
+.hero{
+height:90vh;
+background:url("https://images.unsplash.com/photo-1594035910387-fea47794261f") center/cover;
+display:flex;
+align-items:center;
+justify-content:center;
 text-align:center;
-box-shadow:0 4px 10px rgba(0,0,0,0.1);
 }
 
-.producto img{
-width:100%;
-height:180px;
-object-fit:contain;
+.hero-content{
+background:rgba(0,0,0,0.6);
+padding:40px;
+border-radius:10px;
 }
 
-.precio{
-font-weight:bold;
-margin:10px 0;
+.hero h1{
+font-size:40px;
+margin-bottom:10px;
 }
 
-.boton{
-background:black;
-color:white;
-padding:10px 15px;
-border:none;
-border-radius:8px;
-cursor:pointer;
+.hero p{
+margin-bottom:20px;
+}
+
+.btn{
+display:inline-block;
+padding:12px 25px;
+border-radius:30px;
+text-decoration:none;
+margin:5px;
+font-weight:500;
 transition:0.3s;
 }
 
-.boton:hover{
-background:#444;
+.btn-primary{
+background:#d4af37;
+color:black;
 }
 
-.carrito{
+.btn-primary:hover{
+transform:scale(1.05);
+}
+
+.btn-secondary{
+border:1px solid white;
+color:white;
+}
+
+/* PERFUMES */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+}
+
+.card{
+background:#1c1c1c;
+border-radius:10px;
+overflow:hidden;
+text-align:center;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+.card img{
+width:100%;
+height:220px;
+object-fit:cover;
+}
+
+.card-body{
+padding:20px;
+}
+
+.price{
+color:#d4af37;
+margin:10px 0;
+font-size:18px;
+}
+
+button{
+cursor:pointer;
+border:none;
+}
+
+/* BENEFICIOS */
+
+.benefits{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+text-align:center;
+}
+
+.benefit{
+background:#1c1c1c;
+padding:20px;
+border-radius:10px;
+}
+
+/* TESTIMONIOS */
+
+.testimonials{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+}
+
+.testimonial{
+background:#1c1c1c;
+padding:20px;
+border-radius:10px;
+}
+
+/* CTA */
+
+.cta{
+background:#d4af37;
+color:black;
+text-align:center;
+padding:60px 20px;
+}
+
+.cta h2{
+margin-bottom:20px;
+}
+
+/* FOOTER */
+
+footer{
+background:#000;
+text-align:center;
+padding:30px;
+}
+
+/* CARRITO */
+
+.cart{
 position:fixed;
 right:20px;
-bottom:20px;
-background:white;
+bottom:90px;
+background:#1c1c1c;
 padding:20px;
 border-radius:10px;
 width:260px;
-box-shadow:0 5px 20px rgba(0,0,0,0.2);
+box-shadow:0 5px 20px rgba(0,0,0,0.5);
 }
 
-.carrito h3{
-margin-top:0;
+.cart h3{
+margin-bottom:10px;
 }
 
 .item{
 display:flex;
 justify-content:space-between;
-margin-bottom:8px;
+margin-bottom:6px;
 }
 
-.eliminar{
+.remove{
 color:red;
 cursor:pointer;
 }
 
-.total{
-font-weight:bold;
-margin-top:10px;
-}
+/* WHATSAPP */
 
 .whatsapp{
+position:fixed;
+right:20px;
+bottom:20px;
 background:#25D366;
-width:100%;
-margin-top:10px;
+color:white;
+padding:15px 18px;
+border-radius:50%;
+font-size:22px;
+text-decoration:none;
 }
 
-@media(max-width:800px){
+/* MOBILE */
 
-.catalogo{
+@media(max-width:900px){
+
+.grid{
 grid-template-columns:repeat(2,1fr);
+}
+
+.benefits{
+grid-template-columns:repeat(2,1fr);
+}
+
+.testimonials{
+grid-template-columns:1fr;
 }
 
 }
@@ -119,74 +244,194 @@ grid-template-columns:repeat(2,1fr);
 
 <body>
 
-<header>
-<h1>Kafatemor Perfumes</h1>
-<p>Perfumes árabes originales</p>
-</header>
+<!-- HERO -->
 
-<section class="catalogo">
+<section class="hero">
 
-<div class="producto">
-<img src="https://lattafa.com/cdn/shop/products/Honor_And_Glory.png">
-<h3>Honor & Glory</h3>
-<p class="precio">$1990</p>
-<button class="boton" onclick="agregar('Honor & Glory',1990)">Agregar al carrito</button>
-</div>
+<div class="hero-content">
 
-<div class="producto">
-<img src="https://lattafa.com/cdn/shop/products/Khamrah.png">
-<h3>Khamrah</h3>
-<p class="precio">$1990</p>
-<button class="boton" onclick="agregar('Khamrah',1990)">Agregar al carrito</button>
-</div>
+<h1>Descubrí tu próxima <span class="gold">fragancia favorita</span></h1>
 
-<div class="producto">
-<img src="https://lattafa.com/cdn/shop/products/Mandarin_Sky.png">
-<h3>Mandarin Sky</h3>
-<p class="precio">$1990</p>
-<button class="boton" onclick="agregar('Mandarin Sky',1990)">Agregar al carrito</button>
-</div>
+<p>Perfumes de alta calidad con envíos a todo Uruguay</p>
 
-<div class="producto">
-<img src="https://lattafa.com/cdn/shop/products/Fakhar_Black.png">
-<h3>Fakhar Black</h3>
-<p class="precio">$1990</p>
-<button class="boton" onclick="agregar('Fakhar Black',1990)">Agregar al carrito</button>
+<a href="#perfumes" class="btn btn-primary">Ver perfumes</a>
+
+<a href="https://wa.me/59892436816" class="btn btn-secondary">Comprar por WhatsApp</a>
+
 </div>
 
 </section>
 
-<div class="carrito">
+<!-- SOBRE NOSOTROS -->
 
-<h3>🛒 Carrito</h3>
+<section class="container">
 
-<div id="lista"></div>
+<h2>Sobre <span class="gold">Kafatemor Perfumes</span></h2>
 
-<p class="total">
-Total: $<span id="total">0</span>
+<p style="margin-top:15px;max-width:700px;">
+Kafatemor Perfumes es una empresa dedicada a la venta de perfumes originales y de alta calidad.
+Operamos desde Montevideo y Rocha realizando envíos a todo Uruguay. 
+Nuestro objetivo es ofrecer fragancias increíbles a precios competitivos con atención rápida y confiable.
 </p>
 
-<button class="boton whatsapp" onclick="enviarWhatsapp()">
-Enviar pedido por WhatsApp
-</button>
+</section>
+
+<!-- PERFUMES -->
+
+<section id="perfumes" class="container">
+
+<h2>Perfumes destacados</h2>
+
+<div class="grid">
+
+<div class="card">
+<img src="https://lattafa.com/cdn/shop/products/Honor_And_Glory.png">
+<div class="card-body">
+<h3>Honor & Glory</h3>
+<p class="price">$1990</p>
+<button class="btn btn-primary" onclick="add('Honor & Glory',1990)">Agregar al carrito</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://lattafa.com/cdn/shop/products/Khamrah.png">
+<div class="card-body">
+<h3>Khamrah</h3>
+<p class="price">$1990</p>
+<button class="btn btn-primary" onclick="add('Khamrah',1990)">Agregar al carrito</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://lattafa.com/cdn/shop/products/Mandarin_Sky.png">
+<div class="card-body">
+<h3>Mandarin Sky</h3>
+<p class="price">$1990</p>
+<button class="btn btn-primary" onclick="add('Mandarin Sky',1990)">Agregar al carrito</button>
+</div>
+</div>
 
 </div>
 
+</section>
+
+<!-- BENEFICIOS -->
+
+<section class="container">
+
+<h2>¿Por qué elegirnos?</h2>
+
+<div class="benefits">
+
+<div class="benefit">🚚 Envíos a todo Uruguay</div>
+
+<div class="benefit">🧴 Perfumes originales</div>
+
+<div class="benefit">⚡ Atención rápida</div>
+
+<div class="benefit">💰 Precios competitivos</div>
+
+</div>
+
+</section>
+
+<!-- TESTIMONIOS -->
+
+<section class="container">
+
+<h2>Clientes felices</h2>
+
+<div class="testimonials">
+
+<div class="testimonial">
+"Excelente atención y perfumes originales. Llegó rapidísimo."
+</div>
+
+<div class="testimonial">
+"Los mejores precios que encontré en Uruguay."
+</div>
+
+<div class="testimonial">
+"Compré Khamrah y el aroma dura todo el día. Recomendado."
+</div>
+
+</div>
+
+</section>
+
+<!-- INSTAGRAM -->
+
+<section class="container" style="text-align:center">
+
+<h2>Seguinos en Instagram</h2>
+
+<a href="https://www.instagram.com/kafatemorperfumes.uy" class="btn btn-primary" style="margin-top:20px;">
+Ver Instagram
+</a>
+
+</section>
+
+<!-- CTA -->
+
+<section class="cta">
+
+<h2>¿Buscás tu próximo perfume?</h2>
+
+<a href="https://wa.me/59892436816" class="btn btn-primary">Escribinos ahora</a>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+<p>Kafatemor Perfumes</p>
+
+<p>Montevideo y Rocha, Uruguay</p>
+
+<p>
+<a href="https://www.instagram.com/kafatemorperfumes.uy" style="color:#d4af37;">
+Instagram
+</a>
+</p>
+
+<p style="margin-top:10px;">
+© 2026 Kafatemor Perfumes
+</p>
+
+</footer>
+
+<!-- CARRITO -->
+
+<div class="cart">
+
+<h3>Carrito</h3>
+
+<div id="cartItems"></div>
+
+<p>Total: $<span id="total">0</span></p>
+
+<button class="btn btn-primary" onclick="send()">Enviar pedido</button>
+
+</div>
+
+<a class="whatsapp" href="https://wa.me/59892436816">💬</a>
+
 <script>
 
-let carrito = []
+let cart=[]
 
-function agregar(nombre,precio){
+function add(name,price){
 
-carrito.push({nombre,precio})
+cart.push({name,price})
 
 render()
 
 }
 
-function eliminar(index){
+function remove(i){
 
-carrito.splice(index,1)
+cart.splice(i,1)
 
 render()
 
@@ -194,32 +439,21 @@ render()
 
 function render(){
 
-let lista = document.getElementById("lista")
+let items=document.getElementById("cartItems")
 
-lista.innerHTML=""
+items.innerHTML=""
 
 let total=0
 
-carrito.forEach((item,i)=>{
+cart.forEach((p,i)=>{
 
-total+=item.precio
+total+=p.price
 
-lista.innerHTML+=`
-
+items.innerHTML+=`
 <div class="item">
-
-<span>${item.nombre}</span>
-
-<span>
-
-$${item.precio}
-
-<span class="eliminar" onclick="eliminar(${i})">❌</span>
-
-</span>
-
+${p.name} $${p.price}
+<span class="remove" onclick="remove(${i})">❌</span>
 </div>
-
 `
 
 })
@@ -228,29 +462,24 @@ document.getElementById("total").innerText=total
 
 }
 
-function enviarWhatsapp(){
+function send(){
 
-if(carrito.length==0){
-
+if(cart.length==0){
 alert("Tu carrito está vacío")
-
 return
-
 }
 
-let mensaje="Hola! Quiero pedir:%0A"
+let msg="Hola! Quiero pedir:%0A"
 
-carrito.forEach(item=>{
-
-mensaje+=- ${item.nombre} $${item.precio}%0A
-
+cart.forEach(p=>{
+msg+=- ${p.name} $${p.price}%0A
 })
 
-let total=carrito.reduce((a,b)=>a+b.precio,0)
+let total=cart.reduce((a,b)=>a+b.price,0)
 
-mensaje+=%0ATotal: $${total}
+msg+=%0ATotal: $${total}
 
-window.open(https://wa.me/59892436816?text=${mensaje})
+window.open(https://wa.me/59892436816?text=${msg})
 
 }
 

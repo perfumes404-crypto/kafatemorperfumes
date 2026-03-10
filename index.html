@@ -15,7 +15,7 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Poppins;
+font-family:Poppins,sans-serif;
 }
 
 body{
@@ -23,18 +23,38 @@ background:#0f0f0f;
 color:white;
 }
 
+/* NAVBAR */
+
+header{
+position:fixed;
+top:0;
+width:100%;
+background:black;
+padding:15px 30px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+z-index:1000;
+}
+
+header a{
+color:white;
+text-decoration:none;
+margin-left:20px;
+}
+
+header a:hover{
+color:#d4af37;
+}
+
 .container{
 max-width:1200px;
 margin:auto;
-padding:60px 20px;
+padding:80px 20px;
 }
 
 .gold{
 color:#d4af37;
-}
-
-h1,h2{
-margin-bottom:20px;
 }
 
 /* HERO */
@@ -55,18 +75,16 @@ border-radius:10px;
 }
 
 .hero h1{
-font-size:42px;
+font-size:40px;
 }
 
 .btn{
 display:inline-block;
-padding:12px 25px;
-border-radius:30px;
-text-decoration:none;
+padding:10px 20px;
+border-radius:25px;
 margin:5px;
-font-weight:500;
+text-decoration:none;
 cursor:pointer;
-transition:0.3s;
 }
 
 .btn-primary{
@@ -75,13 +93,24 @@ color:black;
 border:none;
 }
 
-.btn-primary:hover{
-transform:scale(1.05);
-}
-
 .btn-secondary{
 border:1px solid white;
 color:white;
+}
+
+/* BUSCADOR */
+
+.search{
+margin-bottom:40px;
+text-align:center;
+}
+
+.search input{
+padding:12px;
+width:320px;
+border-radius:30px;
+border:none;
+outline:none;
 }
 
 /* PERFUMES */
@@ -101,7 +130,7 @@ transition:0.3s;
 }
 
 .card:hover{
-transform:translateY(-5px);
+transform:translateY(-8px);
 }
 
 .card img{
@@ -117,53 +146,6 @@ padding:20px;
 .price{
 color:#d4af37;
 margin:10px 0;
-font-size:18px;
-}
-
-/* BENEFICIOS */
-
-.benefits{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:20px;
-text-align:center;
-}
-
-.benefit{
-background:#1c1c1c;
-padding:20px;
-border-radius:10px;
-}
-
-/* TESTIMONIOS */
-
-.testimonials{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:20px;
-}
-
-.testimonial{
-background:#1c1c1c;
-padding:20px;
-border-radius:10px;
-}
-
-/* CTA */
-
-.cta{
-background:#d4af37;
-color:black;
-text-align:center;
-padding:70px 20px;
-}
-
-/* FOOTER */
-
-footer{
-background:black;
-text-align:center;
-padding:30px;
 }
 
 /* CARRITO */
@@ -176,12 +158,12 @@ background:#1c1c1c;
 padding:20px;
 border-radius:10px;
 width:260px;
-box-shadow:0 5px 20px rgba(0,0,0,0.5);
 }
 
 .item{
 display:flex;
 justify-content:space-between;
+font-size:14px;
 margin-bottom:6px;
 }
 
@@ -198,7 +180,7 @@ right:20px;
 bottom:20px;
 background:#25D366;
 color:white;
-padding:15px 18px;
+padding:15px;
 border-radius:50%;
 font-size:22px;
 text-decoration:none;
@@ -212,14 +194,6 @@ text-decoration:none;
 grid-template-columns:repeat(2,1fr);
 }
 
-.benefits{
-grid-template-columns:repeat(2,1fr);
-}
-
-.testimonials{
-grid-template-columns:1fr;
-}
-
 }
 
 </style>
@@ -228,7 +202,13 @@ grid-template-columns:1fr;
 
 <body>
 
-<!-- HERO -->
+<header>
+<div class="gold"><b>Kafatemor</b></div>
+<div>
+<a href="#">Inicio</a>
+<a href="#perfumes">Perfumes</a>
+</div>
+</header>
 
 <section class="hero">
 
@@ -236,189 +216,27 @@ grid-template-columns:1fr;
 
 <h1>Descubrí tu próxima <span class="gold">fragancia favorita</span></h1>
 
-<p>Perfumes de alta calidad con envíos a todo Uruguay</p>
+<p>Perfumes originales con envíos a todo Uruguay</p>
 
 <a href="#perfumes" class="btn btn-primary">Ver perfumes</a>
 
-<a href="https://wa.me/59892436816" class="btn btn-secondary">Comprar por WhatsApp</a>
-
 </div>
 
 </section>
-
-<!-- SOBRE NOSOTROS -->
-
-<section class="container">
-
-<h2>Sobre <span class="gold">Kafatemor Perfumes</span></h2>
-
-<p>
-Kafatemor Perfumes es una empresa dedicada a la venta de perfumes originales y de alta calidad.
-Operamos desde Montevideo y Rocha realizando envíos a todo Uruguay.
-Nuestro objetivo es ofrecer fragancias increíbles a precios competitivos con atención rápida y confiable.
-</p>
-
-</section>
-
-<!-- PERFUMES -->
 
 <section id="perfumes" class="container">
 
-<h2>Perfumes destacados</h2>
-<div class="card">
+<h2>Catálogo de perfumes</h2>
 
-<img src="khamrah.jpg">
+<div class="search">
 
-<div class="card-body">
-
-<h3>Khamrah</h3>
-
-<p class="price">$1990</p>
-
-<button class="btn btn-primary" onclick="addToCart('Khamrah',1990)">
-Agregar al carrito
-</button>
+<input type="text" id="searchInput" placeholder="Buscar perfume...">
 
 </div>
 
-</div>
-<div class="card">
-
-<img src="honor-glory.jpg">
-
-<div class="card-body">
-
-<h3>Honor and Glory</h3>
-
-<p class="price">$1990</p>
-
-<button class="btn btn-primary" onclick="addToCart('Honor and Glory',1990)">
-Agregar al carrito
-</button>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<img src="mandarin-sky.jpg">
-
-<div class="card-body">
-
-<h3>Mandarin Sky</h3>
-
-<p class="price">$1990</p>
-
-<button class="btn btn-primary" onclick="addToCart('Mandarin Sky',1990)">
-Agregar al carrito
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<img src="fakhar-black.jpg">
-
-<div class="card-body">
-
-<h3>Fakhar Black</h3>
-
-<p class="price">$2090</p>
-
-<button class="btn btn-primary" onclick="addToCart('Fakhar Black',2090)">
-Agregar al carrito
-</button>
-
-</div>
-
-</div>
-
-</div>
+<div class="grid" id="perfumeGrid"></div>
 
 </section>
-
-<!-- BENEFICIOS -->
-
-<section class="container">
-
-<h2>¿Por qué elegirnos?</h2>
-
-<div class="benefits">
-
-<div class="benefit">🚚 Envíos a todo Uruguay</div>
-
-<div class="benefit">🧴 Perfumes originales</div>
-
-<div class="benefit">⚡ Atención rápida</div>
-
-<div class="benefit">💰 Precios competitivos</div>
-
-</div>
-
-</section>
-
-<!-- TESTIMONIOS -->
-
-<section class="container">
-
-<h2>Clientes felices</h2>
-
-<div class="testimonials">
-
-<div class="testimonial">
-Excelente atención y perfumes originales.
-</div>
-
-<div class="testimonial">
-Los mejores precios que encontré en Uruguay.
-</div>
-
-<div class="testimonial">
-Compré Khamrah y el aroma dura todo el día.
-</div>
-
-</div>
-
-</section>
-
-<!-- INSTAGRAM -->
-
-<section class="container" style="text-align:center">
-
-<h2>Seguinos en Instagram</h2>
-
-<a href="https://www.instagram.com/kafatemorperfumes.uy" class="btn btn-primary">
-Ir a Instagram
-</a>
-
-</section>
-
-<!-- CTA -->
-
-<section class="cta">
-
-<h2>¿Buscás tu próximo perfume?</h2>
-
-<a href="https://wa.me/59892436816" class="btn btn-primary">Escribinos ahora</a>
-
-</section>
-
-<footer>
-
-<p>Kafatemor Perfumes</p>
-
-<p>Montevideo y Rocha - Uruguay</p>
-
-<p>©️ 2026</p>
-
-</footer>
-
-<!-- CARRITO -->
 
 <div class="cart">
 
@@ -438,14 +256,125 @@ Enviar pedido
 
 <script>
 
+const perfumes = [
+
+"Aqua di Gioia EDP.jpg",
+"Asad Zanzibar.webp",
+"Ajayes Portrait.webp",
+"Calvin Klein One 200 ml.webp",
+"9 AM Afnan.avif",
+"Azzure Oud French Avenue.webp",
+"Coco Mademoiselle Chanel.webp",
+"Collection Dantiqués 1910 Lattafa.webp",
+"Al Haramain Amber Oud White.webp",
+"212 VIP Men Are You on The List.jpg",
+"Aqua di Gio PARFUM 50ml.webp",
+"9 AM Dive.webp",
+"Club de Nuit Preciux 1.webp",
+"Delights Island Breeze Armaf 100 ml.webp",
+"Divine Elixir Women JPG.webp",
+"Al Absar Mudiyah Edp 100 Ml.webp",
+"Bharara Bleu 100 ml EDP.webp",
+"Cotton Bliss Risala.webp",
+"Al Haramain Amber Musk.jpg",
+"Byzance Rochas 100 ml.jpg",
+"Amor Amor Cacharel.jpg",
+"Aether Extrait French Avenue.webp",
+"Club de Nuit Imperiale 105 ml.webp",
+"Aqua di Gio Profondo 100ml EDP.webp",
+"212 Vip Rosé NYC 80ml CH.jpg",
+"Burj Noir Risala.webp",
+"Club de Nuit Sillage 105 ml.webp",
+"Bharara Niche Femme 100ml EDP.webp",
+"Bharara Don 100 ml EDP.webp",
+"Club de Nuit Bling.webp",
+"Asad Negro 100 ml EDP.webp",
+"Club De Nuit Lionheart Woman.webp",
+"Bad Femme Maison Alhambra.webp",
+"212 NYC 200 ml EDT.jpg",
+"Club de Nuit Untold.webp",
+"Al Layl Al Wataniah.webp",
+"212 Men NYC 100ml EDT.webp",
+"Calvin Klein Eternity.webp",
+"Bad Boy Le Parfum 50 ml.webp",
+"Amethyst Badee Al Oud.jpg",
+"Al Wataniah Durrat Al Aroos Edp 85ml.webp",
+"Burj Blanc Risala.webp",
+"Coach Gold New York.jpg",
+"Al Noble Wazeer 100 ml EDP.webp",
+"9 PM Elixir.webp",
+"Bharara Double Bleu 100 ml EDP.webp",
+"Asad Bourbon 100 ml.webp",
+"Armani Code Parfum 125ml.webp",
+"Bleu de Chanel EDP 150 ml.webp",
+"Burberry Goddess 100 ml EDP.webp"
+
+];
+
+const grid = document.getElementById("perfumeGrid");
+
+function loadPerfumes(list){
+
+grid.innerHTML="";
+
+list.forEach(file=>{
+
+let name=file
+.replace(".jpg","")
+.replace(".webp","")
+.replace(".avif","");
+
+grid.innerHTML+=`
+
+<div class="card">
+
+<img src="images/${file}">
+
+<div class="card-body">
+
+<h3>${name}</h3>
+
+<p class="price">$1990</p>
+
+<button class="btn btn-primary" onclick="addToCart('${name}',1990)">
+Agregar
+</button>
+
+<a href="https://wa.me/59892436816?text=Hola quiero comprar ${name}" class="btn btn-secondary">
+Comprar
+</a>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+loadPerfumes(perfumes);
+
+/* BUSCADOR */
+
+document.getElementById("searchInput").addEventListener("keyup",function(){
+
+let search=this.value.toLowerCase();
+
+let filtered=perfumes.filter(p=>p.toLowerCase().includes(search));
+
+loadPerfumes(filtered);
+
+});
+
+/* CARRITO */
+
 let cart=[];
 
 function addToCart(name,price){
 
-cart.push({
-name:name,
-price:price
-});
+cart.push({name,price});
 
 updateCart();
 
@@ -467,20 +396,23 @@ cartItems.innerHTML="";
 
 let total=0;
 
-for(let i=0;i<cart.length;i++){
-
-let item=cart[i];
+cart.forEach((item,i)=>{
 
 total+=item.price;
 
 cartItems.innerHTML+=`
+
 <div class="item">
+
 ${item.name} $${item.price}
+
 <span class="remove" onclick="removeFromCart(${i})">❌</span>
+
 </div>
+
 `;
 
-}
+});
 
 document.getElementById("total").innerText=total;
 
@@ -496,23 +428,19 @@ return;
 
 }
 
-let msg="Hola! Quiero pedir:%0A";
-
-for(let i=0;i<cart.length;i++){
-
-msg+="- "+cart[i].name+" $"+cart[i].price+"%0A";
-
-}
+let msg="Hola quiero pedir:%0A";
 
 let total=0;
 
-for(let i=0;i<cart.length;i++){
+cart.forEach(item=>{
 
-total+=cart[i].price;
+msg+=`- ${item.name} $${item.price}%0A`;
 
-}
+total+=item.price;
 
-msg+="%0ATotal: $"+total;
+});
+
+msg+=`%0ATotal: $${total}`;
 
 window.open("https://wa.me/59892436816?text="+msg);
 

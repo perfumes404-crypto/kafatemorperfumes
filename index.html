@@ -1,134 +1,523 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kafatemor Perfumes | Catálogo Completo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        *{ margin:0; padding:0; box-sizing:border-box; font-family:Poppins; scroll-behavior: smooth; }
-        body{ background:#0f0f0f; color:white; }
-        .container{ max-width:1200px; margin:auto; padding:20px; }
-        .gold{ color:#d4af37; }
-        
-        /* BUSCADOR FIJO */
-        .header-sticky { position: sticky; top: 0; background: #0f0f0f; z-index: 1000; padding: 10px 0; border-bottom: 1px solid #333; }
-        .search-box { width: 100%; max-width: 600px; margin: 10px auto; display: block; padding: 12px 20px; border-radius: 30px; border: 1px solid #d4af37; background: #1c1c1c; color: white; font-size: 16px; }
 
-        .nav-cats { text-align: center; margin-bottom: 10px; }
-        .nav-cats a { color: #888; text-decoration: none; margin: 0 10px; font-size: 12px; transition: 0.3s; }
-        .nav-cats a:hover { color: #d4af37; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        h2 { margin: 40px 0 20px; border-left: 4px solid #d4af37; padding-left: 15px; text-transform: uppercase; font-size: 1.2rem; }
+<title>Kafatemor Perfumes</title>
 
-        /* GRID */
-        .grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:20px; }
-        .card{ background:#1c1c1c; border-radius:8px; padding:15px; text-align:center; border: 1px solid #222; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; }
-        .card:hover { border-color: #d4af37; transform: translateY(-3px); }
-        .card h3 { font-size: 14px; font-weight: 400; margin-bottom: 10px; color: #eee; min-height: 40px; }
-        .price { color:#d4af37; font-size:18px; font-weight: 600; margin-bottom: 15px; }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-        .btn-add { background:#d4af37; color:black; border:none; padding:8px 15px; border-radius:20px; cursor:pointer; font-weight: 600; width: 100%; transition: 0.3s; }
-        .btn-add:hover { background: #fff; }
+<style>
 
-        /* CARRITO */
-        .cart-float { position: fixed; right: 20px; bottom: 85px; background: #1c1c1c; width: 300px; border-radius: 12px; border: 1px solid #d4af37; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 2000; display: none; }
-        .cart-item { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 8px; border-bottom: 1px solid #333; padding-bottom: 5px; }
-        .cart-item span { color: #d4af37; }
-        .btn-send { background: #25D366; color: white; border: none; width: 100%; padding: 10px; border-radius: 5px; margin-top: 15px; cursor: pointer; font-weight: bold; }
-        
-        .whatsapp-icon { position: fixed; right: 20px; bottom: 20px; background: #25D366; color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; text-decoration: none; z-index: 2000; }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins;
+}
 
-        @media (max-width: 480px) { .grid { grid-template-columns: 1fr 1fr; gap: 10px; } .card h3 { font-size: 12px; } }
-    </style>
+body{
+background:#0f0f0f;
+color:white;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:60px 20px;
+}
+
+.gold{
+color:#d4af37;
+}
+
+h1,h2{
+margin-bottom:20px;
+}
+
+/* HERO */
+
+.hero{
+height:90vh;
+background:url("kafatemor.jpg") center/cover;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+}
+
+.hero-content{
+background:rgba(0,0,0,0.6);
+padding:40px;
+border-radius:10px;
+}
+
+.hero h1{
+font-size:42px;
+}
+
+.btn{
+display:inline-block;
+padding:12px 25px;
+border-radius:30px;
+text-decoration:none;
+margin:5px;
+font-weight:500;
+cursor:pointer;
+transition:0.3s;
+}
+
+.btn-primary{
+background:#d4af37;
+color:black;
+border:none;
+}
+
+.btn-primary:hover{
+transform:scale(1.05);
+}
+
+.btn-secondary{
+border:1px solid white;
+color:white;
+}
+
+/* PERFUMES */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+}
+
+.card{
+background:#1c1c1c;
+border-radius:10px;
+overflow:hidden;
+text-align:center;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+.card img{
+width:100%;
+height:220px;
+object-fit:cover;
+}
+
+.card-body{
+padding:20px;
+}
+
+.price{
+color:#d4af37;
+margin:10px 0;
+font-size:18px;
+}
+
+/* BENEFICIOS */
+
+.benefits{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+text-align:center;
+}
+
+.benefit{
+background:#1c1c1c;
+padding:20px;
+border-radius:10px;
+}
+
+/* TESTIMONIOS */
+
+.testimonials{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+}
+
+.testimonial{
+background:#1c1c1c;
+padding:20px;
+border-radius:10px;
+}
+
+/* CTA */
+
+.cta{
+background:#d4af37;
+color:black;
+text-align:center;
+padding:70px 20px;
+}
+
+/* FOOTER */
+
+footer{
+background:black;
+text-align:center;
+padding:30px;
+}
+
+/* CARRITO */
+
+.cart{
+position:fixed;
+right:20px;
+bottom:90px;
+background:#1c1c1c;
+padding:20px;
+border-radius:10px;
+width:260px;
+box-shadow:0 5px 20px rgba(0,0,0,0.5);
+}
+
+.item{
+display:flex;
+justify-content:space-between;
+margin-bottom:6px;
+}
+
+.remove{
+color:red;
+cursor:pointer;
+}
+
+/* WHATSAPP */
+
+.whatsapp{
+position:fixed;
+right:20px;
+bottom:20px;
+background:#25D366;
+color:white;
+padding:15px 18px;
+border-radius:50%;
+font-size:22px;
+text-decoration:none;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+.benefits{
+grid-template-columns:repeat(2,1fr);
+}
+
+.testimonials{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+
 </head>
+
 <body>
 
-<div class="header-sticky">
-    <div class="nav-cats">
-        <a href="#arabes">ÁRABES</a> • <a href="#nicho">NICHO</a> • <a href="#disenador">DISEÑADOR</a>
-    </div>
-    <input type="text" id="search" class="search-box" placeholder="Buscar perfume..." onkeyup="filter()">
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-content">
+
+<h1>Descubrí tu próxima <span class="gold">fragancia favorita</span></h1>
+
+<p>Perfumes de alta calidad con envíos a todo Uruguay</p>
+
+<a href="#perfumes" class="btn btn-primary">Ver perfumes</a>
+
+<a href="https://wa.me/59892436816" class="btn btn-secondary">Comprar por WhatsApp</a>
+
 </div>
 
-<div class="container">
-    <h2 id="arabes">Perfumes Árabes</h2>
-    <div class="grid" id="container-arabes"></div>
+</section>
 
-    <h2 id="nicho">Perfumes de Nicho</h2>
-    <div class="grid" id="container-nicho"></div>
+<!-- SOBRE NOSOTROS -->
 
-    <h2 id="disenador">Perfumes de Diseñador</h2>
-    <div class="grid" id="container-disenador"></div>
+<section class="container">
+
+<h2>Sobre <span class="gold">Kafatemor Perfumes</span></h2>
+
+<p>
+Kafatemor Perfumes es una empresa dedicada a la venta de perfumes originales y de alta calidad.
+Operamos desde Montevideo y Rocha realizando envíos a todo Uruguay.
+Nuestro objetivo es ofrecer fragancias increíbles a precios competitivos con atención rápida y confiable.
+</p>
+
+</section>
+
+<!-- PERFUMES -->
+
+<section id="perfumes" class="container">
+
+<h2>Perfumes destacados</h2>
+<div class="card">
+
+<img src="khamrah.jpg">
+
+<div class="card-body">
+
+<h3>Khamrah</h3>
+
+<p class="price">$1990</p>
+
+<button class="btn btn-primary" onclick="addToCart('Khamrah',1990)">
+Agregar al carrito
+</button>
+
 </div>
 
-<div class="cart-float" id="cart">
-    <h4 style="margin-bottom:15px">🛒 Mi Carrito</h4>
-    <div id="cart-list"></div>
-    <div style="margin-top:15px; font-weight: bold; border-top: 1px solid #d4af37; padding-top: 10px;">
-        Total: $<span id="cart-total">0</span>
-    </div>
-    <button class="btn-send" onclick="sendWA()">Enviar pedido por WhatsApp</button>
+</div>
+<div class="card">
+
+<img src="honor-glory.jpg">
+
+<div class="card-body">
+
+<h3>Honor and Glory</h3>
+
+<p class="price">$1990</p>
+
+<button class="btn btn-primary" onclick="addToCart('Honor and Glory',1990)">
+Agregar al carrito
+</button>
+
 </div>
 
-<a href="https://wa.me/59892436816" class="whatsapp-icon">💬</a>
+</div>
+
+<div class="card">
+
+<img src="mandarin-sky.jpg">
+
+<div class="card-body">
+
+<h3>Mandarin Sky</h3>
+
+<p class="price">$1990</p>
+
+<button class="btn btn-primary" onclick="addToCart('Mandarin Sky',1990)">
+Agregar al carrito
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<img src="fakhar-black.jpg">
+
+<div class="card-body">
+
+<h3>Fakhar Black</h3>
+
+<p class="price">$2090</p>
+
+<button class="btn btn-primary" onclick="addToCart('Fakhar Black',2090)">
+Agregar al carrito
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- BENEFICIOS -->
+
+<section class="container">
+
+<h2>¿Por qué elegirnos?</h2>
+
+<div class="benefits">
+
+<div class="benefit">🚚 Envíos a todo Uruguay</div>
+
+<div class="benefit">🧴 Perfumes originales</div>
+
+<div class="benefit">⚡ Atención rápida</div>
+
+<div class="benefit">💰 Precios competitivos</div>
+
+</div>
+
+</section>
+
+<!-- TESTIMONIOS -->
+
+<section class="container">
+
+<h2>Clientes felices</h2>
+
+<div class="testimonials">
+
+<div class="testimonial">
+Excelente atención y perfumes originales.
+</div>
+
+<div class="testimonial">
+Los mejores precios que encontré en Uruguay.
+</div>
+
+<div class="testimonial">
+Compré Khamrah y el aroma dura todo el día.
+</div>
+
+</div>
+
+</section>
+
+<!-- INSTAGRAM -->
+
+<section class="container" style="text-align:center">
+
+<h2>Seguinos en Instagram</h2>
+
+<a href="https://www.instagram.com/kafatemorperfumes.uy" class="btn btn-primary">
+Ir a Instagram
+</a>
+
+</section>
+
+<!-- CTA -->
+
+<section class="cta">
+
+<h2>¿Buscás tu próximo perfume?</h2>
+
+<a href="https://wa.me/59892436816" class="btn btn-primary">Escribinos ahora</a>
+
+</section>
+
+<footer>
+
+<p>Kafatemor Perfumes</p>
+
+<p>Montevideo y Rocha - Uruguay</p>
+
+<p>©️ 2026</p>
+
+</footer>
+
+<!-- CARRITO -->
+
+<div class="cart">
+
+<h3>Carrito</h3>
+
+<div id="cartItems"></div>
+
+<p>Total: $<span id="total">0</span></p>
+
+<button class="btn btn-primary" onclick="sendWhatsApp()">
+Enviar pedido
+</button>
+
+</div>
+
+<a class="whatsapp" href="https://wa.me/59892436816">💬</a>
 
 <script>
-    // LISTADO COMPLETO DEL PDF CON +$500
-    const arabes = [
-        ["9 AM Afnan", 2200], ["9 AM Dive", 2245], ["9 PM Elixir", 3055], ["9 PM, Afnan", 2245], ["Aether Extrait French Avenue", 2265], ["Ajayes Portrait", 1845], ["Al Absar Mudiyah Edp 100 Ml", 1845], ["Al Haramain Amber Musk", 4120], ["Al Haramain Amber Oud White", 3160], ["Al Layl, Al Wataniah", 2120], ["Al Noble Wazeer 100 ml EDP", 1815], ["Al Wataniah Durrat Al Aroos Edp 85ml", 2039], ["Amethyst Badee Al Oud", 1820], ["Asad Bourbon 100 ml", 2290], ["Asad Negro 100 ml EDP", 1735], ["Asad Zanzibar", 1800], ["Azzure Oud French Avenue", 2040], ["Bar Femme Maison Alhambra", 1660], ["Bharara Blleu 100 ml EDP", 3690], ["Bharara Don 100 ml EDP", 3690], ["Bharara Double Bleu 100 ml EDP", 3690], ["Bharara Niche Fem 100ml EDP", 3690], ["Burj Blanc, Risala", 2245], ["Burj Noir, Risala", 2245], ["Club de Nuit Bling", 2880], ["Club de Nuit Imperiale 105 ml", 2740], ["Club De Nuit Lionheart Woman", 2850], ["Club de Nuit Preciux 1", 2871], ["Club de Nuit Sillage 105 ml", 2740], ["Club de Nuit Untold", 2485], ["Collection Dantiqués 1910, Lattafa", 2490], ["Cotton Bliss Risala", 2110], ["Delights Island Breeze Armaf 100 ml", 2710], ["Elegancia Purê, Risala", 2245], ["Emeer Lattafa 100 ml EDP", 3020], ["Fakhar Rose", 1800], ["Fakhar Silver Edition, Lattafa", 2040], ["Fayyad, Al Wataniah", 2450], ["Flavia Ampario Pour Homme, Sterling", 2200], ["Fruity Bliss Risala", 2110], ["Ghost Spectre", 2350], ["Give Me Gourmand (TODOS), Lattafa", 2795], ["Glasier Pour Homme Maison Alhambra", 1720], ["Honor Ciel, Risala", 2245], ["Honor Royal, Risala", 2245], ["Ishq Al Shuyukh Gold 100 ml EDP", 2290], ["Island Bliss Delights Armaf", 2700], ["Jasoor Lattafa 100 ml EDP", 2070], ["Jean Lowe Immorte, Maison Alhambra", 2110], ["Kayaan Classic Al Wataniah 100 ml EDP", 2320], ["Khamra", 1965], ["Khamra Dukan", 2040], ["Khamra Qahwa", 1965], ["Kignsman Maison Alhambra", 1720], ["Lattafa Ana Abiyedh Edp 60ml", 2080], ["Léonie Maison Alhambra", 2000], ["Liberty Pour Femme, Grandeur Elite", 1960], ["Liquid Brun", 2350], ["Lovely Chery", 1720], ["Maahir Legacy Lattafa", 1930], ["Mahaair Lattafa", 1765], ["Mahaair Legacy Lattafa", 1840], ["Mayar Natural Intense", 1985], ["Miss Armaf (TODOS)", 2295], ["Modern Musk Maison Alhambra", 2000], ["Mudiyah EDP, Al Absar", 1720], ["N° 2 Men Maison Alhambra", 1720], ["Noble Blush Badee Al Oud", 1820], ["Odysset Candee", 2000], ["Odyssey Aoud", 2180], ["Odyssey Bahamas 100ml", 2180], ["Odyssey Black Forest", 2770], ["Odyssey Dubai Chocolat", 2035], ["Odyssey Eau de Montagne", 2180], ["Odyssey Home White", 2180], ["Odyssey Homme", 2150], ["Odyssey Limoni", 2150], ["Odyssey Mandarin", 2050], ["Odyssey Marshmallow", 2000], ["Odyssey Revolution 100ml", 2265], ["Odyssey Spectra", 2150], ["Odyssey Toffee Coffee, Armaf", 2450], ["Odyssey Ultra Edition", 2050], ["Opulence Leather Maison Alhambra", 1680], ["Orientica Amber Rouge", 4615], ["Orientica Rosé Eclat", 3720], ["Pink Eclipse Maison Alhambra", 1750], ["Preciux IV Armaf", 3160], ["Quimmah For Men, Lattafa", 1425], ["Sabah Al Ward, Al Wataniah", 2040], ["Salvo EDP", 2000], ["Salvo Elixir 60 ml", 2000], ["Sehr Lattafa EDP 100ml", 2095], ["Shagaf Oud Ahmar Swiss Arabian", 3130], ["Shagaf Oud Azraq Limited Edition", 3130], ["Shagaf Oud Tonka", 3130], ["Shaheen Gold Edp 100 ml", 2460], ["So Candid Rouge, Maison Alhambra", 2000], ["Souvenir Desert Rose Afnan", 2490], ["Spectre Amazonite", 2000], ["Stallion 53", 2090], ["Sublime Bedee al Oud", 1840], ["Teriaq Edp 100ml", 2430], ["The Kingdom Lattafa", 1930], ["The Rose Al Absar", 2120], ["Veneno Scarlet French Avenue", 2520], ["Victoria Lattafa", 1900], ["Victorioso Maison Alhambra", 2000], ["Vintage Radio 100 ml, Lattafa", 1815], ["Vulcan Baie", 2290], ["Yara Candy", 1800], ["Yara Moi", 1800], ["Yara Rosa 100 ml EDP", 1700], ["Yara Tous", 1800], ["Yum Yum Armaf", 2700]
-    ];
 
-    const nicho = [
-        ["Erba Gold 100 ml", 12320], ["Erba Pura 100ml", 10290]
-    ];
+let cart=[];
 
-    const disenador = [
-        ["\"Y\" Yves Saint Laurent EDP 100 ml", 4335], ["212 Men NYC 100ml EDT", 3945], ["212 NYC 200 ml EDT", 5150], ["212 Sexy Carolina Herrera", 3161], ["212 VIP Men Are You on The List? CH 100 ml", 3945], ["212 Vip Rosé NYC 80ml CH", 4590], ["Amor Amor Cacharel", 4010], ["Aqua di Gio EDP 100ml", 5260], ["Aqua di Gio EDT", 4420], ["Aqua di Gio PARFUM 50ml", 4420], ["Aqua di Gio Profondo 100ml EDP", 5090], ["Aqua di Gioia EDP", 4110], ["Armani Code Parfum 125ml", 4730], ["Azzaro The Most Wanted EDP solo y cofre", 4000], ["Bad Boy Le Parfum 50 ml", 3525], ["Because its You Armani", 3945], ["Bleu de Chanel EDP 150 ml", 7400], ["Burberry Goddess 100 ml EDP", 5420], ["Byzance Rochas 100 ml", 3945], ["Calvin Klein Eternity", 3800], ["Calvin Klein one 200 ml", 3600], ["Chance Chanel EDP 100 ml", 6100], ["Coach Gold New York", 4085], ["Coco Mademoiselle Chanel", 6680], ["Divine Elixir women, JPG", 5850], ["Euphoria Calvin Klein EDT", 4365], ["Fame in Love 50 ml", 4085], ["Fame in Love 80 ml", 4810], ["Femme Boss 75 ml", 3450], ["Gentleman Givenchy 50ml Cologne", 2685], ["Gentleman Givenchy Boise EDP 100ml", 4730], ["Gentleman Givenchy EDP 100ml", 4730], ["Gentleman Society Ambrée Givenchy EDP", 4250], ["Good Girl Blush Carolina Herrera", 4280], ["Gucci Flora 100 ml", 5690], ["Gucci Flora 50 ml", 4450], ["Guess Iconic 100ml EDP", 2960], ["Her Secret Absolu Banderas", 2240], ["Her Secret Pink Banderas", 2120], ["Idole EDT 50 ml", 3500], ["Idole Now 100 ml EDP", 4950], ["Idole Peach Roses 100 ml", 4895], ["Invictus Victory", 5735], ["Invictus Victory Elixir EDP", 4475], ["Invitus Aqua EDT 100 ml", 3156], ["J'adore Dior", 4820], ["Jean Paul Gaultier Le Male Elixir", 4810], ["Jean Paul Gaultier Le Male Le Parfum 125ml", 4480], ["Jean Paul Gautier \"Le Beau\" 125 ml EDT", 4250], ["Jean Paul Gautier Classique EDP 100ml", 3415], ["Jean Paul Gautier Divine 100 ml Le Parfum", 5570], ["Karl Ikonik Pour Homme 100 ml EDP", 2656], ["La Nuit Tressor Le Parfum 50 ml", 3665], ["La Vie Est Belle EDP 100ml", 4840], ["La Vie Est Belle Elixir", 5735], ["Lady Million Royal", 4560], ["Lady Million Tradicional", 4560], ["Lancôme Idôle L'Eau 100ml", 4950], ["Lanvin Eclat d'Arpege 100ml EDP", 3270], ["Libre L EAU NUE 90 ml EDP, YSL", 5455], ["Linterdit Givenchy 80 mIEDP", 5290], ["Loewe Earth 100 ml EDP", 5485], ["Loewe Solo Atlas 100 ml EDP", 4730], ["Loewe Solo Ella 100 ml EDP", 4755], ["May Way EDP 100ml", 4140], ["May Way Intense 50ml EDP", 5260], ["Miss Dior Essence 80 ml", 6740], ["Moschino Cheap and Chic Love Love 100ml", 2430], ["Moschino Toy 2 Bubble Gum Edt 50 ml", 2810], ["Moschino Toy 2 Femme 100 ml", 3355], ["Moschino Toy 2 Pearl 50ml EDP", 2990], ["My SLF Yves Saint Laurent EDP 100 ml", 5120], ["My SLF Yves Saint Laurent EDP 60ml", 4140], ["Narciso Cristal 90 ml", 4590], ["Narciso Rodriguez for her EDP", 4065], ["Narciso Rodriguez For Her Intense 100 ml", 4950], ["Narciso Rodriguez for her Intense 50 ml", 4195], ["N°5 Chanel 50 ml EDP", 5150], ["Olimpea Flora", 4000], ["Organza Givenchy", 5175], ["Paco Rabanne 1 Million 100ml", 4645], ["Paco Rabanne pour homme 100 ml", 2500], ["Paco Rosé Rabanne", 1720], ["Paradox Intense Prada 100 ml", 6015], ["Paradox Intense Prada 50ml", 4870], ["Passione Giorgio Armani 100ml", 5260], ["Passione Red Musk Giorgio Armani 100ml", 5260], ["Phantom in Red Rabanne, Parfum elixir", 4390], ["Poeme Lancome Paris 100 ml", 4200], ["Poison Dior 100ml", 5035], ["Ricci Ricci 50 ml", 1920], ["Sauvage 100 ml EDP", 5480], ["Sauvage 100 ml EDT", 4700], ["Sauvage 100 ml Parfum", 6590], ["Sauvage Elixir", 8810], ["Scandal Intense Jean Paul Gaultier 100ml", 5090], ["Scandal Intense JPG Masculino 100ml", 4590], ["Scandal Le Parfum Fem JPG 80 ml", 5090], ["Scandal Le Parfum masc JPG 100 ml", 4580], ["SI EDP Armani 100 ml", 5000], ["SI Intense EDP - Giorgio Armani", 5400], ["Stronger With You Armani 100ml", 3830], ["The Icon Supreme Banderas 100 ml", 1875], ["The Most Wanted Azzaro 100ml", 4430], ["Tom Ford Ombre Leather EDP 50 ml", 5820], ["Tom Ford Ombre Leather Parfum 50 ml", 7080], ["Valentino Donna Extradose PARFUM 100ml", 5570], ["Valentino Donna Yellow Dream", 5120], ["Valentino Green Stravaganza 100 ml", 4895], ["Valentino Uomo Coral Fantasy 100ml", 4140], ["Versace Eros EDP 50ml", 3290], ["Versace Eros EDT 100ml", 3580], ["Versace Eros EDT 200ml", 4450], ["Versace Eros Flame 50 ml", 3290], ["Victoria's Secret Love 100 ml EDP", 3120], ["Victoria's Secret Love 42 ml EDP", 2600], ["Victorias Secret Angel Gold 100 ml", 3120], ["Victorias Secret Angel Gold 50 ml", 2600], ["Victoria's Secret Bombshell 100ml", 3735], ["Victoria's Secret Bombshell 50ml", 3030], ["Victorio Flor Oriental", 1600], ["Victorio Iris Luminoso", 1600], ["Victorio Jazmin Exotico", 1600], ["Victorio Rosa Fresca", 1600], ["Victorio Vitamina Apasionada", 1600], ["Victorio Vitamina Citrica", 1600], ["Victorio Vitamina Exotica", 1600], ["Voce Viva Valentino 100 ml", 5650], ["Voce Viva Valentino 50 ml", 4590]
-    ];
+function addToCart(name,price){
 
-    function fillGrid(list, elementId) {
-        const container = document.getElementById(elementId);
-        container.innerHTML = list.map(p => `
-            <div class="card item-p">
-                <h3>${p[0]}</h3>
-                <p class="price">$${p[1]}</p>
-                <button class="btn-add" onclick="add('${p[0]}', ${p[1]})">AGREGAR</button>
-            </div>
-        `).join('');
-    }
+cart.push({
+name:name,
+price:price
+});
 
-    fillGrid(arabes, 'container-arabes');
-    fillGrid(nicho, 'container-nicho');
-    fillGrid(disenador, 'container-disenador');
+updateCart();
 
-    // FILTRO
-    function filter() {
-        let val = document.getElementById('search').value.toLowerCase();
-        let items = document.querySelectorAll('.item-p');
-        items.forEach(item => {
-            let name = item.querySelector('h3').innerText.toLowerCase();
-            item.style.display = name.includes(val) ? "flex" : "none";
-        });
-    }
+}
 
-    // CARRITO
-    let cartData = [];
-    function add(n, p) {
-        cartData.push({n, p});
-        renderCart();
-        document.getElementById('cart').style.display = 'block';
-    }
-    function renderCart() {
-        const list = document.getElementById('cart-list');
-        list.innerHTML = cartData.map(i => <div class="cart-item">${i.n} <span>$${i.p}</span></div>).join('');
-        document.getElementById('cart-total').innerText = cartData.reduce((s, i) => s + i.p, 0);
-    }
-    function sendWA() {
-        let text = "Hola Kafatemor! Quiero estos perfumes:%0A" + cartData.map(i => "- " + i.n + " ($" + i.p + ")").join("%0A");
-        text += "%0A%0ATotal: $" + document.getElementById('cart-total').innerText;
-        window.open("https://wa.me/59892436816?text=" + text);
-    }
+function removeFromCart(index){
+
+cart.splice(index,1);
+
+updateCart();
+
+}
+
+function updateCart(){
+
+let cartItems=document.getElementById("cartItems");
+
+cartItems.innerHTML="";
+
+let total=0;
+
+for(let i=0;i<cart.length;i++){
+
+let item=cart[i];
+
+total+=item.price;
+
+cartItems.innerHTML+=`
+<div class="item">
+${item.name} $${item.price}
+<span class="remove" onclick="removeFromCart(${i})">❌</span>
+</div>
+`;
+
+}
+
+document.getElementById("total").innerText=total;
+
+}
+
+function sendWhatsApp(){
+
+if(cart.length===0){
+
+alert("Tu carrito está vacío");
+
+return;
+
+}
+
+let msg="Hola! Quiero pedir:%0A";
+
+for(let i=0;i<cart.length;i++){
+
+msg+="- "+cart[i].name+" $"+cart[i].price+"%0A";
+
+}
+
+let total=0;
+
+for(let i=0;i<cart.length;i++){
+
+total+=cart[i].price;
+
+}
+
+msg+="%0ATotal: $"+total;
+
+window.open("https://wa.me/59892436816?text="+msg);
+
+}
+
 </script>
 
 </body>

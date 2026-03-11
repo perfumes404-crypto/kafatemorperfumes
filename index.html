@@ -1,4 +1,894 @@
-
-
-
-
+<!doctype html>
+<html lang="es" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KAFATEMOR PERFUMES - El aroma del sol</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&amp;family=Montserrat:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    html, body { height: 100%; }
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0f0f1a 100%);
+    }
+    .font-display { font-family: 'Playfair Display', serif; }
+    
+    /* Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+      50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.6); }
+    }
+    
+    .animate-fadeInUp { animation: fadeInUp 0.8s ease-out forwards; }
+    .animate-float { animation: float 3s ease-in-out infinite; }
+    .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+    
+    .shimmer-text {
+      background: linear-gradient(90deg, #c9b037 0%, #f4e5a3 25%, #d4af37 50%, #f4e5a3 75%, #c9b037 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 3s linear infinite;
+    }
+    
+    /* Glass morphism */
+    .glass {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Product cards */
+    .product-card {
+      background: linear-gradient(145deg, rgba(26, 26, 46, 0.9), rgba(15, 15, 26, 0.95));
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .product-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(212, 175, 55, 0.6);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(212, 175, 55, 0.2);
+    }
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #0a0a0f; }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #d4af37, #c9b037); border-radius: 4px; }
+    
+    /* Button styles */
+    .btn-gold {
+      background: linear-gradient(135deg, #d4af37 0%, #f4e5a3 50%, #d4af37 100%);
+      background-size: 200% auto;
+      color: #0a0a0f;
+      transition: all 0.3s ease;
+    }
+    .btn-gold:hover {
+      background-position: right center;
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+    }
+    
+    /* WhatsApp button */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 1000;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+      transition: all 0.3s ease;
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.1) rotate(10deg);
+      box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6);
+    }
+    
+    /* Cart sidebar */
+    .cart-sidebar {
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .cart-sidebar.open { transform: translateX(0); }
+    
+    /* Category tabs */
+    .category-tab {
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    .category-tab::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #d4af37, #f4e5a3);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+    .category-tab:hover::after, .category-tab.active::after { width: 100%; }
+    .category-tab.active { color: #d4af37; }
+    
+    /* Perfume bottle SVG animation */
+    .bottle-glow {
+      filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.5));
+    }
+    
+    /* Search input */
+    .search-input {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      transition: all 0.3s ease;
+    }
+    .search-input:focus {
+      border-color: #d4af37;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+      outline: none;
+    }
+    
+    /* Notification toast */
+    .toast {
+      animation: slideIn 0.3s ease-out, fadeOut 0.3s ease-in 2.7s forwards;
+    }
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full text-white overflow-auto">
+  <div id="app" class="min-h-full w-full">
+   <!-- Header -->
+   <header class="fixed top-0 left-0 right-0 z-50 glass">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+     <div class="flex items-center justify-between">
+      <!-- Logo -->
+      <div class="flex items-center space-x-3">
+       <div class="w-12 h-12 relative">
+        <svg viewbox="0 0 50 50" class="w-full h-full bottle-glow animate-float">
+         <defs>
+          <lineargradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+           <stop offset="0%" style="stop-color:#d4af37" />
+           <stop offset="50%" style="stop-color:#f4e5a3" />
+           <stop offset="100%" style="stop-color:#d4af37" />
+          </lineargradient>
+         </defs> <rect x="20" y="5" width="10" height="8" rx="2" fill="url(#goldGrad)" /> <rect x="22" y="2" width="6" height="4" rx="1" fill="url(#goldGrad)" /> <path d="M15 15 Q15 12 20 12 L30 12 Q35 12 35 15 L38 45 Q38 48 35 48 L15 48 Q12 48 12 45 Z" fill="url(#goldGrad)" opacity="0.9" /> <ellipse cx="25" cy="30" rx="8" ry="10" fill="rgba(255,255,255,0.1)" />
+        </svg>
+       </div>
+       <div>
+        <h1 id="store-name" class="font-display text-xl md:text-2xl font-bold shimmer-text">KAFATEMOR PERFUMES</h1>
+        <p id="store-slogan" class="text-xs text-gray-400 tracking-widest">El aroma del sol</p>
+       </div>
+      </div><!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center space-x-8">
+       <a href="#inicio" class="text-gray-300 hover:text-[#d4af37] transition-colors">Inicio</a> <a href="#perfumes" class="text-gray-300 hover:text-[#d4af37] transition-colors">Perfumes</a> <a href="#ofertas" class="text-gray-300 hover:text-[#d4af37] transition-colors">Ofertas</a> <a href="#contacto" class="text-gray-300 hover:text-[#d4af37] transition-colors">Contacto</a>
+      </nav><!-- Cart Button --> <button id="cart-toggle" class="relative p-3 glass rounded-full hover:border-[#d4af37] transition-all">
+       <svg class="w-6 h-6 text-[#d4af37]" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+       </svg><span id="cart-count" class="absolute -top-1 -right-1 w-5 h-5 bg-[#d4af37] text-black text-xs font-bold rounded-full flex items-center justify-center">0</span> </button> <!-- Mobile Menu Button --> <button id="mobile-menu-btn" class="md:hidden p-2">
+       <svg class="w-6 h-6 text-[#d4af37]" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+       </svg></button>
+     </div><!-- Mobile Navigation -->
+     <nav id="mobile-nav" class="hidden md:hidden mt-4 pb-4 border-t border-gray-700 pt-4">
+      <div class="flex flex-col space-y-3">
+       <a href="#inicio" class="text-gray-300 hover:text-[#d4af37] transition-colors">Inicio</a> <a href="#perfumes" class="text-gray-300 hover:text-[#d4af37] transition-colors">Perfumes</a> <a href="#ofertas" class="text-gray-300 hover:text-[#d4af37] transition-colors">Ofertas</a> <a href="#contacto" class="text-gray-300 hover:text-[#d4af37] transition-colors">Contacto</a>
+      </div>
+     </nav>
+    </div>
+   </header><!-- Hero Section -->
+   <section id="inicio" class="relative min-h-[600px] flex items-center justify-center pt-24 pb-16 overflow-hidden">
+    <!-- Background elements -->
+    <div class="absolute inset-0 overflow-hidden">
+     <div class="absolute top-20 left-10 w-64 h-64 bg-[#d4af37] opacity-5 rounded-full blur-3xl"></div>
+     <div class="absolute bottom-20 right-10 w-96 h-96 bg-[#d4af37] opacity-5 rounded-full blur-3xl"></div>
+    </div>
+    <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+     <div class="animate-fadeInUp" style="animation-delay: 0.2s; opacity: 0;">
+      <h2 id="hero-title" class="font-display text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"><span class="shimmer-text">Perfumes originales</span><br><span class="text-white">sellados con QR</span></h2>
+     </div>
+     <div class="animate-fadeInUp" style="animation-delay: 0.4s; opacity: 0;">
+      <p id="hero-subtitle" class="text-xl md:text-2xl text-gray-400 mb-8 tracking-wide">Envíos a todo Uruguay</p>
+     </div>
+     <div class="animate-fadeInUp" style="animation-delay: 0.6s; opacity: 0;">
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+       <a href="#perfumes" class="btn-gold px-10 py-4 rounded-full font-semibold text-lg"> Comprar ahora </a> <a href="#ofertas" class="px-10 py-4 rounded-full font-semibold text-lg border border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37] hover:text-black transition-all"> Ver ofertas </a>
+      </div>
+     </div><!-- Decorative perfume bottles -->
+     <div class="hidden lg:flex justify-center mt-16 space-x-8 animate-fadeInUp" style="animation-delay: 0.8s; opacity: 0;">
+      <div class="w-20 h-32 bottle-glow animate-float" style="animation-delay: 0s;">
+       <svg viewbox="0 0 40 60" class="w-full h-full">
+        <rect x="15" y="5" width="10" height="8" rx="2" fill="#d4af37" /> <rect x="17" y="1" width="6" height="5" rx="1" fill="#c9b037" /> <path d="M10 15 Q10 12 15 12 L25 12 Q30 12 30 15 L33 55 Q33 58 30 58 L10 58 Q7 58 7 55 Z" fill="rgba(212,175,55,0.3)" stroke="#d4af37" stroke-width="0.5" />
+       </svg>
+      </div>
+      <div class="w-24 h-40 bottle-glow animate-float" style="animation-delay: 0.5s;">
+       <svg viewbox="0 0 50 70" class="w-full h-full">
+        <rect x="20" y="5" width="10" height="10" rx="2" fill="#d4af37" /> <rect x="22" y="0" width="6" height="6" rx="1" fill="#c9b037" /> <path d="M12 18 Q12 15 18 15 L32 15 Q38 15 38 18 L40 65 Q40 68 37 68 L13 68 Q10 68 10 65 Z" fill="rgba(212,175,55,0.4)" stroke="#d4af37" stroke-width="0.5" />
+       </svg>
+      </div>
+      <div class="w-20 h-32 bottle-glow animate-float" style="animation-delay: 1s;">
+       <svg viewbox="0 0 40 60" class="w-full h-full">
+        <circle cx="20" cy="8" r="5" fill="#d4af37" /> <rect x="18" y="2" width="4" height="4" rx="1" fill="#c9b037" /> <ellipse cx="20" cy="38" rx="15" ry="20" fill="rgba(212,175,55,0.3)" stroke="#d4af37" stroke-width="0.5" />
+       </svg>
+      </div>
+     </div>
+    </div>
+   </section><!-- Search Section -->
+   <section class="py-8 px-4">
+    <div class="max-w-3xl mx-auto">
+     <div class="relative">
+      <input type="text" id="search-input" placeholder="Buscar perfumes..." class="search-input w-full px-6 py-4 pl-14 rounded-full text-white placeholder-gray-500">
+      <svg class="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-[#d4af37]" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      </svg>
+     </div>
+    </div>
+   </section><!-- Ofertas Section -->
+   <section id="ofertas" class="py-16 px-4">
+    <div class="max-w-7xl mx-auto">
+     <div class="text-center mb-12">
+      <h3 class="font-display text-3xl md:text-4xl font-bold shimmer-text mb-4">🔥 Ofertas del Mes</h3>
+      <p class="text-gray-400">Fragancias premium a precios irresistibles</p>
+     </div>
+     <div id="ofertas-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Ofertas loaded by JS -->
+     </div>
+    </div>
+   </section><!-- Perfumes Section -->
+   <section id="perfumes" class="py-16 px-4">
+    <div class="max-w-7xl mx-auto">
+     <div class="text-center mb-12">
+      <h3 class="font-display text-3xl md:text-4xl font-bold shimmer-text mb-4">Nuestra Colección</h3>
+      <p class="text-gray-400">Más de 100 fragancias exclusivas</p>
+     </div><!-- Category Tabs -->
+     <div class="flex flex-wrap justify-center gap-4 mb-12">
+      <button class="category-tab active px-6 py-3 text-gray-300 font-medium" data-category="all"> Todos </button> <button class="category-tab px-6 py-3 text-gray-300 font-medium" data-category="designer"> Diseñador </button> <button class="category-tab px-6 py-3 text-gray-300 font-medium" data-category="arabes"> Árabes </button> <button class="category-tab px-6 py-3 text-gray-300 font-medium" data-category="nicho"> Nicho </button>
+     </div><!-- Products Grid -->
+     <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <!-- Products loaded by JS -->
+     </div><!-- Load More Button -->
+     <div id="load-more-container" class="text-center mt-12">
+      <button id="load-more-btn" class="btn-gold px-8 py-3 rounded-full font-semibold"> Cargar más perfumes </button>
+     </div>
+    </div>
+   </section><!-- Features Section -->
+   <section class="py-16 px-4 glass">
+    <div class="max-w-6xl mx-auto">
+     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="text-center p-6">
+       <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#d4af37] to-[#c9b037] flex items-center justify-center">
+        <svg class="w-8 h-8 text-black" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+       </div>
+       <h4 class="font-display text-xl font-bold text-[#d4af37] mb-2">100% Originales</h4>
+       <p class="text-gray-400">Todos nuestros perfumes son originales y sellados con código QR verificable</p>
+      </div>
+      <div class="text-center p-6">
+       <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#d4af37] to-[#c9b037] flex items-center justify-center">
+        <svg class="w-8 h-8 text-black" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+        </svg>
+       </div>
+       <h4 class="font-display text-xl font-bold text-[#d4af37] mb-2">Envío Nacional</h4>
+       <p class="text-gray-400">Enviamos a todo Uruguay. Montevideo y Rocha con entregas express</p>
+      </div>
+      <div class="text-center p-6">
+       <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#d4af37] to-[#c9b037] flex items-center justify-center">
+        <svg class="w-8 h-8 text-black" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+       </div>
+       <h4 class="font-display text-xl font-bold text-[#d4af37] mb-2">Mejores Precios</h4>
+       <p class="text-gray-400">Precios competitivos en perfumes de diseñador, árabes y nicho</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- Contact Section -->
+   <section id="contacto" class="py-16 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+     <h3 class="font-display text-3xl md:text-4xl font-bold shimmer-text mb-4">Contáctanos</h3>
+     <p class="text-gray-400 mb-8">¿Tienes dudas? Escríbenos por WhatsApp</p>
+     <div class="glass rounded-2xl p-8 max-w-md mx-auto">
+      <div class="flex items-center justify-center space-x-4 mb-6">
+       <svg class="w-12 h-12 text-green-500" viewbox="0 0 24 24" fill="currentColor">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+       </svg>
+       <div class="text-left">
+        <p class="text-gray-400 text-sm">WhatsApp</p>
+        <p id="contact-whatsapp" class="text-xl font-bold text-[#d4af37]">+598 92 436 816</p>
+       </div>
+      </div>
+      <div class="flex items-center justify-center space-x-4 mb-6">
+       <svg class="w-8 h-8 text-[#d4af37]" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+       </svg>
+       <p class="text-gray-300">Montevideo / Rocha – Uruguay</p>
+      </div><a href="#" id="contact-btn" class="inline-flex items-center space-x-2 bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full font-semibold transition-all hover:scale-105">
+       <svg class="w-6 h-6" viewbox="0 0 24 24" fill="currentColor">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+       </svg><span>Enviar mensaje</span> </a>
+     </div>
+    </div>
+   </section><!-- Footer -->
+   <footer class="py-8 px-4 border-t border-gray-800">
+    <div class="max-w-6xl mx-auto text-center">
+     <p class="font-display text-xl shimmer-text mb-2">KAFATEMOR PERFUMES</p>
+     <p class="text-gray-500 text-sm">© 2024 Todos los derechos reservados | El aroma del sol</p>
+     <p class="text-gray-600 text-xs mt-2">Montevideo / Rocha – Uruguay</p>
+    </div>
+   </footer><!-- Cart Sidebar -->
+   <div id="cart-overlay" class="fixed inset-0 bg-black/60 z-40 hidden"></div>
+   <aside id="cart-sidebar" class="cart-sidebar fixed top-0 right-0 h-full w-full max-w-md bg-gradient-to-b from-[#1a1a2e] to-[#0a0a0f] z-50 flex flex-col">
+    <div class="flex items-center justify-between p-6 border-b border-gray-800">
+     <h3 class="font-display text-2xl font-bold text-[#d4af37]">Tu Carrito</h3><button id="cart-close" class="p-2 hover:bg-gray-800 rounded-full transition-colors">
+      <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg></button>
+    </div>
+    <div id="cart-items" class="flex-1 overflow-auto p-4 space-y-4">
+     <!-- Cart items loaded by JS -->
+    </div>
+    <div id="cart-empty" class="flex-1 flex flex-col items-center justify-center p-6 text-center hidden">
+     <svg class="w-24 h-24 text-gray-700 mb-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+     </svg>
+     <p class="text-gray-500 text-lg">Tu carrito está vacío</p>
+     <p class="text-gray-600 text-sm mt-2">Agrega perfumes para comenzar</p>
+    </div>
+    <div id="cart-footer" class="p-6 border-t border-gray-800">
+     <div class="flex justify-between items-center mb-4">
+      <span class="text-gray-400">Total:</span> <span id="cart-total" class="text-2xl font-bold text-[#d4af37]">$0</span>
+     </div><button id="checkout-btn" class="w-full bg-green-500 hover:bg-green-600 text-white py-4 rounded-full font-semibold flex items-center justify-center space-x-2 transition-all hover:scale-[1.02]">
+      <svg class="w-6 h-6" viewbox="0 0 24 24" fill="currentColor">
+       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+      </svg><span>Comprar por WhatsApp</span> </button>
+    </div>
+   </aside><!-- Instagram Float Button --> <a href="https://www.instagram.com/kafatemorperfumes.uy?igsh=MWI3cnlmMTB5a3gwYg%3D%3D&amp;utm_source=qr" id="instagram-float" class="fixed bottom-24 right-6 z-40 w-14 h-14 bg-gradient-to-br from-pink-500 via-red-500 to-yellow-500 rounded-full flex items-center justify-center shadow-lg hover:shadow-2xl transition-all hover:scale-110 active:scale-95" target="_blank" rel="noopener noreferrer" title="Síguenos en Instagram">
+    <svg class="w-7 h-7 text-white" viewbox="0 0 24 24" fill="currentColor">
+     <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.322a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z" />
+    </svg></a><!-- WhatsApp Float Button --> <a href="#" id="whatsapp-float" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+    <svg class="w-8 h-8 text-white" viewbox="0 0 24 24" fill="currentColor">
+     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg></a> <!-- Toast Container -->
+   <div id="toast-container" class="fixed top-24 right-4 z-50 space-y-2"></div>
+  </div>
+  <script>
+    // ========================================
+    // KAFATEMOR PERFUMES - E-commerce Script
+    // ========================================
+    
+    // Configuration
+    const defaultConfig = {
+      store_name: 'KAFATEMOR PERFUMES',
+      slogan: 'El aroma del sol',
+      hero_title: 'Perfumes originales sellados con QR',
+      hero_subtitle: 'Envíos a todo Uruguay',
+      whatsapp_number: '59892436816',
+      background_color: '#0a0a0f',
+      surface_color: '#1a1a2e',
+      text_color: '#ffffff',
+      primary_color: '#d4af37',
+      secondary_color: '#25d366'
+    };
+    
+    let config = { ...defaultConfig };
+    
+    // CATÁLOGO COMPLETO - Precios base (se suman $500 automáticamente)
+    const catalogoBase = [
+      { name: '"Y" Yves Saint Laurent EDP 100 ml', basePrice: 3835, category: 'designer' },
+      { name: '212 Men NYC 100ml EDT', basePrice: 3445, category: 'designer' },
+      { name: '212 NYC 200 ml EDT', basePrice: 4650, category: 'designer' },
+      { name: '212 Sexy Carolina Herrera', basePrice: 2661, category: 'designer' },
+      { name: '212 VIP Men Are You on The List? CH 100 ml', basePrice: 3445, category: 'designer' },
+      { name: '212 Vip Rosé NYC 80ml CH', basePrice: 4090, category: 'designer' },
+      { name: '9 AM Afnan', basePrice: 1700, category: 'arabes' },
+      { name: '9 AM Dive', basePrice: 1745, category: 'arabes' },
+      { name: '9 PM Elixir', basePrice: 2555, category: 'arabes' },
+      { name: '9 PM Afnan', basePrice: 1745, category: 'arabes' },
+      { name: 'Aether Extrait French Avenue', basePrice: 1765, category: 'nicho' },
+      { name: 'Ajayes Portrait', basePrice: 1345, category: 'arabes' },
+      { name: 'Al Absar Mudiyah Edp 100 Ml', basePrice: 1345, category: 'arabes' },
+      { name: 'Al Haramain Amber Musk', basePrice: 3620, category: 'arabes' },
+      { name: 'Al Haramain Amber Oud White', basePrice: 2660, category: 'arabes' },
+      { name: 'Al Layl, Al Wataniah', basePrice: 1620, category: 'arabes' },
+      { name: 'Al Noble Wazeer 100 ml EDP', basePrice: 1315, category: 'arabes' },
+      { name: 'Al Wataniah Durrat Al Aroos Edp 85ml', basePrice: 1539, category: 'arabes' },
+      { name: 'Amethyst Badee Al Oud', basePrice: 1320, category: 'arabes' },
+      { name: 'Amor Amor Cacharel', basePrice: 3510, category: 'designer' },
+      { name: 'Aqua di Gio EDP 100ml', basePrice: 4760, category: 'designer' },
+      { name: 'Aqua di Gio EDT', basePrice: 3920, category: 'designer' },
+      { name: 'Aqua di Gio PARFUM 50ml', basePrice: 3920, category: 'designer' },
+      { name: 'Aqua di Gio Profondo 100ml EDP', basePrice: 4590, category: 'designer' },
+      { name: 'Aqua di Gioia EDP', basePrice: 3610, category: 'designer' },
+      { name: 'Armani Code Parfum 125ml', basePrice: 4230, category: 'designer' },
+      { name: 'Asad Bourbon 100 ml', basePrice: 1790, category: 'arabes' },
+      { name: 'Asad Negro 100 ml EDP', basePrice: 1235, category: 'arabes' },
+      { name: 'Asad Zanzibar', basePrice: 1300, category: 'arabes' },
+      { name: 'Azzaro The Most Wanted EDP', basePrice: 3500, category: 'designer' },
+      { name: 'Azzure Oud French Avenue', basePrice: 1540, category: 'arabes' },
+      { name: 'Bad Boy Le Parfum 50 ml', basePrice: 3025, category: 'designer' },
+      { name: 'Bar Femme Maison Alhambra', basePrice: 1160, category: 'arabes' },
+      { name: 'Because its You Armani', basePrice: 3445, category: 'designer' },
+      { name: 'Bharara Blleu 100 ml EDP', basePrice: 3190, category: 'nicho' },
+      { name: 'Bharara Don 100 ml EDP', basePrice: 3190, category: 'nicho' },
+      { name: 'Bharara Double Bleu 100 ml EDP', basePrice: 3190, category: 'nicho' },
+      { name: 'Bharara Niche Fem 100ml EDP', basePrice: 3190, category: 'nicho' },
+      { name: 'Bleu de Chanel EDP 150 ml', basePrice: 6900, category: 'designer' },
+      { name: 'Burberry Goddess 100 ml EDP', basePrice: 4920, category: 'designer' },
+      { name: 'Burj Blanc Risala', basePrice: 1745, category: 'arabes' },
+      { name: 'Burj Noir Risala', basePrice: 1745, category: 'arabes' },
+      // Adding more products for a complete catalog
+      { name: 'Khamrah Lattafa', basePrice: 1490, category: 'arabes', oferta: true },
+      { name: 'Mandarin Sky', basePrice: 1490, category: 'arabes', oferta: true },
+      { name: 'Honor & Glory', basePrice: 1490, category: 'arabes', oferta: true },
+      { name: 'Fakhar Black', basePrice: 1590, category: 'arabes', oferta: true },
+      { name: 'Versace Eros EDT 100ml', basePrice: 3800, category: 'designer' },
+      { name: 'Dior Sauvage EDP 100ml', basePrice: 5200, category: 'designer' },
+      { name: 'Jean Paul Gaultier Le Male', basePrice: 3600, category: 'designer' },
+      { name: 'Paco Rabanne 1 Million', basePrice: 3500, category: 'designer' },
+      { name: 'Hugo Boss Bottled', basePrice: 2900, category: 'designer' },
+      { name: 'Calvin Klein CK One', basePrice: 2200, category: 'designer' },
+      { name: 'Lattafa Raghba', basePrice: 1200, category: 'arabes' },
+      { name: 'Lattafa Yara', basePrice: 1350, category: 'arabes' },
+      { name: 'Lattafa Asad', basePrice: 1400, category: 'arabes' },
+      { name: 'Maison Alhambra Jean Lowe', basePrice: 1500, category: 'arabes' },
+      { name: 'Afnan Supremacy Silver', basePrice: 1800, category: 'arabes' },
+      { name: 'Armaf Club de Nuit Intense', basePrice: 1600, category: 'arabes' },
+      { name: 'Fragrance World Clive Dorris', basePrice: 1300, category: 'arabes' },
+      { name: 'Nishane Hacivat', basePrice: 8500, category: 'nicho' },
+      { name: 'Parfums de Marly Layton', basePrice: 9200, category: 'nicho' },
+      { name: 'Initio Oud for Greatness', basePrice: 10500, category: 'nicho' },
+      { name: 'Xerjoff Naxos', basePrice: 9800, category: 'nicho' },
+      { name: 'Amouage Reflection Man', basePrice: 8900, category: 'nicho' }
+    ];
+    
+    // Crear catálogo con precios finales (+$500)
+    const catalogo = catalogoBase.map((item, index) => ({
+      id: `prod-${index}`,
+      name: item.name,
+      price: item.basePrice + 500, // Suma automática de $500
+      category: item.category,
+      oferta: item.oferta || false
+    }));
+    
+    // State
+    let cart = [];
+    let currentCategory = 'all';
+    let displayedProducts = 12;
+    let searchQuery = '';
+    
+    // DOM Elements
+    const productsGrid = document.getElementById('products-grid');
+    const ofertasGrid = document.getElementById('ofertas-grid');
+    const cartSidebar = document.getElementById('cart-sidebar');
+    const cartOverlay = document.getElementById('cart-overlay');
+    const cartItems = document.getElementById('cart-items');
+    const cartEmpty = document.getElementById('cart-empty');
+    const cartFooter = document.getElementById('cart-footer');
+    const cartCount = document.getElementById('cart-count');
+    const cartTotal = document.getElementById('cart-total');
+    const searchInput = document.getElementById('search-input');
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    const loadMoreContainer = document.getElementById('load-more-container');
+    
+    // Generate SVG bottle based on product
+    function generateBottleSVG(productId) {
+      const hash = productId.split('').reduce((a, b) => { a = ((a << 5) - a) + b.charCodeAt(0); return a & a; }, 0);
+      const hue = Math.abs(hash % 60) + 30; // Gold-ish hues
+      const type = Math.abs(hash % 4);
+      
+      const bottles = [
+        `<svg viewBox="0 0 60 90" class="w-full h-full">
+          <defs><linearGradient id="grad${productId}" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:hsl(${hue},60%,60%)"/>
+            <stop offset="50%" style="stop-color:hsl(${hue},70%,75%)"/>
+            <stop offset="100%" style="stop-color:hsl(${hue},60%,50%)"/>
+          </linearGradient></defs>
+          <rect x="24" y="8" width="12" height="12" rx="2" fill="url(#grad${productId})"/>
+          <rect x="26" y="2" width="8" height="8" rx="2" fill="hsl(${hue},50%,40%)"/>
+          <path d="M15 22 Q15 18 22 18 L38 18 Q45 18 45 22 L48 82 Q48 88 42 88 L18 88 Q12 88 12 82 Z" fill="url(#grad${productId})" opacity="0.9"/>
+          <ellipse cx="30" cy="55" rx="12" ry="18" fill="rgba(255,255,255,0.15)"/>
+        </svg>`,
+        `<svg viewBox="0 0 60 90" class="w-full h-full">
+          <defs><linearGradient id="grad${productId}" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:hsl(${hue},60%,60%)"/>
+            <stop offset="100%" style="stop-color:hsl(${hue},60%,40%)"/>
+          </linearGradient></defs>
+          <circle cx="30" cy="12" r="8" fill="url(#grad${productId})"/>
+          <rect x="27" y="2" width="6" height="6" rx="1" fill="hsl(${hue},50%,35%)"/>
+          <ellipse cx="30" cy="55" rx="22" ry="30" fill="url(#grad${productId})" opacity="0.9"/>
+          <ellipse cx="30" cy="50" rx="10" ry="15" fill="rgba(255,255,255,0.1)"/>
+        </svg>`,
+        `<svg viewBox="0 0 60 90" class="w-full h-full">
+          <defs><linearGradient id="grad${productId}" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:hsl(${hue},60%,65%)"/>
+            <stop offset="100%" style="stop-color:hsl(${hue},60%,45%)"/>
+          </linearGradient></defs>
+          <rect x="22" y="5" width="16" height="15" rx="3" fill="url(#grad${productId})"/>
+          <rect x="25" y="0" width="10" height="7" rx="2" fill="hsl(${hue},50%,35%)"/>
+          <rect x="10" y="22" width="40" height="60" rx="5" fill="url(#grad${productId})" opacity="0.9"/>
+          <rect x="18" y="35" width="24" height="35" rx="3" fill="rgba(255,255,255,0.1)"/>
+        </svg>`,
+        `<svg viewBox="0 0 60 90" class="w-full h-full">
+          <defs><linearGradient id="grad${productId}" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:hsl(${hue},60%,60%)"/>
+            <stop offset="100%" style="stop-color:hsl(${hue},60%,40%)"/>
+          </linearGradient></defs>
+          <path d="M25 5 L35 5 L38 15 L22 15 Z" fill="url(#grad${productId})"/>
+          <rect x="27" y="0" width="6" height="6" rx="1" fill="hsl(${hue},50%,35%)"/>
+          <path d="M18 18 L42 18 L48 85 Q48 88 45 88 L15 88 Q12 88 12 85 Z" fill="url(#grad${productId})" opacity="0.9"/>
+          <path d="M22 30 L38 30 L42 75 L18 75 Z" fill="rgba(255,255,255,0.1)"/>
+        </svg>`
+      ];
+      
+      return bottles[type];
+    }
+    
+    // Create product card HTML
+    function createProductCard(product, isOferta = false) {
+      const card = document.createElement('div');
+      card.className = 'product-card rounded-2xl overflow-hidden';
+      card.innerHTML = `
+        <div class="relative p-6 bg-gradient-to-b from-gray-800/50 to-transparent">
+          ${isOferta ? '<span class="absolute top-3 left-3 bg-red-500 text-white text-xs px-3 py-1 rounded-full font-bold">OFERTA</span>' : ''}
+          <div class="w-32 h-44 mx-auto mb-4 transform hover:scale-110 transition-transform duration-500">
+            ${generateBottleSVG(product.id)}
+          </div>
+        </div>
+        <div class="p-5">
+          <h4 class="font-medium text-white text-sm mb-2 line-clamp-2 min-h-[40px]">${product.name}</h4>
+          <div class="flex items-center justify-between">
+            <span class="text-2xl font-bold text-[#d4af37]">$${product.price.toLocaleString()}</span>
+            <button 
+              onclick="addToCart('${product.id}')" 
+              class="p-3 bg-[#d4af37] hover:bg-[#c9b037] text-black rounded-full transition-all hover:scale-110 active:scale-95"
+              aria-label="Agregar al carrito"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      `;
+      return card;
+    }
+    
+    // Render ofertas
+    function renderOfertas() {
+      ofertasGrid.innerHTML = '';
+      const ofertas = catalogo.filter(p => p.oferta);
+      ofertas.forEach(product => {
+        ofertasGrid.appendChild(createProductCard(product, true));
+      });
+    }
+    
+    // Filter products
+    function getFilteredProducts() {
+      let filtered = catalogo.filter(p => !p.oferta);
+      
+      if (currentCategory !== 'all') {
+        filtered = filtered.filter(p => p.category === currentCategory);
+      }
+      
+      if (searchQuery) {
+        const query = searchQuery.toLowerCase();
+        filtered = filtered.filter(p => p.name.toLowerCase().includes(query));
+      }
+      
+      return filtered;
+    }
+    
+    // Render products
+    function renderProducts() {
+      const filtered = getFilteredProducts();
+      const toShow = filtered.slice(0, displayedProducts);
+      
+      productsGrid.innerHTML = '';
+      toShow.forEach(product => {
+        productsGrid.appendChild(createProductCard(product));
+      });
+      
+      // Show/hide load more button
+      if (filtered.length > displayedProducts) {
+        loadMoreContainer.classList.remove('hidden');
+      } else {
+        loadMoreContainer.classList.add('hidden');
+      }
+    }
+    
+    // Add to cart
+    function addToCart(productId) {
+      const product = catalogo.find(p => p.id === productId);
+      if (!product) return;
+      
+      const existingItem = cart.find(item => item.id === productId);
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        cart.push({ ...product, quantity: 1 });
+      }
+      
+      saveCart();
+      updateCartUI();
+      showToast(`${product.name} agregado al carrito`);
+    }
+    
+    // Remove from cart
+    function removeFromCart(productId) {
+      cart = cart.filter(item => item.id !== productId);
+      saveCart();
+      updateCartUI();
+    }
+    
+    // Update quantity
+    function updateQuantity(productId, delta) {
+      const item = cart.find(i => i.id === productId);
+      if (!item) return;
+      
+      item.quantity += delta;
+      if (item.quantity <= 0) {
+        removeFromCart(productId);
+      } else {
+        saveCart();
+        updateCartUI();
+      }
+    }
+    
+    // Save cart to Data SDK
+    async function saveCart() {
+      if (!window.dataSdk) return;
+      
+      // For simplicity, we store cart in localStorage as backup
+      localStorage.setItem('kafatemor_cart', JSON.stringify(cart));
+    }
+    
+    // Load cart
+    function loadCart() {
+      const saved = localStorage.getItem('kafatemor_cart');
+      if (saved) {
+        try {
+          cart = JSON.parse(saved);
+        } catch (e) {
+          cart = [];
+        }
+      }
+    }
+    
+    // Update cart UI
+    function updateCartUI() {
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      
+      cartCount.textContent = totalItems;
+      cartTotal.textContent = `$${totalPrice.toLocaleString()}`;
+      
+      if (cart.length === 0) {
+        cartItems.classList.add('hidden');
+        cartEmpty.classList.remove('hidden');
+        cartFooter.classList.add('opacity-50', 'pointer-events-none');
+      } else {
+        cartItems.classList.remove('hidden');
+        cartEmpty.classList.add('hidden');
+        cartFooter.classList.remove('opacity-50', 'pointer-events-none');
+        
+        cartItems.innerHTML = cart.map(item => `
+          <div class="glass rounded-xl p-4 flex items-center space-x-4">
+            <div class="w-16 h-20 flex-shrink-0">
+              ${generateBottleSVG(item.id)}
+            </div>
+            <div class="flex-1 min-w-0">
+              <h5 class="text-white text-sm font-medium truncate">${item.name}</h5>
+              <p class="text-[#d4af37] font-bold">$${item.price.toLocaleString()}</p>
+              <div class="flex items-center space-x-3 mt-2">
+                <button onclick="updateQuantity('${item.id}', -1)" class="w-7 h-7 rounded-full bg-gray-700 hover:bg-gray-600 flex items-center justify-center text-white">-</button>
+                <span class="text-white font-medium">${item.quantity}</span>
+                <button onclick="updateQuantity('${item.id}', 1)" class="w-7 h-7 rounded-full bg-gray-700 hover:bg-gray-600 flex items-center justify-center text-white">+</button>
+              </div>
+            </div>
+            <button onclick="removeFromCart('${item.id}')" class="p-2 hover:bg-red-500/20 rounded-full transition-colors">
+              <svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+              </svg>
+            </button>
+          </div>
+        `).join('');
+      }
+    }
+    
+    // Toggle cart
+    function toggleCart() {
+      cartSidebar.classList.toggle('open');
+      cartOverlay.classList.toggle('hidden');
+      document.body.style.overflow = cartSidebar.classList.contains('open') ? 'hidden' : '';
+    }
+    
+    // Checkout via WhatsApp
+    function checkout() {
+      if (cart.length === 0) return;
+      
+      const whatsappNumber = config.whatsapp_number || defaultConfig.whatsapp_number;
+      const items = cart.map(item => `• ${item.name} x${item.quantity} - $${(item.price * item.quantity).toLocaleString()}`).join('\n');
+      const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      
+      const message = encodeURIComponent(`¡Hola! Quiero comprar estos perfumes:\n\n${items}\n\n*Total: $${total.toLocaleString()}*`);
+      const url = `https://wa.me/${whatsappNumber}?text=${message}`;
+      
+      window.open(url, '_blank');
+    }
+    
+    // Show toast notification
+    function showToast(message) {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = 'toast glass px-6 py-3 rounded-full text-white text-sm flex items-center space-x-2';
+      toast.innerHTML = `
+        <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+        </svg>
+        <span>${message}</span>
+      `;
+      container.appendChild(toast);
+      setTimeout(() => toast.remove(), 3000);
+    }
+    
+    // Update UI based on config
+    function updateUI() {
+      document.getElementById('store-name').textContent = config.store_name || defaultConfig.store_name;
+      document.getElementById('store-slogan').textContent = config.slogan || defaultConfig.slogan;
+      
+      const heroTitle = document.getElementById('hero-title');
+      const title = config.hero_title || defaultConfig.hero_title;
+      const words = title.split(' ');
+      const midPoint = Math.ceil(words.length / 2);
+      heroTitle.innerHTML = `
+        <span class="shimmer-text">${words.slice(0, midPoint).join(' ')}</span><br>
+        <span class="text-white">${words.slice(midPoint).join(' ')}</span>
+      `;
+      
+      document.getElementById('hero-subtitle').textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+      
+      const whatsappNumber = config.whatsapp_number || defaultConfig.whatsapp_number;
+      document.getElementById('contact-whatsapp').textContent = `+${whatsappNumber.slice(0,3)} ${whatsappNumber.slice(3,5)} ${whatsappNumber.slice(5,8)} ${whatsappNumber.slice(8)}`;
+      document.getElementById('whatsapp-float').href = `https://wa.me/${whatsappNumber}`;
+      document.getElementById('contact-btn').onclick = () => window.open(`https://wa.me/${whatsappNumber}`, '_blank');
+    }
+    
+    // Initialize Element SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (newConfig) => {
+          config = { ...defaultConfig, ...newConfig };
+          updateUI();
+        },
+        mapToCapabilities: (cfg) => ({
+          recolorables: [
+            {
+              get: () => cfg.background_color || defaultConfig.background_color,
+              set: (value) => window.elementSdk.setConfig({ background_color: value })
+            },
+            {
+              get: () => cfg.surface_color || defaultConfig.surface_color,
+              set: (value) => window.elementSdk.setConfig({ surface_color: value })
+            },
+            {
+              get: () => cfg.text_color || defaultConfig.text_color,
+              set: (value) => window.elementSdk.setConfig({ text_color: value })
+            },
+            {
+              get: () => cfg.primary_color || defaultConfig.primary_color,
+              set: (value) => window.elementSdk.setConfig({ primary_color: value })
+            },
+            {
+              get: () => cfg.secondary_color || defaultConfig.secondary_color,
+              set: (value) => window.elementSdk.setConfig({ secondary_color: value })
+            }
+          ],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (cfg) => new Map([
+          ['store_name', cfg.store_name || defaultConfig.store_name],
+          ['slogan', cfg.slogan || defaultConfig.slogan],
+          ['hero_title', cfg.hero_title || defaultConfig.hero_title],
+          ['hero_subtitle', cfg.hero_subtitle || defaultConfig.hero_subtitle],
+          ['whatsapp_number', cfg.whatsapp_number || defaultConfig.whatsapp_number]
+        ])
+      });
+    }
+    
+    // Initialize Data SDK
+    if (window.dataSdk) {
+      window.dataSdk.init({
+        onDataChanged: (data) => {
+          // Data SDK used for future order tracking
+        }
+      });
+    }
+    
+    // Event Listeners
+    document.getElementById('cart-toggle').addEventListener('click', toggleCart);
+    document.getElementById('cart-close').addEventListener('click', toggleCart);
+    document.getElementById('cart-overlay').addEventListener('click', toggleCart);
+    document.getElementById('checkout-btn').addEventListener('click', checkout);
+    
+    document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+      document.getElementById('mobile-nav').classList.toggle('hidden');
+    });
+    
+    // Category tabs
+    document.querySelectorAll('.category-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentCategory = tab.dataset.category;
+        displayedProducts = 12;
+        renderProducts();
+      });
+    });
+    
+    // Search
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value;
+      displayedProducts = 12;
+      renderProducts();
+    });
+    
+    // Load more
+    loadMoreBtn.addEventListener('click', () => {
+      displayedProducts += 12;
+      renderProducts();
+    });
+    
+    // Smooth scroll for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        document.getElementById('mobile-nav').classList.add('hidden');
+      });
+    });
+    
+    // Initialize
+    loadCart();
+    updateCartUI();
+    renderOfertas();
+    renderProducts();
+    updateUI();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9daa3d79f15aa12e',t:'MTc3MzIyODc2My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

@@ -5,9 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kafatemor Perfumes - Perfumes Árabes, de Nicho y de Diseñador</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
-  <script src="/_sdk/element_sdk.js"></script>
-  <script src="/_sdk/data_sdk.js"></script>
   <style>
     * {
       margin: 0;
@@ -141,11 +138,61 @@
     }
 
     .hero {
-      background: linear-gradient(135deg, rgba(30, 58, 138, 0.15) 0%, rgba(192, 192, 192, 0.05) 100%);
-      padding: 60px 20px;
+      background: linear-gradient(135deg, #0a0e1a 0%, #1a1f2e 50%, #0f1419 100%);
+      padding: 80px 20px;
       text-align: center;
       border-bottom: 1px solid rgba(192, 192, 192, 0.1);
       animation: fadeIn 0.8s ease;
+      position: relative;
+      overflow: hidden;
+      min-height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(ellipse 800px 400px at 15% 30%, rgba(30, 58, 138, 0.25) 0%, transparent 40%),
+        radial-gradient(ellipse 900px 350px at 85% 70%, rgba(192, 192, 192, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 50% 100%, rgba(30, 58, 138, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 30% 60%, rgba(37, 99, 235, 0.1) 0%, transparent 60%);
+      animation: gradientShift 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(192, 192, 192, 0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { opacity: 0.8; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) translateX(0); }
+      50% { transform: translateY(-20px) translateX(20px); }
+    }
+
+    .hero > div {
+      position: relative;
+      z-index: 10;
     }
 
     .hero-title {
@@ -304,6 +351,23 @@
       display: flex;
       flex-direction: column;
       height: 100%;
+      position: relative;
+    }
+
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(30, 58, 138, 0), #1e3a8a, rgba(30, 58, 138, 0));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .product-card:hover::before {
+      opacity: 1;
     }
 
     .product-card:hover {
@@ -383,12 +447,51 @@
       display: flex;
       align-items: center;
       gap: 4px;
+      position: relative;
+      overflow: hidden;
+      font-weight: 600;
+    }
+
+    .btn-add-cart::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: radial-gradient(circle, rgba(30, 58, 138, 0.6), transparent);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .btn-add-cart:hover::before {
+      animation: addToCartPulse 0.6s ease-out;
+    }
+
+    @keyframes addToCartPulse {
+      0% {
+        width: 0;
+        height: 0;
+        opacity: 1;
+      }
+      100% {
+        width: 80px;
+        height: 80px;
+        opacity: 0;
+      }
     }
 
     .btn-add-cart:hover {
-      background: rgba(30, 58, 138, 0.4);
-      border-color: rgba(30, 58, 138, 0.8);
-      transform: scale(1.05);
+      background: linear-gradient(135deg, rgba(30, 58, 138, 0.9), rgba(37, 99, 235, 0.7));
+      border-color: #1e3a8a;
+      transform: scale(1.15) translateY(-2px);
+      box-shadow: 0 8px 25px rgba(30, 58, 138, 0.6), inset 0 0 20px rgba(37, 99, 235, 0.2);
+      color: #ffffff;
+    }
+
+    .btn-add-cart:active {
+      transform: scale(0.92);
     }
 
     .cart-sidebar {
@@ -453,6 +556,13 @@
       justify-content: space-between;
       align-items: center;
       font-size: 13px;
+      transition: all 0.2s ease;
+      border-left: 3px solid transparent;
+    }
+
+    .cart-item:hover {
+      border-left-color: #1e3a8a;
+      background: rgba(30, 58, 138, 0.15);
     }
 
     .cart-item-info {
@@ -736,6 +846,8 @@
     }
   </style>
   <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
  </head>
  <body>
   <div class="app-wrapper"><!-- HEADER -->
@@ -770,9 +882,13 @@
    </header><!-- MAIN CONTENT -->
    <main style="flex: 1;"><!-- HERO -->
     <section class="hero">
-     <h1 class="hero-title" id="heroTitle">Kafatemor Perfumes</h1>
-     <p class="hero-subtitle" id="heroSubtitle">Perfumes árabes, de nicho y de diseñador al mejor precio.</p>
-     <div class="hero-buttons"><button class="btn btn-primary" onclick="scrollToSection('all-products')"> <i data-lucide="eye" style="width: 18px; height: 18px;"></i> Ver Catálogo </button> <button class="btn btn-secondary" onclick="openCart()"> <i data-lucide="shopping-bag" style="width: 18px; height: 18px;"></i> Comprar Ahora </button>
+     <div style="max-width: 800px; margin: 0 auto; animation: fadeIn 0.8s ease;">
+      <p style="font-size: 14px; color: rgba(192, 192, 192, 0.8); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;">✨ Esencias del Mundo</p>
+      <h1 class="hero-title" id="heroTitle">Kafatemor Perfumes</h1>
+      <p style="font-size: 24px; color: rgba(224, 224, 224, 0.85); margin: 30px 0 20px; font-style: italic; font-weight: 300; line-height: 1.6;">"Un perfume es una historia sin palabras, un viaje sensorial que despierta recuerdos y emociones."</p>
+      <p class="hero-subtitle" id="heroSubtitle">Perfumes árabes, de nicho y de diseñador al mejor precio.</p>
+      <div class="hero-buttons"><button class="btn btn-primary" onclick="scrollToSection('all-products')"> <i data-lucide="sparkles" style="width: 18px; height: 18px;"></i> Descubrir Aromas </button> <button class="btn btn-secondary" onclick="openCart()"> <i data-lucide="shopping-bag" style="width: 18px; height: 18px;"></i> Ver Carrito </button>
+      </div>
      </div>
     </section><!-- BENEFITS -->
     <div class="benefits">
@@ -897,232 +1013,48 @@
   <div class="floating-buttons"><a href="https://wa.me/59892436816" target="_blank" rel="noopener noreferrer" class="float-btn float-whatsapp" title="WhatsApp"> <i data-lucide="message-circle" style="width: 28px; height: 28px;"></i> </a> <a href="https://www.instagram.com/kafatemorperfumes.uy?igsh=MWI3cnlmMTB5a3gwYg%3D%3D&amp;utm_source=qr" target="_blank" rel="noopener noreferrer" class="float-btn float-instagram" title="Instagram"> <i data-lucide="instagram" style="width: 28px; height: 28px;"></i> </a>
   </div>
   <script>
-    // CATALOG DATA - COMPLETO CON TODOS LOS PERFUMES
-    const catalog = {
-      arabe: [
-        // AFNAN
-        { id: 'afnan-9am', name: '9 AM', brand: 'Afnan', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'afnan-9am-dive', name: '9 AM Dive', brand: 'Afnan', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'afnan-9pm', name: '9 PM', brand: 'Afnan', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        { id: 'afnan-9pm-elixir', name: '9 PM Elixir', brand: 'Afnan', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        { id: 'afnan-desert-rose', name: 'Souvenir Desert Rose', brand: 'Afnan', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        // LATTAFA
-        { id: 'lattafa-badee-amethyst', name: 'Badee Al Oud Amethyst', brand: 'Lattafa', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        { id: 'lattafa-badee-noble', name: 'Noble Blush Badee Al Oud', brand: 'Lattafa', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        { id: 'lattafa-badee-sublime', name: 'Sublime Badee Al Oud', brand: 'Lattafa', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        { id: 'lattafa-khamrah', name: 'Khamrah', brand: 'Lattafa', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'lattafa-khamrah-qahwa', name: 'Khamrah Qahwa', brand: 'Lattafa', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'lattafa-khamrah-dukan', name: 'Khamrah Dukan', brand: 'Lattafa', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'lattafa-fakhar-rose', name: 'Fakhar Rose', brand: 'Lattafa', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        { id: 'lattafa-fakhar-silver', name: 'Fakhar Silver', brand: 'Lattafa', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'lattafa-jasoor', name: 'Jasoor', brand: 'Lattafa', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'lattafa-vintage-radio', name: 'Vintage Radio', brand: 'Lattafa', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'lattafa-mayar', name: 'Mayar Natural Intense', brand: 'Lattafa', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        { id: 'lattafa-sehr', name: 'Sehr', brand: 'Lattafa', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'lattafa-victoria', name: 'Victoria', brand: 'Lattafa', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        { id: 'lattafa-yara-candy', name: 'Yara Candy', brand: 'Lattafa', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        { id: 'lattafa-yara-moi', name: 'Yara Moi', brand: 'Lattafa', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        { id: 'lattafa-yara-rosa', name: 'Yara Rosa', brand: 'Lattafa', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        { id: 'lattafa-yara-tous', name: 'Yara Tous', brand: 'Lattafa', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        { id: 'lattafa-ana-abiyedh', name: 'Ana Abiyedh', brand: 'Lattafa', category: 'Perfumes Árabes', gender: 'unisex', image: '🧴' },
-        { id: 'lattafa-emeer', name: 'Emeer', brand: 'Lattafa', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'lattafa-maahir', name: 'Maahir', brand: 'Lattafa', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'lattafa-maahir-legacy', name: 'Maahir Legacy', brand: 'Lattafa', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'lattafa-quimmah', name: 'Quimmah', brand: 'Lattafa', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'lattafa-kingdom', name: 'The Kingdom', brand: 'Lattafa', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'lattafa-gourmand', name: 'Give Me Gourmand', brand: 'Lattafa', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        // MAISON ALHAMBRA
-        { id: 'alhambra-bar-femme', name: 'Bar Femme', brand: 'Maison Alhambra', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        { id: 'alhambra-kingsman', name: 'Kingsman', brand: 'Maison Alhambra', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'alhambra-leonie', name: 'Léonie', brand: 'Maison Alhambra', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        { id: 'alhambra-modern-musk', name: 'Modern Musk', brand: 'Maison Alhambra', category: 'Perfumes Árabes', gender: 'unisex', image: '🧴' },
-        { id: 'alhambra-nº2-men', name: 'Nº2 Men', brand: 'Maison Alhambra', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'alhambra-opulence-leather', name: 'Opulence Leather', brand: 'Maison Alhambra', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'alhambra-pink-eclipse', name: 'Pink Eclipse', brand: 'Maison Alhambra', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        { id: 'alhambra-candid-rouge', name: 'So Candid Rouge', brand: 'Maison Alhambra', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        { id: 'alhambra-glasier', name: 'Glasier Pour Homme', brand: 'Maison Alhambra', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'alhambra-jean-lowe', name: 'Jean Lowe Immortel', brand: 'Maison Alhambra', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'alhambra-victorioso', name: 'Victorioso', brand: 'Maison Alhambra', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        // ARMAF
-        { id: 'armaf-club-bling', name: 'Club de Nuit Bling', brand: 'Armaf', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'armaf-club-imperiale', name: 'Club de Nuit Imperiale', brand: 'Armaf', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'armaf-club-lionheart', name: 'Club de Nuit Lionheart Woman', brand: 'Armaf', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        { id: 'armaf-club-precieux', name: 'Club de Nuit Precieux', brand: 'Armaf', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'armaf-club-sillage', name: 'Club de Nuit Sillage', brand: 'Armaf', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'armaf-club-untold', name: 'Club de Nuit Untold', brand: 'Armaf', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        { id: 'armaf-miss', name: 'Miss Armaf', brand: 'Armaf', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        { id: 'armaf-yum-yum', name: 'Yum Yum', brand: 'Armaf', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        // ARMAF ODYSSEY
-        { id: 'odyssey-aoud', name: 'Odyssey Aoud', brand: 'Armaf Odyssey', category: 'Perfumes Árabes', gender: 'unisex', image: '🧴' },
-        { id: 'odyssey-bahamas', name: 'Odyssey Bahamas', brand: 'Armaf Odyssey', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'odyssey-black-forest', name: 'Odyssey Black Forest', brand: 'Armaf Odyssey', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'odyssey-chocolate', name: 'Odyssey Dubai Chocolate', brand: 'Armaf Odyssey', category: 'Perfumes Árabes', gender: 'unisex', image: '🧴' },
-        { id: 'odyssey-montagne', name: 'Odyssey Eau de Montagne', brand: 'Armaf Odyssey', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'odyssey-home-white', name: 'Odyssey Home White', brand: 'Armaf Odyssey', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        { id: 'odyssey-homme', name: 'Odyssey Homme', brand: 'Armaf Odyssey', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'odyssey-limoni', name: 'Odyssey Limoni', brand: 'Armaf Odyssey', category: 'Perfumes Árabes', gender: 'unisex', image: '🧴' },
-        { id: 'odyssey-mandarin', name: 'Odyssey Mandarin', brand: 'Armaf Odyssey', category: 'Perfumes Árabes', gender: 'unisex', image: '🧴' },
-        { id: 'odyssey-marshmallow', name: 'Odyssey Marshmallow', brand: 'Armaf Odyssey', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        { id: 'odyssey-revolution', name: 'Odyssey Revolution', brand: 'Armaf Odyssey', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'odyssey-spectra', name: 'Odyssey Spectra', brand: 'Armaf Odyssey', category: 'Perfumes Árabes', gender: 'unisex', image: '🧴' },
-        { id: 'odyssey-toffee', name: 'Odyssey Toffee Coffee', brand: 'Armaf Odyssey', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        { id: 'odyssey-ultra', name: 'Odyssey Ultra Edition', brand: 'Armaf Odyssey', category: 'Perfumes Árabes', gender: 'unisex', image: '🧴' },
-        // AL WATANIAH
-        { id: 'wataniah-al-layl', name: 'Al Layl', brand: 'Al Wataniah', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'wataniah-durrat', name: 'Durrat Al Aroos', brand: 'Al Wataniah', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        { id: 'wataniah-fayyad', name: 'Fayyad', brand: 'Al Wataniah', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'wataniah-kayaan', name: 'Kayaan Classic', brand: 'Al Wataniah', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'wataniah-sabah', name: 'Sabah Al Ward', brand: 'Al Wataniah', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        { id: 'wataniah-risala', name: 'Risala', brand: 'Al Wataniah', category: 'Perfumes Árabes', gender: 'unisex', image: '🧴' },
-        { id: 'wataniah-burj-blanc', name: 'Burj Blanc', brand: 'Al Wataniah', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'wataniah-burj-noir', name: 'Burj Noir', brand: 'Al Wataniah', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'wataniah-cotton-bliss', name: 'Cotton Bliss', brand: 'Al Wataniah', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        { id: 'wataniah-elegancia', name: 'Elegancia Pure', brand: 'Al Wataniah', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        { id: 'wataniah-fruity', name: 'Fruity Bliss', brand: 'Al Wataniah', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        { id: 'wataniah-honor-ciel', name: 'Honor Ciel', brand: 'Al Wataniah', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        { id: 'wataniah-honor-royal', name: 'Honor Royal', brand: 'Al Wataniah', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        // OTRAS ÁRABES
-        { id: 'other-french-avenue', name: 'Aether Extrait French Avenue', brand: 'Aether', category: 'Perfumes Árabes', gender: 'unisex', image: '🧴' },
-        { id: 'other-portrait', name: 'Ajayes Portrait', brand: 'Ajayes', category: 'Perfumes Árabes', gender: 'unisex', image: '🧴' },
-        { id: 'other-mudiyah', name: 'Al Absar Mudiyah', brand: 'Al Absar', category: 'Perfumes Árabes', gender: 'unisex', image: '🧴' },
-        { id: 'other-rose-absar', name: 'The Rose Al Absar', brand: 'Al Absar', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-        { id: 'other-amber-haramain', name: 'Amber Musk Al Haramain', brand: 'Al Haramain', category: 'Perfumes Árabes', gender: 'unisex', image: '🧴' },
-        { id: 'other-amber-oud', name: 'Amber Oud White Al Haramain', brand: 'Al Haramain', category: 'Perfumes Árabes', gender: 'unisex', image: '🧴' },
-        { id: 'other-ishq-gold', name: 'Ishq Al Shuyukh Gold', brand: 'Al Haramain', category: 'Perfumes Árabes', gender: 'unisex', image: '🧴' },
-        { id: 'other-liquid-brun', name: 'Liquid Brun', brand: 'Alhambra', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'other-shagaf-uar', name: 'Shagaf Oud Ahmar', brand: 'Al Haramain', category: 'Perfumes Árabes', gender: 'unisex', image: '🧴' },
-        { id: 'other-shagaf-azraq', name: 'Shagaf Oud Azraq', brand: 'Al Haramain', category: 'Perfumes Árabes', gender: 'unisex', image: '🧴' },
-        { id: 'other-shagaf-tonka', name: 'Shagaf Oud Tonka', brand: 'Al Haramain', category: 'Perfumes Árabes', gender: 'unisex', image: '🧴' },
-        { id: 'other-shaheen', name: 'Shaheen Gold', brand: 'Al Haramain', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'other-spectre', name: 'Spectre Amazonite', brand: 'Al Haramain', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'other-stallion', name: 'Stallion 53', brand: 'Al Haramain', category: 'Perfumes Árabes', gender: 'hombre', image: '🧴' },
-        { id: 'other-teriaq', name: 'Teriaq', brand: 'Al Haramain', category: 'Perfumes Árabes', gender: 'unisex', image: '🧴' },
-        { id: 'other-veneno', name: 'Veneno Scarlet', brand: 'Al Haramain', category: 'Perfumes Árabes', gender: 'mujer', image: '🧴' },
-      ],
-      nicho: [
-        // XERJOFF
-        { id: 'xerjoff-erba', name: 'Erba Pura', brand: 'Xerjoff', category: 'De Nicho', gender: 'unisex', image: '🧴' },
-        { id: 'xerjoff-erba-gold', name: 'Erba Gold', brand: 'Xerjoff', category: 'De Nicho', gender: 'unisex', image: '🧴' },
-        // BHARARA
-        { id: 'bharara-bleu', name: 'Bharara Bleu', brand: 'Bharara', category: 'De Nicho', gender: 'hombre', image: '🧴' },
-        { id: 'bharara-don', name: 'Bharara Don', brand: 'Bharara', category: 'De Nicho', gender: 'hombre', image: '🧴' },
-        { id: 'bharara-double', name: 'Bharara Double Bleu', brand: 'Bharara', category: 'De Nicho', gender: 'hombre', image: '🧴' },
-        { id: 'bharara-femme', name: 'Bharara Niche Femme', brand: 'Bharara', category: 'De Nicho', gender: 'mujer', image: '🧴' },
-        // ORIENTICA
-        { id: 'orientica-amber', name: 'Amber Rouge', brand: 'Orientica', category: 'De Nicho', gender: 'unisex', image: '🧴' },
-        { id: 'orientica-rose', name: 'Rosé Eclat', brand: 'Orientica', category: 'De Nicho', gender: 'mujer', image: '🧴' },
-        // SWISS ARABIAN
-        { id: 'swiss-shaghaf', name: 'Shaghaf Oud', brand: 'Swiss Arabian', category: 'De Nicho', gender: 'unisex', image: '🧴' },
-        // TOM FORD
-        { id: 'tomford-ombre-edp', name: 'Ombre Leather EDP', brand: 'Tom Ford', category: 'De Nicho', gender: 'hombre', image: '🧴' },
-        { id: 'tomford-ombre-parfum', name: 'Ombre Leather Parfum', brand: 'Tom Ford', category: 'De Nicho', gender: 'hombre', image: '🧴' },
-      ],
-      diseñador: [
-        // YVES SAINT LAURENT
-        { id: 'ysl-y-edp', name: 'Y EDP', brand: 'Yves Saint Laurent', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        { id: 'ysl-myslf', name: 'MYSLF', brand: 'Yves Saint Laurent', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        { id: 'ysl-libre', name: "Libre L'Eau Nue", brand: 'Yves Saint Laurent', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        // GIORGIO ARMANI
-        { id: 'armani-acqua-edt', name: 'Acqua di Gio EDT', brand: 'Giorgio Armani', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        { id: 'armani-acqua-edp', name: 'Acqua di Gio EDP', brand: 'Giorgio Armani', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        { id: 'armani-acqua-parfum', name: 'Acqua di Gio Parfum', brand: 'Giorgio Armani', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        { id: 'armani-acqua-profondo', name: 'Acqua di Gio Profondo', brand: 'Giorgio Armani', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        { id: 'armani-gioia', name: 'Acqua di Gioia', brand: 'Giorgio Armani', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'armani-code', name: 'Armani Code', brand: 'Giorgio Armani', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        { id: 'armani-because', name: "Because It's You", brand: 'Giorgio Armani', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'armani-passione', name: 'Passione', brand: 'Giorgio Armani', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'armani-passione-musk', name: 'Passione Red Musk', brand: 'Giorgio Armani', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'armani-si', name: 'SI', brand: 'Giorgio Armani', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'armani-si-intense', name: 'SI Intense', brand: 'Giorgio Armani', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'armani-stronger', name: 'Stronger With You', brand: 'Giorgio Armani', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        // CAROLINA HERRERA
-        { id: 'herrera-212men', name: '212 Men', brand: 'Carolina Herrera', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        { id: 'herrera-212', name: '212', brand: 'Carolina Herrera', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'herrera-212sexy', name: '212 Sexy', brand: 'Carolina Herrera', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'herrera-212vip', name: '212 VIP Men', brand: 'Carolina Herrera', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        { id: 'herrera-212vip-rose', name: '212 VIP Rosé', brand: 'Carolina Herrera', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'herrera-goodgirl', name: 'Good Girl Blush', brand: 'Carolina Herrera', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'herrera-badboy', name: 'Bad Boy Le Parfum', brand: 'Carolina Herrera', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        // CHANEL
-        { id: 'chanel-bleu', name: 'Bleu de Chanel', brand: 'Chanel', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        { id: 'chanel-chance', name: 'Chance', brand: 'Chanel', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'chanel-coco', name: 'Coco Mademoiselle', brand: 'Chanel', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'chanel-nº5', name: 'Nº5', brand: 'Chanel', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        // DIOR
-        { id: 'dior-jadore', name: "J'adore", brand: 'Dior', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'dior-poison', name: 'Poison', brand: 'Dior', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'dior-miss-essence', name: 'Miss Dior Essence', brand: 'Dior', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'dior-sauvage-edt', name: 'Sauvage EDT', brand: 'Dior', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        { id: 'dior-sauvage-edp', name: 'Sauvage EDP', brand: 'Dior', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        { id: 'dior-sauvage-parfum', name: 'Sauvage Parfum', brand: 'Dior', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        { id: 'dior-sauvage-elixir', name: 'Sauvage Elixir', brand: 'Dior', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        // LANCÔME
-        { id: 'lancome-idole', name: 'Idôle', brand: 'Lancôme', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'lancome-idole-now', name: 'Idôle Now', brand: 'Lancôme', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'lancome-idole-peach', name: 'Idôle Peach Roses', brand: 'Lancôme', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'lancome-lavie', name: 'La Vie Est Belle', brand: 'Lancôme', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'lancome-lavie-elixir', name: 'La Vie Est Belle Elixir', brand: 'Lancôme', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'lancome-nuit', name: 'La Nuit Trésor', brand: 'Lancôme', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'lancome-poeme', name: 'Poeme', brand: 'Lancôme', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        // JEAN PAUL GAULTIER
-        { id: 'gaultier-lemale-elixir', name: 'Le Male Elixir', brand: 'Jean Paul Gaultier', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        { id: 'gaultier-lemale-parfum', name: 'Le Male Le Parfum', brand: 'Jean Paul Gaultier', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        { id: 'gaultier-lebeau', name: 'Le Beau', brand: 'Jean Paul Gaultier', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        { id: 'gaultier-classique', name: 'Classique', brand: 'Jean Paul Gaultier', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'gaultier-divine', name: 'Divine', brand: 'Jean Paul Gaultier', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'gaultier-scandal', name: 'Scandal', brand: 'Jean Paul Gaultier', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        // PACO RABANNE
-        { id: 'rabanne-1million', name: '1 Million', brand: 'Paco Rabanne', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        { id: 'rabanne-poure', name: 'Paco Rabanne Pour Homme', brand: 'Paco Rabanne', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        { id: 'rabanne-phantom', name: 'Phantom Elixir', brand: 'Paco Rabanne', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        { id: 'rabanne-invictus-aqua', name: 'Invictus Aqua', brand: 'Paco Rabanne', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        { id: 'rabanne-invictus-victory', name: 'Invictus Victory', brand: 'Paco Rabanne', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        { id: 'rabanne-invictus-elixir', name: 'Invictus Victory Elixir', brand: 'Paco Rabanne', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        { id: 'rabanne-ladymillion', name: 'Lady Million', brand: 'Paco Rabanne', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        // VERSACE
-        { id: 'versace-eros-edt', name: 'Eros EDT', brand: 'Versace', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        { id: 'versace-eros-edp', name: 'Eros EDP', brand: 'Versace', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        { id: 'versace-eros-flame', name: 'Eros Flame', brand: 'Versace', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        // VALENTINO
-        { id: 'valentino-voce', name: 'Voce Viva', brand: 'Valentino', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'valentino-donna-extra', name: 'Donna Extradose', brand: 'Valentino', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'valentino-donna-yellow', name: 'Donna Yellow Dream', brand: 'Valentino', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'valentino-uomo-coral', name: 'Uomo Coral Fantasy', brand: 'Valentino', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        { id: 'valentino-green', name: 'Green Stravaganza', brand: 'Valentino', category: 'De Diseñador', gender: 'unisex', image: '🧴' },
-        // GIVENCHY
-        { id: 'givenchy-gentleman', name: 'Gentleman', brand: 'Givenchy', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        { id: 'givenchy-gentleman-boisee', name: 'Gentleman Boisée', brand: 'Givenchy', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        { id: 'givenchy-gentleman-society', name: 'Gentleman Society', brand: 'Givenchy', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        { id: 'givenchy-linterdit', name: "L'Interdit", brand: 'Givenchy', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'givenchy-organza', name: 'Organza', brand: 'Givenchy', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        // MOSCHINO
-        { id: 'moschino-toy2', name: 'Toy 2', brand: 'Moschino', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'moschino-toy2-bubble', name: 'Toy 2 Bubble Gum', brand: 'Moschino', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'moschino-toy2-pearl', name: 'Toy 2 Pearl', brand: 'Moschino', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'moschino-cheap', name: 'Cheap & Chic Love Love', brand: 'Moschino', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        // OTRAS MARCAS DISEÑADOR
-        { id: 'other-cacharel', name: 'Cacharel Amor Amor', brand: 'Cacharel', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'other-burberry', name: 'Burberry Goddess', brand: 'Burberry', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'other-coach', name: 'Coach Gold', brand: 'Coach', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'other-rochas', name: 'Rochas Byzance', brand: 'Rochas', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'other-calvin-eternity', name: 'Eternity', brand: 'Calvin Klein', category: 'De Diseñador', gender: 'unisex', image: '🧴' },
-        { id: 'other-calvin-one', name: 'One', brand: 'Calvin Klein', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        { id: 'other-calvin-euphoria', name: 'Euphoria', brand: 'Calvin Klein', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'other-gucci-flora', name: 'Gucci Flora', brand: 'Gucci', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'other-guess-iconic', name: 'Guess Iconic', brand: 'Guess', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'other-lanvin', name: 'Lanvin Éclat d\'Arpège', brand: 'Lanvin', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'other-loewe-earth', name: 'Earth', brand: 'Loewe', category: 'De Diseñador', gender: 'unisex', image: '🧴' },
-        { id: 'other-loewe-solo-atlas', name: 'Solo Atlas', brand: 'Loewe', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        { id: 'other-loewe-solo-ella', name: 'Solo Ella', brand: 'Loewe', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'other-narciso', name: 'For Her', brand: 'Narciso Rodriguez', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'other-prada', name: 'Prada Paradoxe Intense', brand: 'Prada', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'other-banderas-her', name: 'Her Secret', brand: 'Antonio Banderas', category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'other-banderas-icon', name: 'Icon Supreme', brand: 'Antonio Banderas', category: 'De Diseñador', gender: 'hombre', image: '🧴' },
-        { id: 'other-victoriasecret', name: 'Bombshell', brand: "Victoria's Secret", category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'other-victoriasecret-love', name: 'Love', brand: "Victoria's Secret", category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-        { id: 'other-victoriasecret-angel', name: 'Angel Gold', brand: "Victoria's Secret", category: 'De Diseñador', gender: 'mujer', image: '🧴' },
-      ]
-    };
+const catalog = [
+
+{ id:'afnan-9am', name:'9 AM', brand:'Afnan', image:'9 AM Afnan.avif' },
+{ id:'afnan-9am-dive', name:'9 AM Dive', brand:'Afnan', image:'9 AM Dive.webp' },
+{ id:'afnan-9pm', name:'9 PM', brand:'Afnan', image:'9 PM Afnan.webp' },
+{ id:'afnan-9pm-elixir', name:'9 PM Elixir', brand:'Afnan', image:'9 PM Elixir.webp' },
+
+{ id:'lattafa-khamrah', name:'Khamrah', brand:'Lattafa', image:'khamrah.jpg' },
+{ id:'lattafa-khamrah-qahwa', name:'Khamrah Qahwa', brand:'Lattafa', image:'Khamra Qahwa.webp' },
+{ id:'lattafa-khamrah-dukan', name:'Khamrah Dukan', brand:'Lattafa', image:'Khamra Dukan.webp' },
+
+{ id:'lattafa-yara-candy', name:'Yara Candy', brand:'Lattafa', image:'Yara Candy.webp' },
+{ id:'lattafa-yara-moi', name:'Yara Moi', brand:'Lattafa', image:'Yara Moi.webp' },
+{ id:'lattafa-yara-rosa', name:'Yara Rosa', brand:'Lattafa', image:'Yara Rosa 100 ml EDP.webp' },
+{ id:'lattafa-yara-tous', name:'Yara Tous', brand:'Lattafa', image:'Yara Tous.webp' },
+
+{ id:'armaf-club-bling', name:'Club de Nuit Bling', brand:'Armaf', image:'Club de Nuit Bling.webp' },
+{ id:'armaf-club-imperiale', name:'Club de Nuit Imperiale', brand:'Armaf', image:'Club de Nuit Imperiale 105 ml.webp' },
+{ id:'armaf-club-sillage', name:'Club de Nuit Sillage', brand:'Armaf', image:'Club de Nuit Sillage 105 ml.webp' },
+{ id:'armaf-club-untold', name:'Club de Nuit Untold', brand:'Armaf', image:'Club de Nuit Untold.webp' },
+
+{ id:'dior-sauvage-edt', name:'Sauvage EDT', brand:'Dior', image:'Sauvage 100 ml EDT.webp' },
+{ id:'dior-sauvage-edp', name:'Sauvage EDP', brand:'Dior', image:'Sauvage 100 ml EDP.webp' },
+{ id:'dior-sauvage-elixir', name:'Sauvage Elixir', brand:'Dior', image:'Sauvage Elixir.webp' },
+
+{ id:'ysl-y-edp', name:'Y EDP', brand:'Yves Saint Laurent', image:'Y Yves Saint Laurent EDP 100 ml.webp' },
+
+{ id:'versace-eros-edt', name:'Eros EDT', brand:'Versace', image:'Versace Eros EDT 100 ml.jpg' },
+{ id:'versace-eros-edp', name:'Eros EDP', brand:'Versace', image:'Versace Eros EDP 50 ml.jpg' },
+{ id:'versace-eros-flame', name:'Eros Flame', brand:'Versace', image:'Versace Eros Flame 50 ml.webp' },
+
+{ id:'rabanne-1million', name:'1 Million', brand:'Paco Rabanne', image:'Paco Rabanne 1 Million 100 ml.webp' },
+
+{ id:'rabanne-invictus-victory', name:'Invictus Victory', brand:'Paco Rabanne', image:'Invictus Victory.webp' },
+{ id:'rabanne-invictus-elixir', name:'Invictus Victory Elixir', brand:'Paco Rabanne', image:'Invictus Victory Elixir EDP.jpg' },
+
+{ id:'chanel-bleu', name:'Bleu de Chanel', brand:'Chanel', image:'Bleu de Chanel EDP 150 ml.webp' },
+
+{ id:'lancome-lavie', name:'La Vie Est Belle', brand:'Lancôme', image:'La Vie Est Belle EDP 100 ml.webp' }
+
+];
+
 
     const bestsellers = [
       { id: 'lattafa-khamrah', name: 'Khamrah', brand: 'Lattafa', price: '1990' },
@@ -1213,6 +1145,39 @@
     function addToCart(productId) {
       const product = getAllProducts().find(p => p.id === productId);
       const existing = cart.find(item => item.id === productId);
+      
+      // Crear animación de confirmación
+      const button = event.target.closest('.btn-add-cart');
+      if (button) {
+        const originalHTML = button.innerHTML;
+        button.innerHTML = '<i data-lucide="check" style="width: 14px; height: 14px;"></i> ✓';
+        button.style.background = 'linear-gradient(135deg, rgba(34, 197, 94, 0.9), rgba(34, 197, 94, 0.6))';
+        button.style.borderColor = '#22c55e';
+        button.style.color = '#ffffff';
+        button.style.transform = 'scale(1.2)';
+        
+        // Efecto de chispa múltiple que sale hacia el carrito
+        const rect = button.getBoundingClientRect();
+        const startX = rect.left + rect.width / 2;
+        const startY = rect.top + rect.height / 2;
+        
+        // Crear múltiples chispas en diferentes direcciones
+        for (let i = 0; i < 6; i++) {
+          setTimeout(() => {
+            createCartSparkle(startX, startY);
+          }, i * 50);
+        }
+        
+        setTimeout(() => {
+          button.innerHTML = originalHTML;
+          button.style.background = '';
+          button.style.borderColor = '';
+          button.style.color = '';
+          button.style.transform = '';
+          lucide.createIcons();
+        }, 1200);
+      }
+      
       if (existing) {
         existing.quantity++;
       } else {
@@ -1221,6 +1186,53 @@
       saveCartToStorage();
       updateCart();
     }
+
+    function createCartSparkle(x, y) {
+      const sparkle = document.createElement('div');
+      const angle = Math.random() * Math.PI * 2;
+      const velocity = 2 + Math.random() * 3;
+      
+      sparkle.style.position = 'fixed';
+      sparkle.style.left = x + 'px';
+      sparkle.style.top = y + 'px';
+      sparkle.style.width = '6px';
+      sparkle.style.height = '6px';
+      sparkle.style.background = `hsl(${210 + Math.random() * 20}, 100%, ${50 + Math.random() * 20}%)`;
+      sparkle.style.borderRadius = '50%';
+      sparkle.style.pointerEvents = 'none';
+      sparkle.style.zIndex = '9999';
+      sparkle.style.boxShadow = `0 0 ${8 + Math.random() * 6}px rgba(30, 58, 138, 0.9)`;
+      
+      const endX = x + Math.cos(angle) * (100 + Math.random() * 50);
+      const endY = y - 200 - Math.random() * 100;
+      
+      sparkle.style.setProperty('--endX', endX + 'px');
+      sparkle.style.setProperty('--endY', endY + 'px');
+      sparkle.style.animation = `sparkleFloat ${0.7 + Math.random() * 0.3}s ease-out forwards`;
+      
+      document.body.appendChild(sparkle);
+      
+      setTimeout(() => sparkle.remove(), 1200);
+    }
+
+    // Actualizar estilos para la animación de chispa mejorada
+    const styleSheet = document.createElement('style');
+    styleSheet.textContent = `
+      @keyframes sparkleFloat {
+        0% {
+          transform: translate(0, 0) scale(1);
+          opacity: 1;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          transform: translate(calc(var(--endX) - var(--startX, 0px)), calc(var(--endY) - var(--startY, 0px))) scale(0);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(styleSheet);
 
     function removeFromCart(productId) {
       cart = cart.filter(item => item.id !== productId);
@@ -1430,6 +1442,12 @@
     window.elementSdk.init(elementConfig);
 
     // Initialize
+    init();
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9dc86b0f45ed634f',t:'MTc3MzU0NTIwMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
+
     init();
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9dc8604cf4a3db36',t:'MTc3MzU0NDc2Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>

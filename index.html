@@ -3,80 +3,78 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kafatemor Perfumes - Perfumes Árabes, de Nicho y de Diseñador</title>
-  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <title>Kafatemor Perfumes - Premium Fragrances</title>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Playfair+Display:wght@700&amp;display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html, body {
-      height: 100%;
-      width: 100%;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; width: 100%; }
     body {
-      background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 100%);
-      color: #e0e0e0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0a0e17 0%, #15191f 100%);
+      color: #e8e8e8;
+      font-family: 'Poppins', sans-serif;
       overflow-x: hidden;
     }
 
-    .app-wrapper {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      overflow-y: auto;
-    }
+    .app-wrapper { width: 100%; min-height: 100%; display: flex; flex-direction: column; }
+    .container { max-width: 1400px; margin: 0 auto; width: 100%; padding: 0 20px; }
 
+    /* HEADER */
     .header {
-      background: linear-gradient(180deg, rgba(15, 20, 25, 0.95) 0%, rgba(26, 31, 46, 0.9) 100%);
-      border-bottom: 1px solid rgba(192, 192, 192, 0.1);
+      background: rgba(10, 14, 23, 0.97);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.08);
       position: sticky;
       top: 0;
       z-index: 100;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .header-top {
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
     }
 
     .logo {
-      font-size: 24px;
+      font-size: 26px;
       font-weight: 700;
-      background: linear-gradient(135deg, #1e3a8a 0%, #c0c0c0 100%);
+      background: linear-gradient(135deg, #d4af37 0%, #e8d9b8 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      letter-spacing: 1px;
+      letter-spacing: 2px;
+      font-family: 'Playfair Display', serif;
+      flex-shrink: 0;
     }
 
     .search-container {
       position: relative;
       flex: 1;
-      max-width: 400px;
+      max-width: 450px;
     }
 
     .search-input {
       width: 100%;
-      background: rgba(192, 192, 192, 0.1);
-      border: 1px solid rgba(192, 192, 192, 0.2);
-      color: #e0e0e0;
-      padding: 10px 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      color: #e8e8e8;
+      padding: 11px 16px;
       border-radius: 8px;
       font-size: 14px;
+      font-family: 'Poppins', sans-serif;
       transition: all 0.3s ease;
     }
 
-    .search-input::placeholder {
-      color: rgba(192, 192, 192, 0.5);
-    }
-
+    .search-input::placeholder { color: rgba(232, 232, 232, 0.4); }
     .search-input:focus {
       outline: none;
-      background: rgba(192, 192, 192, 0.15);
-      border-color: rgba(192, 192, 192, 0.4);
-      box-shadow: 0 0 20px rgba(30, 58, 138, 0.3);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(212, 175, 55, 0.5);
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
     }
 
     .search-results {
@@ -84,68 +82,115 @@
       top: 100%;
       left: 0;
       right: 0;
-      background: #1a1f2e;
-      border: 1px solid rgba(192, 192, 192, 0.2);
+      background: #15191f;
+      border: 1px solid rgba(212, 175, 55, 0.2);
       border-top: none;
-      max-height: 300px;
+      max-height: 350px;
       overflow-y: auto;
-      border-radius: 0 0 8px 8px;
+      border-radius: 0 0 10px 10px;
       z-index: 1000;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
 
     .search-result-item {
       padding: 12px 16px;
       cursor: pointer;
-      border-bottom: 1px solid rgba(192, 192, 192, 0.1);
+      border-bottom: 1px solid rgba(192, 192, 192, 0.08);
       transition: background 0.2s ease;
     }
 
-    .search-result-item:hover {
-      background: rgba(30, 58, 138, 0.2);
-    }
+    .search-result-item:hover { background: rgba(212, 175, 55, 0.1); }
+    .result-name { font-weight: 600; color: #e8e8e8; font-size: 13px; }
+    .result-brand { font-size: 12px; color: rgba(232, 232, 232, 0.6); margin-top: 4px; }
 
-    .result-name {
+    .header-actions { display: flex; gap: 12px; flex-shrink: 0; }
+
+    .btn-discover {
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #d4af37 0%, #e8d9b8 100%);
+      color: #0a0e17;
+      border: none;
+      border-radius: 8px;
       font-weight: 600;
-      color: #e0e0e0;
       font-size: 13px;
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
 
-    .result-brand {
-      font-size: 12px;
-      color: rgba(192, 192, 192, 0.7);
+    .btn-discover:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.25);
+    }
+
+    .cart-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      color: #d4af37;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .cart-btn:hover {
+      background: rgba(212, 175, 55, 0.25);
+      border-color: rgba(212, 175, 55, 0.5);
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: #e74c3c;
+      color: white;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
     }
 
     .nav-menu {
       display: flex;
-      gap: 2px;
+      gap: 4px;
       overflow-x: auto;
-      padding: 0 16px;
+      padding: 0 20px;
+      border-top: 1px solid rgba(192, 192, 192, 0.08);
     }
 
     .nav-item {
-      padding: 12px 16px;
+      padding: 12px 18px;
       cursor: pointer;
-      color: rgba(224, 224, 224, 0.8);
+      color: rgba(232, 232, 232, 0.7);
       font-size: 13px;
       white-space: nowrap;
       border-bottom: 2px solid transparent;
       transition: all 0.3s ease;
+      font-weight: 500;
     }
 
     .nav-item:hover, .nav-item.active {
-      color: #c0c0c0;
-      border-bottom-color: #1e3a8a;
+      color: #d4af37;
+      border-bottom-color: #d4af37;
     }
 
+    /* HERO */
     .hero {
-      background: linear-gradient(135deg, #0a0e1a 0%, #1a1f2e 50%, #0f1419 100%);
-      padding: 80px 20px;
+      background: linear-gradient(135deg, #0a0e17 0%, #1a1f2e 50%, #15191f 100%);
+      padding: 100px 20px;
       text-align: center;
-      border-bottom: 1px solid rgba(192, 192, 192, 0.1);
-      animation: fadeIn 0.8s ease;
+      border-bottom: 1px solid rgba(192, 192, 192, 0.08);
       position: relative;
       overflow: hidden;
-      min-height: 500px;
+      min-height: 550px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -159,24 +204,9 @@
       right: 0;
       bottom: 0;
       background: 
-        radial-gradient(ellipse 800px 400px at 15% 30%, rgba(30, 58, 138, 0.25) 0%, transparent 40%),
-        radial-gradient(ellipse 900px 350px at 85% 70%, rgba(192, 192, 192, 0.15) 0%, transparent 40%),
-        radial-gradient(circle at 50% 100%, rgba(30, 58, 138, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 30% 60%, rgba(37, 99, 235, 0.1) 0%, transparent 60%);
+        radial-gradient(ellipse 1000px 500px at 20% 30%, rgba(212, 175, 55, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse 900px 400px at 80% 70%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
       animation: gradientShift 8s ease-in-out infinite;
-      pointer-events: none;
-    }
-
-    .hero::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -10%;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(192, 192, 192, 0.08) 0%, transparent 70%);
-      border-radius: 50%;
-      animation: float 6s ease-in-out infinite;
       pointer-events: none;
     }
 
@@ -185,168 +215,103 @@
       50% { opacity: 1; }
     }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0) translateX(0); }
-      50% { transform: translateY(-20px) translateX(20px); }
-    }
+    .hero-content { position: relative; z-index: 10; max-width: 900px; }
+    .hero-label { font-size: 12px; color: rgba(212, 175, 55, 0.9); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; font-weight: 600; }
+    .hero-title { font-size: 56px; font-weight: 700; margin-bottom: 16px; background: linear-gradient(135deg, #e8d9b8 0%, #d4af37 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: 1px; font-family: 'Playfair Display', serif; }
+    .hero-subtitle { font-size: 18px; color: rgba(232, 232, 232, 0.8); margin-bottom: 40px; font-weight: 300; line-height: 1.6; }
+    .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 
-    .hero > div {
-      position: relative;
-      z-index: 10;
-    }
-
-    .hero-title {
-      font-size: 48px;
-      font-weight: 700;
-      margin-bottom: 12px;
-      background: linear-gradient(135deg, #c0c0c0 0%, #1e3a8a 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      letter-spacing: 2px;
-    }
-
-    .hero-subtitle {
-      font-size: 18px;
-      color: rgba(224, 224, 224, 0.8);
-      margin-bottom: 30px;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 12px 32px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
-      color: white;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(30, 58, 138, 0.3);
-    }
-
-    .btn-secondary {
-      background: rgba(192, 192, 192, 0.1);
-      color: #c0c0c0;
-      border: 1px solid rgba(192, 192, 192, 0.3);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(192, 192, 192, 0.15);
-      border-color: rgba(192, 192, 192, 0.5);
-    }
-
+    /* BENEFITS */
     .benefits {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      padding: 40px 20px;
-      max-width: 1200px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      padding: 60px 20px;
+      max-width: 1400px;
       margin: 0 auto;
-      width: 100%;
     }
 
     .benefit-card {
-      background: rgba(30, 58, 138, 0.1);
-      border: 1px solid rgba(192, 192, 192, 0.15);
-      padding: 24px;
+      background: rgba(212, 175, 55, 0.05);
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      padding: 32px 24px;
       border-radius: 12px;
       text-align: center;
       transition: all 0.3s ease;
     }
 
     .benefit-card:hover {
-      border-color: rgba(192, 192, 192, 0.3);
-      box-shadow: 0 10px 30px rgba(30, 58, 138, 0.15);
+      border-color: rgba(212, 175, 55, 0.4);
+      background: rgba(212, 175, 55, 0.08);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(212, 175, 55, 0.1);
     }
 
-    .benefit-icon {
-      font-size: 32px;
-      margin-bottom: 12px;
+    .benefit-icon { font-size: 40px; margin-bottom: 16px; }
+    .benefit-title { font-weight: 600; margin-bottom: 8px; color: #e8e8e8; font-size: 16px; }
+    .benefit-text { font-size: 13px; color: rgba(232, 232, 232, 0.65); line-height: 1.5; }
+
+    /* SECTION */
+    .section { padding: 60px 20px; max-width: 1400px; margin: 0 auto; width: 100%; }
+    .section-title { font-size: 38px; font-weight: 700; margin-bottom: 40px; background: linear-gradient(135deg, #e8d9b8 0%, #d4af37 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-family: 'Playfair Display', serif; }
+
+    /* FILTER BAR */
+    .filter-bar { margin-bottom: 40px; }
+    .search-box { display: flex; gap: 12px; margin-bottom: 20px; }
+    .search-input-full {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      color: #e8e8e8;
+      padding: 12px 18px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.3s ease;
     }
 
-    .benefit-title {
-      font-weight: 600;
-      margin-bottom: 8px;
-      color: #c0c0c0;
+    .search-input-full::placeholder { color: rgba(232, 232, 232, 0.4); }
+    .search-input-full:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(212, 175, 55, 0.5);
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
     }
 
-    .benefit-text {
-      font-size: 13px;
-      color: rgba(224, 224, 224, 0.7);
-    }
-
-    .section {
-      padding: 40px 20px;
-      max-width: 1400px;
-      margin: 0 auto;
-      width: 100%;
-    }
-
-    .section-title {
-      font-size: 32px;
-      font-weight: 700;
-      margin-bottom: 30px;
-      background: linear-gradient(135deg, #c0c0c0 0%, #1e3a8a 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .filters {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      margin-bottom: 30px;
-    }
-
+    .filters { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
     .filter-select {
-      background: rgba(30, 58, 138, 0.1);
-      border: 1px solid rgba(192, 192, 192, 0.2);
-      color: #e0e0e0;
-      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      color: #e8e8e8;
+      padding: 11px 14px;
       border-radius: 8px;
       font-size: 13px;
       cursor: pointer;
       transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
     }
 
     .filter-select:hover, .filter-select:focus {
-      background: rgba(30, 58, 138, 0.15);
-      border-color: rgba(192, 192, 192, 0.4);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(212, 175, 55, 0.4);
       outline: none;
     }
 
+    /* PRODUCTS GRID */
     .products-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 20px;
-      margin-bottom: 40px;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 24px;
+      margin-bottom: 50px;
     }
 
     .product-card {
-      background: rgba(26, 31, 46, 0.5);
-      border: 1px solid rgba(192, 192, 192, 0.1);
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(212, 175, 55, 0.1);
       border-radius: 12px;
       overflow: hidden;
-      transition: all 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
       cursor: pointer;
       display: flex;
       flex-direction: column;
@@ -361,237 +326,134 @@
       left: 0;
       right: 0;
       height: 2px;
-      background: linear-gradient(90deg, rgba(30, 58, 138, 0), #1e3a8a, rgba(30, 58, 138, 0));
+      background: linear-gradient(90deg, rgba(212, 175, 55, 0), #d4af37, rgba(212, 175, 55, 0));
       opacity: 0;
       transition: opacity 0.3s ease;
-    }
-
-    .product-card:hover::before {
-      opacity: 1;
+      z-index: 10;
     }
 
     .product-card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(192, 192, 192, 0.3);
-      box-shadow: 0 15px 40px rgba(30, 58, 138, 0.2);
+      transform: translateY(-8px);
+      border-color: rgba(212, 175, 55, 0.3);
+      box-shadow: 0 20px 50px rgba(212, 175, 55, 0.15);
+      background: rgba(255, 255, 255, 0.03);
     }
 
-    .product-image {
+    .product-card:hover::before { opacity: 1; }
+
+    .product-image-wrapper {
       width: 100%;
-      height: 200px;
-      background: linear-gradient(135deg, rgba(30, 58, 138, 0.1) 0%, rgba(192, 192, 192, 0.05) 100%);
+      height: 240px;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0.02) 100%);
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      font-size: 64px;
+      position: relative;
     }
 
-    .product-image img {
+    .product-image {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transition: transform 0.4s ease;
     }
 
-    .product-info {
-      padding: 16px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
+    .product-card:hover .product-image { transform: scale(1.08); }
 
-    .product-brand {
-      font-size: 11px;
-      color: rgba(192, 192, 192, 0.7);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 4px;
-    }
+    .product-info { padding: 18px; flex: 1; display: flex; flex-direction: column; }
+    .product-brand { font-size: 11px; color: rgba(212, 175, 55, 0.9); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px; font-weight: 600; }
+    .product-name { font-weight: 600; color: #e8e8e8; margin-bottom: 10px; font-size: 15px; line-height: 1.3; }
 
-    .product-name {
-      font-weight: 600;
-      color: #e0e0e0;
-      margin-bottom: 8px;
-      font-size: 14px;
-      line-height: 1.3;
-    }
+    .product-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; gap: 10px; }
+    .product-price { font-weight: 700; color: #d4af37; font-size: 15px; }
 
-    .product-category {
-      font-size: 12px;
-      color: rgba(224, 224, 224, 0.6);
-      margin-bottom: 12px;
-    }
-
-    .product-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: auto;
-    }
-
-    .product-price {
-      font-weight: 700;
-      color: #c0c0c0;
-      font-size: 16px;
-    }
-
-    .btn-add-cart {
-      background: rgba(30, 58, 138, 0.2);
-      border: 1px solid rgba(30, 58, 138, 0.5);
-      color: #c0c0c0;
-      padding: 6px 12px;
+    .btn-add-to-cart {
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.3), rgba(212, 175, 55, 0.15));
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      color: #d4af37;
+      padding: 8px 16px;
       border-radius: 6px;
       cursor: pointer;
       font-size: 12px;
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
+      font-weight: 600;
       display: flex;
       align-items: center;
-      gap: 4px;
-      position: relative;
-      overflow: hidden;
-      font-weight: 600;
+      gap: 5px;
+      white-space: nowrap;
     }
 
-    .btn-add-cart::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      background: radial-gradient(circle, rgba(30, 58, 138, 0.6), transparent);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
+    .btn-add-to-cart:hover {
+      background: linear-gradient(135deg, #d4af37, #e8d9b8);
+      color: #0a0e17;
+      border-color: #d4af37;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
     }
 
-    .btn-add-cart:hover::before {
-      animation: addToCartPulse 0.6s ease-out;
+    .no-products {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      color: rgba(232, 232, 232, 0.5);
+      font-size: 16px;
     }
 
-    @keyframes addToCartPulse {
-      0% {
-        width: 0;
-        height: 0;
-        opacity: 1;
-      }
-      100% {
-        width: 80px;
-        height: 80px;
-        opacity: 0;
-      }
-    }
-
-    .btn-add-cart:hover {
-      background: linear-gradient(135deg, rgba(30, 58, 138, 0.9), rgba(37, 99, 235, 0.7));
-      border-color: #1e3a8a;
-      transform: scale(1.15) translateY(-2px);
-      box-shadow: 0 8px 25px rgba(30, 58, 138, 0.6), inset 0 0 20px rgba(37, 99, 235, 0.2);
-      color: #ffffff;
-    }
-
-    .btn-add-cart:active {
-      transform: scale(0.92);
-    }
-
+    /* CART SIDEBAR */
     .cart-sidebar {
       position: fixed;
-      right: -350px;
+      right: -380px;
       top: 0;
-      width: 350px;
+      width: 380px;
       height: 100%;
-      background: #1a1f2e;
-      border-left: 1px solid rgba(192, 192, 192, 0.2);
+      background: #15191f;
+      border-left: 1px solid rgba(192, 192, 192, 0.1);
       z-index: 200;
       transition: right 0.3s ease;
       display: flex;
       flex-direction: column;
       overflow: hidden;
+      box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
     }
 
-    .cart-sidebar.active {
-      right: 0;
-    }
+    .cart-sidebar.active { right: 0; }
+    .cart-header { padding: 20px; border-bottom: 1px solid rgba(192, 192, 192, 0.1); display: flex; justify-content: space-between; align-items: center; }
+    .cart-title { font-weight: 700; color: #e8e8e8; font-size: 18px; }
+    .cart-close { background: none; border: none; color: rgba(232, 232, 232, 0.6); cursor: pointer; font-size: 26px; transition: color 0.2s ease; }
+    .cart-close:hover { color: #e8e8e8; }
 
-    .cart-header {
-      padding: 20px;
-      border-bottom: 1px solid rgba(192, 192, 192, 0.1);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .cart-title {
-      font-weight: 700;
-      color: #c0c0c0;
-      font-size: 18px;
-    }
-
-    .cart-close {
-      background: none;
-      border: none;
-      color: rgba(224, 224, 224, 0.6);
-      cursor: pointer;
-      font-size: 24px;
-      transition: color 0.2s ease;
-    }
-
-    .cart-close:hover {
-      color: #e0e0e0;
-    }
-
-    .cart-items {
-      flex: 1;
-      overflow-y: auto;
-      padding: 20px;
-    }
-
+    .cart-items { flex: 1; overflow-y: auto; padding: 20px; }
     .cart-item {
-      background: rgba(30, 58, 138, 0.1);
-      border: 1px solid rgba(192, 192, 192, 0.1);
-      padding: 12px;
+      background: rgba(212, 175, 55, 0.05);
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      padding: 14px;
       border-radius: 8px;
       margin-bottom: 12px;
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
       font-size: 13px;
       transition: all 0.2s ease;
       border-left: 3px solid transparent;
     }
 
     .cart-item:hover {
-      border-left-color: #1e3a8a;
-      background: rgba(30, 58, 138, 0.15);
+      border-left-color: #d4af37;
+      background: rgba(212, 175, 55, 0.08);
     }
 
-    .cart-item-info {
-      flex: 1;
-    }
-
-    .cart-item-name {
-      font-weight: 600;
-      color: #e0e0e0;
-      margin-bottom: 4px;
-    }
-
-    .cart-item-brand {
-      font-size: 11px;
-      color: rgba(192, 192, 192, 0.7);
-    }
-
-    .cart-item-controls {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
+    .cart-item-info { flex: 1; }
+    .cart-item-name { font-weight: 600; color: #e8e8e8; margin-bottom: 4px; }
+    .cart-item-brand { font-size: 11px; color: rgba(232, 232, 232, 0.6); }
+    .cart-item-controls { display: flex; gap: 8px; align-items: center; margin-left: 10px; }
 
     .qty-btn {
-      background: rgba(30, 58, 138, 0.2);
-      border: 1px solid rgba(30, 58, 138, 0.5);
-      color: #c0c0c0;
-      width: 24px;
-      height: 24px;
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      color: #d4af37;
+      width: 26px;
+      height: 26px;
       border-radius: 4px;
       cursor: pointer;
       font-size: 12px;
@@ -599,66 +461,55 @@
       align-items: center;
       justify-content: center;
       transition: all 0.2s ease;
+      font-weight: 600;
     }
 
-    .qty-btn:hover {
-      background: rgba(30, 58, 138, 0.4);
-    }
-
-    .cart-qty {
-      width: 28px;
-      text-align: center;
-      color: #c0c0c0;
-    }
+    .qty-btn:hover { background: rgba(212, 175, 55, 0.3); }
+    .cart-qty { width: 30px; text-align: center; color: #d4af37; font-weight: 600; font-size: 12px; }
 
     .cart-remove {
-      background: rgba(239, 68, 68, 0.2);
-      border: 1px solid rgba(239, 68, 68, 0.4);
-      color: #fca5a5;
+      background: rgba(231, 76, 60, 0.15);
+      border: 1px solid rgba(231, 76, 60, 0.3);
+      color: #e74c3c;
       padding: 4px 8px;
       border-radius: 4px;
       cursor: pointer;
       font-size: 11px;
       transition: all 0.2s ease;
+      font-weight: 600;
     }
 
     .cart-remove:hover {
-      background: rgba(239, 68, 68, 0.4);
-      border-color: rgba(239, 68, 68, 0.7);
+      background: rgba(231, 76, 60, 0.3);
+      border-color: rgba(231, 76, 60, 0.6);
     }
 
-    .cart-footer {
-      padding: 20px;
-      border-top: 1px solid rgba(192, 192, 192, 0.1);
-    }
+    .empty-cart { text-align: center; padding: 60px 20px; color: rgba(232, 232, 232, 0.6); }
+    .empty-cart-icon { font-size: 56px; margin-bottom: 16px; }
 
-    .cart-total {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 16px;
-      font-weight: 700;
-      color: #c0c0c0;
-    }
+    .cart-footer { padding: 20px; border-top: 1px solid rgba(192, 192, 192, 0.1); }
+    .cart-total { display: flex; justify-content: space-between; margin-bottom: 16px; font-weight: 700; color: #d4af37; font-size: 16px; }
 
     .btn-checkout {
       width: 100%;
-      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
-      color: white;
+      background: linear-gradient(135deg, #d4af37 0%, #e8d9b8 100%);
+      color: #0a0e17;
       border: none;
-      padding: 12px;
+      padding: 13px;
       border-radius: 8px;
       cursor: pointer;
-      font-weight: 600;
+      font-weight: 700;
       transition: all 0.3s ease;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
+      font-size: 14px;
     }
 
-    .btn-checkout:hover {
+    .btn-checkout:hover:not(:disabled) {
       transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(30, 58, 138, 0.3);
+      box-shadow: 0 12px 30px rgba(212, 175, 55, 0.3);
     }
 
     .btn-checkout:disabled {
@@ -667,21 +518,11 @@
       transform: none;
     }
 
-    .empty-cart {
-      text-align: center;
-      padding: 40px 20px;
-      color: rgba(224, 224, 224, 0.6);
-    }
-
-    .empty-cart-icon {
-      font-size: 48px;
-      margin-bottom: 12px;
-    }
-
+    /* FLOATING BUTTONS */
     .floating-buttons {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
+      bottom: 24px;
+      right: 24px;
       display: flex;
       flex-direction: column;
       gap: 12px;
@@ -699,195 +540,116 @@
       justify-content: center;
       transition: all 0.3s ease;
       font-size: 24px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+      text-decoration: none;
     }
 
     .float-btn:hover {
-      transform: scale(1.1);
+      transform: scale(1.15);
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
     }
 
-    .float-whatsapp {
-      background: #25d366;
-      color: white;
-    }
+    .float-whatsapp { background: #25d366; color: white; }
+    .float-instagram { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
 
-    .float-instagram {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-    }
-
-    .float-cart {
-      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
-      color: white;
-      position: relative;
-    }
-
-    .cart-badge {
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      background: #ef4444;
-      color: white;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
+    /* FOOTER */
     .footer {
-      background: rgba(15, 20, 25, 0.8);
-      border-top: 1px solid rgba(192, 192, 192, 0.1);
-      padding: 40px 20px;
-      margin-top: 40px;
+      background: rgba(10, 14, 23, 0.95);
+      border-top: 1px solid rgba(192, 192, 192, 0.08);
+      padding: 60px 20px 30px;
+      margin-top: 60px;
     }
 
     .footer-content {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      margin-bottom: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
     }
 
-    .footer-section h3 {
-      color: #c0c0c0;
-      margin-bottom: 12px;
-      font-weight: 700;
-    }
+    .footer-section h3 { color: #e8e8e8; margin-bottom: 16px; font-weight: 700; font-size: 16px; }
+    .footer-section ul { list-style: none; }
+    .footer-section li { margin-bottom: 10px; }
+    .footer-section a { color: rgba(232, 232, 232, 0.65); text-decoration: none; font-size: 13px; transition: color 0.2s ease; }
+    .footer-section a:hover { color: #d4af37; }
 
-    .footer-section ul {
-      list-style: none;
-    }
+    .footer-bottom { border-top: 1px solid rgba(192, 192, 192, 0.08); padding-top: 20px; text-align: center; color: rgba(232, 232, 232, 0.5); font-size: 12px; }
 
-    .footer-section li {
-      margin-bottom: 8px;
-    }
-
-    .footer-section a {
-      color: rgba(224, 224, 224, 0.7);
-      text-decoration: none;
-      font-size: 13px;
-      transition: color 0.2s ease;
-    }
-
-    .footer-section a:hover {
-      color: #c0c0c0;
-    }
-
-    .footer-bottom {
-      border-top: 1px solid rgba(192, 192, 192, 0.1);
-      padding-top: 20px;
-      text-align: center;
-      color: rgba(224, 224, 224, 0.6);
-      font-size: 12px;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .loading {
-      display: inline-block;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: rgba(192, 192, 192, 0.5);
-      animation: pulse 1.5s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 1; }
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .products-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
     }
 
     @media (max-width: 768px) {
-      .hero-title {
-        font-size: 32px;
-      }
-
-      .products-grid {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      }
-
-      .cart-sidebar {
-        width: 100%;
-        right: -100%;
-      }
-
-      .nav-menu {
-        padding: 12px 8px;
-      }
-
-      .nav-item {
-        padding: 8px 12px;
-        font-size: 12px;
-      }
-
-      .search-container {
-        max-width: 200px;
-      }
-
-      .search-input {
-        padding: 8px 12px;
-        font-size: 12px;
-      }
+      .header-top { flex-wrap: wrap; gap: 12px; }
+      .logo { font-size: 20px; }
+      .search-container { max-width: 100%; order: 3; flex-basis: 100%; }
+      .header-actions { order: 2; }
+      .hero { padding: 60px 20px; min-height: auto; }
+      .hero-title { font-size: 36px; }
+      .hero-subtitle { font-size: 16px; }
+      .section { padding: 40px 20px; }
+      .section-title { font-size: 28px; }
+      .products-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+      .product-image-wrapper { height: 180px; }
+      .cart-sidebar { width: 100%; right: -100%; }
+      .floating-buttons { bottom: 16px; right: 16px; gap: 10px; }
+      .float-btn { width: 50px; height: 50px; font-size: 22px; }
+      .nav-menu { padding: 0 12px; }
+      .nav-item { padding: 10px 14px; font-size: 12px; }
+      .filters { grid-template-columns: 1fr; }
     }
   </style>
   <style>body { box-sizing: border-box; }</style>
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js" type="text/javascript"></script>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
-  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
  </head>
  <body>
-  <div class="app-wrapper"><!-- HEADER -->
+  <div class="app-wrapper">
+   <!-- HEADER -->
    <header class="header">
-    <div style="padding: 16px 20px; display: flex; align-items: center; gap: 20px; max-width: 1400px; margin: 0 auto; width: 100%; flex-wrap: wrap;">
+    <div class="header-top">
      <div class="logo">
       KAFATEMOR
      </div>
-     <div class="search-container"><input type="text" id="searchInput" class="search-input" placeholder="Buscar perfume, marca...">
+     <div class="search-container">
+      <input type="text" id="searchInput" class="search-input" placeholder="Buscar perfume, marca...">
       <div id="searchResults" class="search-results" style="display: none;"></div>
      </div>
-     <div style="display: flex; gap: 12px;"><button class="btn btn-primary" onclick="scrollToSection('all-products')" style="font-size: 12px; padding: 10px 20px;"> <i data-lucide="shopping-bag" style="width: 16px; height: 16px;"></i> Ver Catálogo </button> <button id="cartToggle" class="float-btn float-cart" style="position: relative; margin-top: 0;"> <i data-lucide="shopping-cart" style="width: 24px; height: 24px;"></i>
+     <div class="header-actions">
+      <button class="btn-discover" onclick="scrollToSection('all-products')">Ver Catálogo</button> <button id="cartToggle" class="cart-btn">🛒 
        <div id="cartBadge" class="cart-badge" style="display: none;">
         0
        </div></button>
      </div>
     </div>
     <nav class="nav-menu">
-     <div class="nav-item active" onclick="filterByCategory('all')">
+     <div class="nav-item active" onclick="scrollToSection('hero')">
       Inicio
      </div>
      <div class="nav-item" onclick="scrollToSection('bestsellers')">
       Más Vendidos
      </div>
-     <div class="nav-item" onclick="scrollToSection('mayoristas')">
-      Mayoristas
+     <div class="nav-item" onclick="scrollToSection('all-products')">
+      Catálogo
      </div>
      <div class="nav-item" onclick="scrollToSection('about')">
       Sobre Nosotros
      </div>
     </nav>
    </header><!-- MAIN CONTENT -->
-   <main style="flex: 1;"><!-- HERO -->
-    <section class="hero">
-     <div style="max-width: 800px; margin: 0 auto; animation: fadeIn 0.8s ease;">
-      <p style="font-size: 14px; color: rgba(192, 192, 192, 0.8); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;">✨ Esencias del Mundo</p>
+   <main style="flex: 1;">
+    <!-- HERO -->
+    <section class="hero" id="hero">
+     <div class="hero-content">
+      <p class="hero-label">✨ Esencias Premium del Mundo</p>
       <h1 class="hero-title" id="heroTitle">Kafatemor Perfumes</h1>
-      <p style="font-size: 24px; color: rgba(224, 224, 224, 0.85); margin: 30px 0 20px; font-style: italic; font-weight: 300; line-height: 1.6;">"Un perfume es una historia sin palabras, un viaje sensorial que despierta recuerdos y emociones."</p>
-      <p class="hero-subtitle" id="heroSubtitle">Perfumes árabes, de nicho y de diseñador al mejor precio.</p>
-      <div class="hero-buttons"><button class="btn btn-primary" onclick="scrollToSection('all-products')"> <i data-lucide="sparkles" style="width: 18px; height: 18px;"></i> Descubrir Aromas </button> <button class="btn btn-secondary" onclick="openCart()"> <i data-lucide="shopping-bag" style="width: 18px; height: 18px;"></i> Ver Carrito </button>
+      <p class="hero-subtitle" id="heroSubtitle">Descubre nuestra colección exclusiva de perfumes árabes, de nicho y de diseñador</p>
+      <div class="hero-buttons">
+       <button class="btn-discover" onclick="scrollToSection('all-products')" style="background: linear-gradient(135deg, #d4af37 0%, #e8d9b8 100%); color: #0a0e17;">Explorar Catálogo</button> <button class="btn-discover" onclick="openCart()" style="background: rgba(212, 175, 55, 0.15); color: #d4af37; border: 1px solid rgba(212, 175, 55, 0.3);">Ver Carrito</button>
       </div>
      </div>
     </section><!-- BENEFITS -->
@@ -900,7 +662,7 @@
        Envíos a Todo Uruguay
       </div>
       <div class="benefit-text">
-       Recibe tu pedido en cualquier parte del país con total seguridad.
+       Entrega rápida y segura a cualquier punto del país
       </div>
      </div>
      <div class="benefit-card">
@@ -911,7 +673,7 @@
        Mejores Precios
       </div>
       <div class="benefit-text">
-       Los precios más competitivos del mercado de perfumería.
+       Precios competitivos del mercado de perfumería
       </div>
      </div>
      <div class="benefit-card">
@@ -922,7 +684,7 @@
        Descuentos Mayoristas
       </div>
       <div class="benefit-text">
-       Especiales para revendedores y compras al por mayor.
+       Ofertas especiales para revendedores y compras al por mayor
       </div>
      </div>
     </div><!-- MÁS VENDIDOS -->
@@ -931,63 +693,71 @@
      <div id="bestsellersList" class="products-grid"></div>
     </section><!-- TODOS LOS PRODUCTOS -->
     <section id="all-products" class="section">
-     <div style="background: rgba(30, 58, 138, 0.15); border-left: 4px solid #1e3a8a; padding: 20px; margin-bottom: 30px; border-radius: 8px;">
-      <p style="color: rgba(224, 224, 224, 0.9); font-size: 14px; margin-bottom: 10px;">💡 <strong>Nota importante:</strong> Los precios varían según disponibilidad y cantidad. Contáctanos por WhatsApp para consultar el mejor precio actual.</p>
-      <p style="color: rgba(224, 224, 224, 0.8); font-size: 14px;">🧴 ¿No encuentras el perfume que buscas? Tenemos muchas variedades más. ¡Consulta cualquier perfume por WhatsApp!</p>
+     <h2 class="section-title">Nuestro Catálogo Completo</h2>
+     <div style="background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 8px; padding: 16px; margin-bottom: 30px;">
+      <p style="color: #d4af37; font-size: 14px; margin-bottom: 8px; font-weight: 600;">💡 Información importante:</p>
+      <ul style="list-style: none; color: rgba(232, 232, 232, 0.8); font-size: 13px;">
+       <li style="margin-bottom: 8px;">✓ Los precios varían según la marca y disponibilidad. Consulta por WhatsApp para obtener precios actualizados.</li>
+       <li>✓ ¿No encuentras el perfume que buscas? Contáctanos por WhatsApp y te ayudaremos a encontrarlo.</li>
+      </ul>
      </div>
-     <h2 class="section-title">Nuestro Catálogo</h2>
-     <div class="filters"><select class="filter-select" id="genderFilter" onchange="applyFilters()"> <option value="">Género: Todos</option> <option value="hombre">Hombres</option> <option value="mujer">Mujeres</option> <option value="unisex">Unisex</option> </select> <select class="filter-select" id="typeFilter" onchange="applyFilters()"> <option value="">Tipo: Todos</option> <option value="arabe">Perfumes Árabes</option> <option value="nicho">De Nicho</option> <option value="diseñador">De Diseñador</option> </select> <select class="filter-select" id="brandFilter" onchange="applyFilters()"> <option value="">Marca: Todas</option> </select> <select class="filter-select" id="sortFilter" onchange="applyFilters()"> <option value="name">Ordenar: A-Z</option> <option value="brand">Por Marca</option> <option value="popularity">Más Popular</option> </select>
+     <div class="filter-bar">
+      <div class="search-box">
+       <input type="text" id="catalogSearch" class="search-input-full" placeholder="🔍 Buscar por nombre o marca...">
+      </div>
+      <div class="filters">
+       <select class="filter-select" id="brandFilter" onchange="applyFilters()"> <option value="">Marca: Todas</option> </select> <select class="filter-select" id="sortFilter" onchange="applyFilters()"> <option value="name">Ordenar: A-Z</option> <option value="brand">Por Marca</option> <option value="popularity">Más Popular</option> </select>
+      </div>
      </div>
      <div id="productsList" class="products-grid"></div>
     </section><!-- MAYORISTAS -->
-    <section id="mayoristas" class="section" style="background: rgba(30, 58, 138, 0.08); border-radius: 12px; padding: 40px 20px;">
+    <section id="mayoristas" class="section" style="background: rgba(212, 175, 55, 0.05); border-radius: 12px;">
      <h2 class="section-title">Compras al Por Mayor</h2>
-     <p style="color: rgba(224, 224, 224, 0.8); margin-bottom: 24px; max-width: 600px;">Somos proveedores oficiales de perfumes para revendedores. Ofrecemos:</p>
-     <ul style="list-style: none; color: rgba(224, 224, 224, 0.8); margin-bottom: 30px;">
-      <li style="margin-bottom: 12px;">✓ Precios especiales por volumen</li>
-      <li style="margin-bottom: 12px;">✓ Descuentos para revendedores</li>
-      <li style="margin-bottom: 12px;">✓ Packs personalizados</li>
-      <li style="margin-bottom: 12px;">✓ Asesoramiento en catálogo</li>
-     </ul><a href="https://wa.me/59892436816" target="_blank" rel="noopener noreferrer" class="btn btn-primary"> <i data-lucide="message-circle" style="width: 18px; height: 18px;"></i> Consultar por WhatsApp </a>
+     <p style="color: rgba(232, 232, 232, 0.8); margin-bottom: 24px; max-width: 600px; font-size: 15px;">Somos proveedores oficiales de perfumes para revendedores. Ofrecemos:</p>
+     <ul style="list-style: none; color: rgba(232, 232, 232, 0.8); margin-bottom: 30px;">
+      <li style="margin-bottom: 12px; font-size: 14px;">✓ Precios especiales por volumen</li>
+      <li style="margin-bottom: 12px; font-size: 14px;">✓ Descuentos para revendedores</li>
+      <li style="margin-bottom: 12px; font-size: 14px;">✓ Packs personalizados</li>
+      <li style="margin-bottom: 12px; font-size: 14px;">✓ Asesoramiento en catálogo</li>
+     </ul><a href="https://wa.me/59892436816" target="_blank" rel="noopener noreferrer" class="btn-discover" style="display: inline-block;">💬 Consultar por WhatsApp</a>
     </section><!-- ABOUT US -->
     <section id="about" class="section">
      <h2 class="section-title">Sobre Kafatemor Perfumes</h2>
-     <div style="max-width: 600px; color: rgba(224, 224, 224, 0.8); line-height: 1.6;">
+     <div style="max-width: 600px; color: rgba(232, 232, 232, 0.8); line-height: 1.8; font-size: 15px;">
       <p id="aboutText" style="margin-bottom: 16px;">Somos una perfumería online con base en Montevideo y Rocha.</p>
       <p style="margin-bottom: 16px;">Ofrecemos perfumes árabes, de nicho y de diseñador a precios altamente competitivos.</p>
-      <p style="margin-bottom: 16px;">Realizamos envíos a todo Uruguay y también ofrecemos precios especiales para revendedores y compras al por mayor.</p>
-      <p>Nuestro objetivo es acercar perfumes de alta calidad a precios accesibles.</p>
+      <p style="margin-bottom: 16px;">Realizamos envíos a todo Uruguay y ofrecemos precios especiales para revendedores.</p>
+      <p>Nuestro objetivo es acercar perfumes de alta calidad a precios accesibles para todos.</p>
      </div>
     </section>
    </main><!-- FOOTER -->
    <footer class="footer">
     <div class="footer-content">
      <div class="footer-section">
-      <h3>Categorías</h3>
+      <h3>Contacto</h3>
       <ul>
-       <li><a href="#" onclick="filterByCategory('arabe'); return false;">Perfumes Árabes</a></li>
-       <li><a href="#" onclick="filterByCategory('nicho'); return false;">De Nicho</a></li>
-       <li><a href="#" onclick="filterByCategory('diseñador'); return false;">De Diseñador</a></li>
+       <li><a href="https://wa.me/59892436816" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+       <li><a href="https://www.instagram.com/kafatemorperfumes.uy" target="_blank" rel="noopener noreferrer">Instagram</a></li>
       </ul>
      </div>
      <div class="footer-section">
       <h3>Información</h3>
       <ul>
        <li><a href="#about" onclick="scrollToSection('about')">Sobre Nosotros</a></li>
-       <li><a href="https://wa.me/59892436816" target="_blank" rel="noopener noreferrer">Contacto</a></li>
-       <li><a href="https://wa.me/59892436816" target="_blank" rel="noopener noreferrer">Mayoristas</a></li>
+       <li><a href="#mayoristas" onclick="scrollToSection('mayoristas')">Mayoristas</a></li>
+       <li><a href="https://wa.me/59892436816" target="_blank" rel="noopener noreferrer">Consultas</a></li>
       </ul>
      </div>
      <div class="footer-section">
-      <h3>Redes Sociales</h3>
+      <h3>Categorías</h3>
       <ul>
-       <li><a href="https://www.instagram.com/kafatemorperfumes.uy?igsh=MWI3cnlmMTB5a3gwYg%3D%3D&amp;utm_source=qr" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-       <li><a href="https://wa.me/59892436816" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+       <li><a href="#all-products" onclick="scrollToSection('all-products')">Ver Catálogo</a></li>
+       <li><a href="#bestsellers" onclick="scrollToSection('bestsellers')">Más Vendidos</a></li>
       </ul>
      </div>
     </div>
     <div class="footer-bottom">
-     <p>© 2024 Kafatemor Perfumes. Todos los derechos reservados. | Tienda Online de Perfumes</p>
+     <p>© 2024 Kafatemor Perfumes. Todos los derechos reservados. | Tienda Online Premium de Perfumes</p>
     </div>
    </footer>
   </div><!-- CART SIDEBAR -->
@@ -1006,178 +776,333 @@
     </div>
    </div>
    <div class="cart-footer">
-    <div class="cart-total"><span>Total Perfumes:</span> <span id="cartTotal">0</span>
-    </div><button class="btn-checkout" id="checkoutBtn" onclick="checkout()" disabled> <i data-lucide="message-circle" style="width: 18px; height: 18px;"></i> Consultar por WhatsApp </button>
+    <div class="cart-total"><span>Total:</span> <span id="cartTotal">0</span>
+    </div><button class="btn-checkout" id="checkoutBtn" onclick="checkout()" disabled>💬 Consultar por WhatsApp</button>
    </div>
   </div><!-- FLOATING BUTTONS -->
-  <div class="floating-buttons"><a href="https://wa.me/59892436816" target="_blank" rel="noopener noreferrer" class="float-btn float-whatsapp" title="WhatsApp"> <i data-lucide="message-circle" style="width: 28px; height: 28px;"></i> </a> <a href="https://www.instagram.com/kafatemorperfumes.uy?igsh=MWI3cnlmMTB5a3gwYg%3D%3D&amp;utm_source=qr" target="_blank" rel="noopener noreferrer" class="float-btn float-instagram" title="Instagram"> <i data-lucide="instagram" style="width: 28px; height: 28px;"></i> </a>
+  <div class="floating-buttons">
+   <a href="https://wa.me/59892436816" target="_blank" rel="noopener noreferrer" class="float-btn float-whatsapp" title="WhatsApp">💬</a> <a href="https://www.instagram.com/kafatemorperfumes.uy" target="_blank" rel="noopener noreferrer" class="float-btn float-instagram" title="Instagram">📷</a>
   </div>
   <script>
-const catalog = [
-
-{ id:'afnan-9am', name:'9 AM', brand:'Afnan', image:'9 AM Afnan.avif' },
-{ id:'afnan-9am-dive', name:'9 AM Dive', brand:'Afnan', image:'9 AM Dive.webp' },
-{ id:'afnan-9pm', name:'9 PM', brand:'Afnan', image:'9 PM Afnan.webp' },
-{ id:'afnan-9pm-elixir', name:'9 PM Elixir', brand:'Afnan', image:'9 PM Elixir.webp' },
-
-{ id:'lattafa-khamrah', name:'Khamrah', brand:'Lattafa', image:'khamrah.jpg' },
-{ id:'lattafa-khamrah-qahwa', name:'Khamrah Qahwa', brand:'Lattafa', image:'Khamra Qahwa.webp' },
-{ id:'lattafa-khamrah-dukan', name:'Khamrah Dukan', brand:'Lattafa', image:'Khamra Dukan.webp' },
-
-{ id:'lattafa-yara-candy', name:'Yara Candy', brand:'Lattafa', image:'Yara Candy.webp' },
-{ id:'lattafa-yara-moi', name:'Yara Moi', brand:'Lattafa', image:'Yara Moi.webp' },
-{ id:'lattafa-yara-rosa', name:'Yara Rosa', brand:'Lattafa', image:'Yara Rosa 100 ml EDP.webp' },
-{ id:'lattafa-yara-tous', name:'Yara Tous', brand:'Lattafa', image:'Yara Tous.webp' },
-
-{ id:'armaf-club-bling', name:'Club de Nuit Bling', brand:'Armaf', image:'Club de Nuit Bling.webp' },
-{ id:'armaf-club-imperiale', name:'Club de Nuit Imperiale', brand:'Armaf', image:'Club de Nuit Imperiale 105 ml.webp' },
-{ id:'armaf-club-sillage', name:'Club de Nuit Sillage', brand:'Armaf', image:'Club de Nuit Sillage 105 ml.webp' },
-{ id:'armaf-club-untold', name:'Club de Nuit Untold', brand:'Armaf', image:'Club de Nuit Untold.webp' },
-
-{ id:'dior-sauvage-edt', name:'Sauvage EDT', brand:'Dior', image:'Sauvage 100 ml EDT.webp' },
-{ id:'dior-sauvage-edp', name:'Sauvage EDP', brand:'Dior', image:'Sauvage 100 ml EDP.webp' },
-{ id:'dior-sauvage-elixir', name:'Sauvage Elixir', brand:'Dior', image:'Sauvage Elixir.webp' },
-
-{ id:'ysl-y-edp', name:'Y EDP', brand:'Yves Saint Laurent', image:'Y Yves Saint Laurent EDP 100 ml.webp' },
-
-{ id:'versace-eros-edt', name:'Eros EDT', brand:'Versace', image:'Versace Eros EDT 100 ml.jpg' },
-{ id:'versace-eros-edp', name:'Eros EDP', brand:'Versace', image:'Versace Eros EDP 50 ml.jpg' },
-{ id:'versace-eros-flame', name:'Eros Flame', brand:'Versace', image:'Versace Eros Flame 50 ml.webp' },
-
-{ id:'rabanne-1million', name:'1 Million', brand:'Paco Rabanne', image:'Paco Rabanne 1 Million 100 ml.webp' },
-
-{ id:'rabanne-invictus-victory', name:'Invictus Victory', brand:'Paco Rabanne', image:'Invictus Victory.webp' },
-{ id:'rabanne-invictus-elixir', name:'Invictus Victory Elixir', brand:'Paco Rabanne', image:'Invictus Victory Elixir EDP.jpg' },
-
-{ id:'chanel-bleu', name:'Bleu de Chanel', brand:'Chanel', image:'Bleu de Chanel EDP 150 ml.webp' },
-
-{ id:'lancome-lavie', name:'La Vie Est Belle', brand:'Lancôme', image:'La Vie Est Belle EDP 100 ml.webp' }
-
-];
-
+    // ========== CATALOG (FLAT ARRAY) ==========
+    const catalog = [
+      { id: '212-men-nyc-100ml-edt', name: '212 Men NYC 100ml EDT', brand: '212', image: '212 Men NYC 100ml EDT.webp' },
+      { id: '212-nyc-200ml-edt', name: '212 NYC 200 ml EDT', brand: '212', image: '212 NYC 200 ml EDT.jpg' },
+      { id: '212-sexy-carolina-herrera', name: '212 Sexy Carolina Herrera', brand: '212', image: '212 Sexy Carolina Herrera.webp' },
+      { id: '212-vip-men', name: '212 VIP Men Are You on The List', brand: '212', image: '212 VIP Men Are You on The List.jpg' },
+      { id: '212-vip-rose', name: '212 Vip Rosé NYC 80ml CH', brand: '212', image: '212 Vip Rosé NYC 80ml CH.jpg' },
+      { id: 'afnan-9am', name: '9 AM', brand: 'Afnan', image: '9 AM Afnan.avif' },
+      { id: 'afnan-9am-dive', name: '9 AM Dive', brand: 'Afnan', image: '9 AM Dive.webp' },
+      { id: 'afnan-9pm', name: '9 PM', brand: 'Afnan', image: '9 PM Afnan.webp' },
+      { id: 'afnan-9pm-elixir', name: '9 PM Elixir', brand: 'Afnan', image: '9 PM Elixir.webp' },
+      { id: 'acqua-di-gio-edp-100ml', name: 'Acqua di Gio EDP 100 ml', brand: 'Giorgio Armani', image: 'Acqua di Gio EDP 100 ml.webp' },
+      { id: 'acqua-di-gio-edt', name: 'Acqua di Gio EDT', brand: 'Giorgio Armani', image: 'Acqua di Gio EDT.webp' },
+      { id: 'aether-extrait', name: 'Aether Extrait', brand: 'French Avenue', image: 'Aether Extrait French Avenue.webp' },
+      { id: 'ajayes-portrait', name: 'Ajayes Portrait', brand: 'Ajayes', image: 'Ajayes Portrait.webp' },
+      { id: 'al-absar-mudiyah', name: 'Al Absar Mudiyah Edp 100 Ml', brand: 'Al Absar', image: 'Al Absar Mudiyah Edp 100 Ml.webp' },
+      { id: 'al-haramain-amber-musk', name: 'Al Haramain Amber Musk', brand: 'Al Haramain', image: 'Al Haramain Amber Musk.jpg' },
+      { id: 'al-haramain-amber-oud-white', name: 'Al Haramain Amber Oud White', brand: 'Al Haramain', image: 'Al Haramain Amber Oud White.webp' },
+      { id: 'al-layl-al-wataniah', name: 'Al Layl Al Wataniah', brand: 'Al Wataniah', image: 'Al Layl Al Wataniah.webp' },
+      { id: 'al-noble-wazeer', name: 'Al Noble Wazeer 100 ml EDP', brand: 'Al Noble', image: 'Al Noble Wazeer 100 ml EDP.webp' },
+      { id: 'al-wataniah-durrat', name: 'Al Wataniah Durrat Al Aroos Edp 85ml', brand: 'Al Wataniah', image: 'Al Wataniah Durrat Al Aroos Edp 85ml.webp' },
+      { id: 'amethyst-badee', name: 'Amethyst Badee Al Oud', brand: 'Badee Al Oud', image: 'Amethyst Badee Al Oud.jpg' },
+      { id: 'amor-amor-cacharel', name: 'Amor Amor Cacharel', brand: 'Cacharel', image: 'Amor Amor Cacharel.jpg' },
+      { id: 'aqua-di-gio-parfum-50ml', name: 'Aqua di Gio PARFUM 50ml', brand: 'Giorgio Armani', image: 'Aqua di Gio PARFUM 50ml.webp' },
+      { id: 'aqua-di-gio-profondo', name: 'Aqua di Gio Profondo 100ml EDP', brand: 'Giorgio Armani', image: 'Aqua di Gio Profondo 100ml EDP.webp' },
+      { id: 'aqua-di-gioia-edp', name: 'Aqua di Gioia EDP', brand: 'Giorgio Armani', image: 'Aqua di Gioia EDP.jpg' },
+      { id: 'armani-code-parfum', name: 'Armani Code Parfum 125ml', brand: 'Giorgio Armani', image: 'Armani Code Parfum 125ml.webp' },
+      { id: 'asad-bourbon', name: 'Asad Bourbon 100 ml', brand: 'Asad', image: 'Asad Bourbon 100 ml.webp' },
+      { id: 'asad-negro', name: 'Asad Negro 100 ml EDP', brand: 'Asad', image: 'Asad Negro 100 ml EDP.webp' },
+      { id: 'asad-zanzibar', name: 'Asad Zanzibar', brand: 'Asad', image: 'Asad Zanzibar.webp' },
+      { id: 'azzaro-most-wanted-edt', name: 'Azzaro The Most Wanted 100ml', brand: 'Azzaro', image: 'Azzaro The Most Wanted 100ml.webp' },
+      { id: 'azzaro-most-wanted-edp', name: 'Azzaro The Most Wanted EDP', brand: 'Azzaro', image: 'Azzaro The Most Wanted EDP.webp' },
+      { id: 'azzure-oud', name: 'Azzure Oud', brand: 'French Avenue', image: 'Azzure Oud French Avenue.webp' },
+      { id: 'bad-boy-le-parfum', name: 'Bad Boy Le Parfum 50 ml', brand: 'Carolina Herrera', image: 'Bad Boy Le Parfum 50 ml.webp' },
+      { id: 'bad-femme-maison', name: 'Bad Femme Maison Alhambra', brand: 'Maison Alhambra', image: 'Bad Femme Maison Alhambra.webp' },
+      { id: 'because-its-you', name: 'Because It\'s You Armani', brand: 'Giorgio Armani', image: 'Because It_s You Armani.webp' },
+      { id: 'bharara-bleu', name: 'Bharara Bleu 100 ml EDP', brand: 'Bharara', image: 'Bharara Bleu 100 ml EDP.webp' },
+      { id: 'bharara-don', name: 'Bharara Don 100 ml EDP', brand: 'Bharara', image: 'Bharara Don 100 ml EDP.webp' },
+      { id: 'bharara-double-bleu', name: 'Bharara Double Bleu 100 ml EDP', brand: 'Bharara', image: 'Bharara Double Bleu 100 ml EDP.webp' },
+      { id: 'bharara-niche-femme', name: 'Bharara Niche Femme 100ml EDP', brand: 'Bharara', image: 'Bharara Niche Femme 100ml EDP.webp' },
+      { id: 'bleu-de-chanel-edp', name: 'Bleu de Chanel EDP 150 ml', brand: 'Chanel', image: 'Bleu de Chanel EDP 150 ml.webp' },
+      { id: 'burberry-goddess', name: 'Burberry Goddess 100 ml EDP', brand: 'Burberry', image: 'Burberry Goddess 100 ml EDP.webp' },
+      { id: 'burj-blanc', name: 'Burj Blanc Risala', brand: 'Risala', image: 'Burj Blanc Risala.webp' },
+      { id: 'burj-noir', name: 'Burj Noir Risala', brand: 'Risala', image: 'Burj Noir Risala.webp' },
+      { id: 'byzance-rochas', name: 'Byzance Rochas 100 ml', brand: 'Rochas', image: 'Byzance Rochas 100 ml.jpg' },
+      { id: 'calvin-klein-eternity', name: 'Calvin Klein Eternity', brand: 'Calvin Klein', image: 'Calvin Klein Eternity.webp' },
+      { id: 'calvin-klein-one', name: 'Calvin Klein One 200 ml', brand: 'Calvin Klein', image: 'Calvin Klein One 200 ml.webp' },
+      { id: 'chance-chanel-edp', name: 'Chance Chanel EDP 100 ml', brand: 'Chanel', image: 'Chance Chanel EDP 100 ml.webp' },
+      { id: 'club-de-nuit-lionheart', name: 'Club De Nuit Lionheart Woman', brand: 'Armaf', image: 'Club De Nuit Lionheart Woman.webp' },
+      { id: 'club-de-nuit-bling', name: 'Club de Nuit Bling', brand: 'Armaf', image: 'Club de Nuit Bling.webp' },
+      { id: 'club-de-nuit-imperiale', name: 'Club de Nuit Imperiale 105 ml', brand: 'Armaf', image: 'Club de Nuit Imperiale 105 ml.webp' },
+      { id: 'club-de-nuit-preciux', name: 'Club de Nuit Preciux 1', brand: 'Armaf', image: 'Club de Nuit Preciux 1.webp' },
+      { id: 'club-de-nuit-sillage', name: 'Club de Nuit Sillage 105 ml', brand: 'Armaf', image: 'Club de Nuit Sillage 105 ml.webp' },
+      { id: 'club-de-nuit-untold', name: 'Club de Nuit Untold', brand: 'Armaf', image: 'Club de Nuit Untold.webp' },
+      { id: 'coach-gold-new-york', name: 'Coach Gold New York', brand: 'Coach', image: 'Coach Gold New York.jpg' },
+      { id: 'coco-mademoiselle', name: 'Coco Mademoiselle Chanel', brand: 'Chanel', image: 'Coco Mademoiselle Chanel.webp' },
+      { id: 'collection-dantiques', name: 'Collection Dantiqués 1910 Lattafa', brand: 'Lattafa', image: 'Collection Dantiqués 1910 Lattafa.webp' },
+      { id: 'cotton-bliss', name: 'Cotton Bliss Risala', brand: 'Risala', image: 'Cotton Bliss Risala.webp' },
+      { id: 'delights-island-breeze', name: 'Delights Island Breeze Armaf 100 ml', brand: 'Armaf', image: 'Delights Island Breeze Armaf 100 ml.webp' },
+      { id: 'divine-elixir', name: 'Divine Elixir Women', brand: 'Divine', image: 'Divine Elixir Women JPG.webp' },
+      { id: 'elegancia-pure', name: 'Elegancia Purê Risala', brand: 'Risala', image: 'Elegancia Purê Risala.webp' },
+      { id: 'emeer-lattafa', name: 'Emeer Lattafa 100 ml EDP', brand: 'Lattafa', image: 'Emeer Lattafa 100 ml EDP.webp' },
+      { id: 'erba-gold', name: 'Erba Gold 100 ml', brand: 'Erba', image: 'Erba Gold 100 ml.webp' },
+      { id: 'erba-pura', name: 'Erba Pura 100 ml', brand: 'Erba', image: 'Erba Pura 100 ml.webp' },
+      { id: 'euphoria-calvin-klein', name: 'Euphoria Calvin Klein EDT', brand: 'Calvin Klein', image: 'Euphoria Calvin Klein EDT.webp' },
+      { id: 'fakhar-rose-1', name: 'Fakhar Rose', brand: 'Lattafa', image: 'Fakhar Rose(1).webp' },
+      { id: 'fakhar-rose-2', name: 'Fakhar Rose', brand: 'Lattafa', image: 'Fakhar Rose.webp' },
+      { id: 'fakhar-silver', name: 'Fakhar Silver Edition Lattafa', brand: 'Lattafa', image: 'Fakhar Silver Edition Lattafa.webp' },
+      { id: 'fame-in-love', name: 'Fame in Love 50 ml', brand: 'Fame', image: 'Fame in Love 50 ml.jpg' },
+      { id: 'fayyad-al-wataniah', name: 'Fayyad Al Wataniah', brand: 'Al Wataniah', image: 'Fayyad Al Wataniah.jpeg' },
+      { id: 'femme-boss', name: 'Femme Boss 75 ml', brand: 'Femme Boss', image: 'Femme Boss 75 ml.webp' },
+      { id: 'flavia-ampario', name: 'Flavia Ampario Pour Homme Sterling', brand: 'Flavia', image: 'Flavia Ampario Pour Homme Sterling.webp' },
+      { id: 'fruity-bliss', name: 'Fruity Bliss Risala', brand: 'Risala', image: 'Fruity Bliss Risala.webp' },
+      { id: 'gentleman-givenchy-cologne', name: 'Gentleman Givenchy 50 ml Cologne', brand: 'Givenchy', image: 'Gentleman Givenchy 50 ml Cologne.webp' },
+      { id: 'gentleman-givenchy-boisse', name: 'Gentleman Givenchy Boisse EDP 100 ml', brand: 'Givenchy', image: 'Gentleman Givenchy Boisse EDP 100 ml.jpg' },
+      { id: 'gentleman-givenchy-edp', name: 'Gentleman Givenchy EDP 100 ml', brand: 'Givenchy', image: 'Gentleman Givenchy EDP 100 ml.jpg' },
+      { id: 'gentleman-society', name: 'Gentleman Society Ambrée Givenchy EDP', brand: 'Givenchy', image: 'Gentleman Society Ambrée Givenchy EDP.webp' },
+      { id: 'ghost-spectre', name: 'Ghost Spectre', brand: 'Ghost', image: 'Ghost Spectre.webp' },
+      { id: 'give-me-gourmand', name: 'Give Me Gourmand Lattafa', brand: 'Lattafa', image: 'Give Me Gourmand Lattafa.webp' },
+      { id: 'glasier-pour-homme', name: 'Glasier Pour Homme Maison Alhambra', brand: 'Maison Alhambra', image: 'Glasier Pour Homme Maison Alhambra.webp' },
+      { id: 'good-girl-blush', name: 'Good Girl Blush Carolina Herrera', brand: 'Carolina Herrera', image: 'Good Girl Blush Carolina Herrera.jpg' },
+      { id: 'gucci-flora', name: 'Gucci Flora 100 ml', brand: 'Gucci', image: 'Gucci Flora 100 ml.jpg' },
+      { id: 'guess-iconic', name: 'Guess Iconic 100 ml EDP', brand: 'Guess', image: 'Guess Iconic 100 ml EDP.jpg' },
+      { id: 'her-secret-absolu', name: 'Her Secret Absolu Banderas', brand: 'Antonio Banderas', image: 'Her Secret Absolu Banderas.webp' },
+      { id: 'her-secret-pink', name: 'Her Secret Pink Banderas', brand: 'Antonio Banderas', image: 'Her Secret Pink Banderas.jpg' },
+      { id: 'honor-ciel', name: 'Honor Ciel Risala', brand: 'Risala', image: 'Honor Ciel Risala.jpg' },
+      { id: 'honor-royal', name: 'Honor Royal Risala', brand: 'Risala', image: 'Honor Royal Risala.webp' },
+      { id: 'honor-and-glory', name: 'Honor and Glory', brand: 'Afnan', image: 'Honor and Glory.webp' },
+      { id: 'idole-edt', name: 'Idole EDT 50 ml', brand: 'Lancôme', image: 'Idole EDT 50 ml.jpg' },
+      { id: 'idole-now', name: 'Idole Now 100 ml EDP', brand: 'Lancôme', image: 'Idole Now 100 ml EDP.webp' },
+      { id: 'idole-peach-roses', name: 'Idole Peach Roses 100 ml', brand: 'Lancôme', image: 'Idole Peach Roses 100 ml.webp' },
+      { id: 'invictus-aqua-edt', name: 'Invictus Aqua EDT 100 ml', brand: 'Paco Rabanne', image: 'Invictus Aqua EDT 100 ml.jpg' },
+      { id: 'invictus-victory-elixir', name: 'Invictus Victory Elixir EDP', brand: 'Paco Rabanne', image: 'Invictus Victory Elixir EDP.jpg' },
+      { id: 'invictus-victory', name: 'Invictus Victory', brand: 'Paco Rabanne', image: 'Invictus Victory.webp' },
+      { id: 'ishq-al-shuyukh', name: 'Ishq Al Shuyukh Gold 100 ml EDP', brand: 'Ishq Al Shuyukh', image: 'Ishq Al Shuyukh Gold 100 ml EDP.webp' },
+      { id: 'island-bliss-delights', name: 'Island Bliss Delights Armaf', brand: 'Armaf', image: 'Island Bliss Delights Armaf.webp' },
+      { id: 'jadore-dior', name: 'Jadore Dior', brand: 'Dior', image: 'Jadore Dior.webp' },
+      { id: 'jasoor-lattafa', name: 'Jasoor Lattafa 100 ml EDP', brand: 'Lattafa', image: 'Jasoor Lattafa 100 ml EDP.webp' },
+      { id: 'jean-lowe-immorte', name: 'Jean Lowe Immorte Maison Alhambra', brand: 'Maison Alhambra', image: 'Jean Lowe Immorte Maison Alhambra.png' },
+      { id: 'jean-paul-gaultier-classique', name: 'Jean Paul Gaultier Classique EDP 100 ml', brand: 'Jean Paul Gaultier', image: 'Jean Paul Gaultier Classique EDP 100 ml.jpg' },
+      { id: 'jean-paul-gaultier-divine', name: 'Jean Paul Gaultier Divine 100 ml Le Parfum', brand: 'Jean Paul Gaultier', image: 'Jean Paul Gaultier Divine 100 ml Le Parfum.jpg' },
+      { id: 'jean-paul-gaultier-le-beau', name: 'Jean Paul Gaultier Le Beau 125 ml EDT', brand: 'Jean Paul Gaultier', image: 'Jean Paul Gaultier Le Beau 125 ml EDT.webp' },
+      { id: 'jean-paul-gaultier-le-male-elixir', name: 'Jean Paul Gaultier Le Male Elixir', brand: 'Jean Paul Gaultier', image: 'Jean Paul Gaultier Le Male Elixir.jpg' },
+      { id: 'jean-paul-gaultier-le-male-le-parfum', name: 'Jean Paul Gaultier Le Male Le Parfum 125 ml', brand: 'Jean Paul Gaultier', image: 'Jean Paul Gaultier Le Male Le Parfum 125 ml.jpg' },
+      { id: 'kayaan-classic', name: 'Kayaan Classic Al Wataniah 100 ml EDP', brand: 'Al Wataniah', image: 'Kayaan Classic Al Wataniah 100 ml EDP.webp' },
+      { id: 'khamrah-dukan', name: 'Khamrah Dukan', brand: 'Lattafa', image: 'Khamra Dukan.webp' },
+      { id: 'khamrah-qahwa', name: 'Khamrah Qahwa', brand: 'Lattafa', image: 'Khamra Qahwa.webp' },
+      { id: 'kingsman-maison', name: 'Kingsman Maison Alhambra', brand: 'Maison Alhambra', image: 'Kingsman Maison Alhambra.webp' },
+      { id: 'la-nuit-tresor', name: 'La Nuit Tressor Le Parfum 50 ml', brand: 'Lancôme', image: 'La Nuit Tressor Le Parfum 50 ml.jpg' },
+      { id: 'la-vie-est-belle-edp', name: 'La Vie Est Belle EDP 100 ml', brand: 'Lancôme', image: 'La Vie Est Belle EDP 100 ml.webp' },
+      { id: 'la-vie-est-belle-elixir', name: 'La Vie Est Belle Elixir', brand: 'Lancôme', image: 'La Vie Est Belle Elixir.webp' },
+      { id: 'lady-million-royal', name: 'Lady Million Royal', brand: 'Paco Rabanne', image: 'Lady Million Royal.webp' },
+      { id: 'lady-million-tradicional', name: 'Lady Million Tradicional', brand: 'Paco Rabanne', image: 'Lady Million Tradicional.webp' },
+      { id: 'lancome-idole-leau', name: 'Lancome Idole L\'Eau 100 ml', brand: 'Lancôme', image: 'Lancome Idole L Eau 100 ml.webp' },
+      { id: 'lanvin-eclat-darpege', name: 'Lanvin Eclat d\'Arpege 100 ml EDP', brand: 'Lanvin', image: 'Lanvin Eclat d_Arpege 100 ml EDP.webp' },
+      { id: 'lattafa-ana-abiyedh', name: 'Lattafa Ana Abiyedh Edp 60ml', brand: 'Lattafa', image: 'Lattafa Ana Abiyedh Edp 60ml.webp' },
+      { id: 'lattafa-khamrah', name: 'Lattafa Khamrah eau de parfum', brand: 'Lattafa', image: 'Lattafa Khamrah eau de parfum.webp' },
+      { id: 'lattafa-pride-fakhar-black', name: 'Lattafa Pride Of Lattafa Fakhar Black Men', brand: 'Lattafa', image: 'Lattafa Pride Of Lattafa Fakhar Black Men.webp' },
+      { id: 'liberty-pour-femme', name: 'Liberty Pour Femme Grandeur Elite', brand: 'Grandeur Elite', image: 'Liberty Pour Femme Grandeur Elite.webp' },
+      { id: 'libre-leau-nue', name: 'Libre L\'Eau Nue 90 ml EDP YSL', brand: 'Yves Saint Laurent', image: 'Libre L\'Eau Nue 90 ml EDP YSL.webp' },
+      { id: 'linterdit-givenchy', name: 'Linterdit Givenchy 80 ml EDP', brand: 'Givenchy', image: 'Linterdit Givenchy 80 ml EDP.webp' },
+      { id: 'liquid-brun', name: 'Liquid Brun', brand: 'Liquid', image: 'Liquid Brun.webp' },
+      { id: 'loewe-earth', name: 'Loewe Earth 100 ml EDP', brand: 'Loewe', image: 'Loewe Earth 100 ml EDP.jpg' },
+      { id: 'loewe-solo-atlas', name: 'Loewe Solo Atlas 100 ml EDP', brand: 'Loewe', image: 'Loewe Solo Atlas 100 ml EDP.jpg' },
+      { id: 'loewe-solo-ella', name: 'Loewe Solo Ella 100 ml EDP', brand: 'Loewe', image: 'Loewe Solo Ella 100 ml EDP.webp' },
+      { id: 'lovely-chery', name: 'Lovely Chery', brand: 'Lovely', image: 'Lovely Chery.webp' },
+      { id: 'leonie-maison', name: 'Léonie Maison Alhambra', brand: 'Maison Alhambra', image: 'Léonie Maison Alhambra.webp' },
+      { id: 'myslf-ysl', name: 'MYSLF Yves Saint Laurent EDP 100 ml', brand: 'Yves Saint Laurent', image: 'MYSLF Yves Saint Laurent EDP 100 ml.webp' },
+      { id: 'maahir-legacy', name: 'Maahir Legacy Lattafa', brand: 'Lattafa', image: 'Maahir Legacy Lattafa.webp' },
+      { id: 'mahaair-lattafa', name: 'Mahaair Lattafa', brand: 'Lattafa', image: 'Mahaair Lattafa.webp' },
+      { id: 'may-way-intense', name: 'May Way Intense 50 ml EDP', brand: 'May Way', image: 'May Way Intense 50 ml EDP.webp' },
+      { id: 'mayar-natural-intense', name: 'Mayar Natural Intense', brand: 'Mayar', image: 'Mayar Natural Intense.webp' },
+      { id: 'miss-dior-essence', name: 'Miss Dior Essence 80 ml', brand: 'Dior', image: 'Miss Dior Essence 80 ml.webp' },
+      { id: 'modern-musk-maison', name: 'Modern Musk Maison Alhambra', brand: 'Maison Alhambra', image: 'Modern Musk Maison Alhambra.jpg' },
+      { id: 'moschino-toy-2-bubble-gum', name: 'Moschino Toy 2 Bubble Gum EDT 50 ml', brand: 'Moschino', image: 'Moschino Toy 2 Bubble Gum EDT 50 ml.webp' },
+      { id: 'moschino-toy-2-femme', name: 'Moschino Toy 2 Femme 100 ml', brand: 'Moschino', image: 'Moschino Toy 2 Femme 100 ml.webp' },
+      { id: 'moschino-toy-2-pearl', name: 'Moschino Toy 2 Pearl 50 ml EDP', brand: 'Moschino', image: 'Moschino Toy 2 Pearl 50 ml EDP.webp' },
+      { id: 'mudiyah-edp', name: 'Mudiyah EDP Al Absar', brand: 'Al Absar', image: 'Mudiyah EDP Al Absar.webp' },
+      { id: 'my-way-edp', name: 'My Way EDP 100ml', brand: 'Giorgio Armani', image: 'My Way EDP 100ml.jpg' },
+      { id: 'my-way-intense', name: 'My Way Intense 50ml EDP', brand: 'Giorgio Armani', image: 'My Way Intense 50ml EDP.webp' },
+      { id: 'narciso-cristal', name: 'Narciso Cristal 90 ml', brand: 'Narciso Rodriguez', image: 'Narciso Cristal 90 ml.webp' },
+      { id: 'narciso-for-her-edp', name: 'Narciso Rodriguez For Her EDP', brand: 'Narciso Rodriguez', image: 'Narciso Rodriguez For Her EDP.jpg' },
+      { id: 'narciso-for-her-intense', name: 'Narciso Rodriguez For Her Intense 100 ml', brand: 'Narciso Rodriguez', image: 'Narciso Rodriguez For Her Intense 100 ml.webp' },
+      { id: 'noble-blush', name: 'Noble Blush Badee Al Oud', brand: 'Badee Al Oud', image: 'Noble Blush Badee Al Oud.webp' },
+      { id: 'n-2-men-maison', name: 'N° 2 Men Maison Alhambra', brand: 'Maison Alhambra', image: 'N° 2 Men Maison Alhambra.webp' },
+      { id: 'odysset-candee', name: 'Odysset Candee', brand: 'Odyssey', image: 'Odysset Candee.jpg' },
+      { id: 'odyssey-aoud', name: 'Odyssey Aoud', brand: 'Odyssey', image: 'Odyssey Aoud.jpg' },
+      { id: 'odyssey-bahamas', name: 'Odyssey Bahamas 100 ml', brand: 'Odyssey', image: 'Odyssey Bahamas 100 ml.webp' },
+      { id: 'odyssey-black-forest', name: 'Odyssey Black Forest', brand: 'Odyssey', image: 'Odyssey Black Forest.jpg' },
+      { id: 'odyssey-dubai-chocolat', name: 'Odyssey Dubai Chocolat', brand: 'Odyssey', image: 'Odyssey Dubai Chocolat.webp' },
+      { id: 'odyssey-eau-de-montagne', name: 'Odyssey Eau de Montagne', brand: 'Odyssey', image: 'Odyssey Eau de Montagne.jpg' },
+      { id: 'odyssey-home-white', name: 'Odyssey Home White', brand: 'Odyssey', image: 'Odyssey Home White.webp' },
+      { id: 'odyssey-homme', name: 'Odyssey Homme', brand: 'Odyssey', image: 'Odyssey Homme.webp' },
+      { id: 'odyssey-limoni', name: 'Odyssey Limoni', brand: 'Odyssey', image: 'Odyssey Limoni.webp' },
+      { id: 'odyssey-marshmallow', name: 'Odyssey Marshmallow', brand: 'Odyssey', image: 'Odyssey Marshmallow.webp' },
+      { id: 'odyssey-revolution', name: 'Odyssey Revolution 100 ml', brand: 'Odyssey', image: 'Odyssey Revolution 100 ml.webp' },
+      { id: 'odyssey-spectra', name: 'Odyssey Spectra', brand: 'Odyssey', image: 'Odyssey Spectra.webp' },
+      { id: 'odyssey-toffee-coffee', name: 'Odyssey Toffee Coffee Armaf', brand: 'Armaf', image: 'Odyssey Toffee Coffee Armaf.webp' },
+      { id: 'odyssey-ultra-edition', name: 'Odyssey Ultra Edition', brand: 'Odyssey', image: 'Odyssey Ultra Edition.webp' },
+      { id: 'olimpea-flora', name: 'Olimpea Flora', brand: 'Olimpea', image: 'Olimpea Flora.webp' },
+      { id: 'opulence-leather', name: 'Opulence Leather Maison Alhambra', brand: 'Maison Alhambra', image: 'Opulence Leather Maison Alhambra.webp' },
+      { id: 'organza-givenchy', name: 'Organza Givenchy', brand: 'Givenchy', image: 'Organza Givenchy.jpg' },
+      { id: 'orientica-amber-rouge', name: 'Orientica Amber Rouge', brand: 'Orientica', image: 'Orientica Amber Rouge.jpg' },
+      { id: 'orientica-rose-eclat', name: 'Orientica Rose Eclat', brand: 'Orientica', image: 'Orientica Rose Eclat.webp' },
+      { id: 'paco-rabanne-1-million', name: 'Paco Rabanne 1 Million 100 ml', brand: 'Paco Rabanne', image: 'Paco Rabanne 1 Million 100 ml.webp' },
+      { id: 'paco-rabanne-pour-homme', name: 'Paco Rabanne Pour Homme 100 ml', brand: 'Paco Rabanne', image: 'Paco Rabanne Pour Homme 100 ml.webp' },
+      { id: 'paco-rose-rabanne', name: 'Paco Rosé Rabanne', brand: 'Paco Rabanne', image: 'Paco Rosé Rabanne.jpg' },
+      { id: 'paradox-intense-prada', name: 'Paradox Intense Prada 100 ml', brand: 'Prada', image: 'Paradox Intense Prada 100 ml.webp' },
+      { id: 'passione-giorgio-armani', name: 'Passione Giorgio Armani 100 ml', brand: 'Giorgio Armani', image: 'Passione Giorgio Armani 100 ml.webp' },
+      { id: 'passione-red-musk', name: 'Passione Red Musk Giorgio Armani 100 ml', brand: 'Giorgio Armani', image: 'Passione Red Musk Giorgio Armani 100 ml.webp' },
+      { id: 'phantom-in-red', name: 'Phantom In Red Rabanne Parfum Elixir', brand: 'Paco Rabanne', image: 'Phantom In Red Rabanne Parfum Elixir.webp' },
+      { id: 'pink-eclipse', name: 'Pink Eclipse Maison Alhambra', brand: 'Maison Alhambra', image: 'Pink Eclipse Maison Alhambra.webp' },
+      { id: 'poeme-lancome', name: 'Poeme Lancome Paris 100 ml', brand: 'Lancôme', image: 'Poeme Lancome Paris 100 ml.webp' },
+      { id: 'poison-dior', name: 'Poison Dior 100 ml', brand: 'Dior', image: 'Poison Dior 100 ml.webp' },
+      { id: 'preciux-iv', name: 'Preciux IV Armaf', brand: 'Armaf', image: 'Preciux IV Armaf.webp' },
+      { id: 'quimmah-for-men', name: 'Quimmah For Men Lattafa', brand: 'Lattafa', image: 'Quimmah For Men Lattafa.webp' },
+      { id: 'ricci-ricci', name: 'Ricci Ricci 50 ml', brand: 'Nina Ricci', image: 'Ricci Ricci 50 ml.webp' },
+      { id: 'si-edp-armani', name: 'SI EDP Armani 100 ml', brand: 'Giorgio Armani', image: 'SI EDP Armani 100 ml.webp' },
+      { id: 'si-intense-armani', name: 'SI Intense Giorgio Armani', brand: 'Giorgio Armani', image: 'SI Intense Giorgio Armani.webp' },
+      { id: 'sabah-al-ward', name: 'Sabah Al Ward Al Wataniah', brand: 'Al Wataniah', image: 'Sabah Al Ward Al Wataniah.webp' },
+      { id: 'salvo-edp', name: 'Salvo EDP', brand: 'Salvo', image: 'Salvo EDP.webp' },
+      { id: 'salvo-elixir', name: 'Salvo Elixir 60 ml', brand: 'Salvo', image: 'Salvo Elixir 60 ml.webp' },
+      { id: 'sauvage-edp', name: 'Sauvage 100 ml EDP', brand: 'Dior', image: 'Sauvage 100 ml EDP.webp' },
+      { id: 'sauvage-edt', name: 'Sauvage 100 ml EDT', brand: 'Dior', image: 'Sauvage 100 ml EDT.webp' },
+      { id: 'sauvage-elixir', name: 'Sauvage Elixir', brand: 'Dior', image: 'Sauvage Elixir.webp' },
+      { id: 'scandal-intense', name: 'Scandal Intense Jean Paul Gaultier 100 ml', brand: 'Jean Paul Gaultier', image: 'Scandal Intense Jean Paul Gaultier 100 ml.jpg' },
+      { id: 'sehr-lattafa', name: 'Sehr Lattafa EDP 100 ml', brand: 'Lattafa', image: 'Sehr Lattafa EDP 100 ml.webp' },
+      { id: 'shagaf-oud-ahmar', name: 'Shagaf Oud Ahmar Swiss Arabian', brand: 'Swiss Arabian', image: 'Shagaf Oud Ahmar Swiss Arabian.webp' },
+      { id: 'shagaf-oud-azraq', name: 'Shagaf Oud Azraq Limited Edition', brand: 'Swiss Arabian', image: 'Shagaf Oud Azraq Limited Edition.webp' },
+      { id: 'shagaf-oud-tonka', name: 'Shagaf Oud Tonka', brand: 'Swiss Arabian', image: 'Shagaf Oud Tonka.webp' },
+      { id: 'shaheen-gold', name: 'Shaheen Gold EDP 100 ml', brand: 'Shaheen', image: 'Shaheen Gold EDP 100 ml.webp' },
+      { id: 'sky-mandarine', name: 'Sky Mandarine', brand: 'Sky', image: 'Sky Mandarine.webp' },
+      { id: 'so-candid-rouge', name: 'So Candid Rouge Maison Alhambra', brand: 'Maison Alhambra', image: 'So Candid Rouge Maison Alhambra.webp' },
+      { id: 'souvenir-desert-rose', name: 'Souvenir Desert Rose Afnan', brand: 'Afnan', image: 'Souvenir Desert Rose Afnan.webp' },
+      { id: 'spectre-amazonite', name: 'Spectre Amazonite', brand: 'Spectre', image: 'Spectre Amazonite.webp' },
+      { id: 'stallion-53', name: 'Stallion 53', brand: 'Stallion', image: 'Stallion 53.png' },
+      { id: 'stronger-with-you', name: 'Stronger With You Armani 100 ml', brand: 'Giorgio Armani', image: 'Stronger With You Armani 100 ml.webp' },
+      { id: 'sublime-badee', name: 'Sublime Badee Al Oud', brand: 'Badee Al Oud', image: 'Sublime Badee Al Oud.webp' },
+      { id: 'teriaq-edp', name: 'Teriaq EDP 100 ml', brand: 'Teriaq', image: 'Teriaq EDP 100 ml.webp' },
+      { id: 'the-icon-supreme', name: 'The Icon Supreme Banderas 100 ml', brand: 'Antonio Banderas', image: 'The Icon Supreme Banderas 100 ml.jpg' },
+      { id: 'the-kingdom', name: 'The Kingdom Lattafa', brand: 'Lattafa', image: 'The Kingdom Lattafa.webp' },
+      { id: 'the-rose-al-absar', name: 'The Rose Al Absar', brand: 'Al Absar', image: 'The Rose Al Absar.jpg' },
+      { id: 'tom-ford-ombre-leather-edp', name: 'Tom Ford Ombre Leather EDP 50 ml', brand: 'Tom Ford', image: 'Tom Ford Ombre Leather EDP 50 ml.webp' },
+      { id: 'tom-ford-ombre-leather-parfum', name: 'Tom Ford Ombre Leather Parfum 50 ml', brand: 'Tom Ford', image: 'Tom Ford Ombre Leather Parfum 50 ml.jpg' },
+      { id: 'valentino-donna-extradose', name: 'Valentino Donna Extradose Parfum 100 ml', brand: 'Valentino', image: 'Valentino Donna Extradose Parfum 100 ml.webp' },
+      { id: 'valentino-donna-yellow-dream', name: 'Valentino Donna Yellow Dream', brand: 'Valentino', image: 'Valentino Donna Yellow Dream.webp' },
+      { id: 'valentino-green-stravaganza', name: 'Valentino Green Stravaganza 100 ml', brand: 'Valentino', image: 'Valentino Green Stravaganza 100 ml.webp' },
+      { id: 'valentino-uomo-coral-fantasy', name: 'Valentino Uomo Coral Fantasy 100 ml', brand: 'Valentino', image: 'Valentino Uomo Coral Fantasy 100 ml.webp' },
+      { id: 'veneno-scarlet', name: 'Veneno Scarlet', brand: 'French Avenue', image: 'Veneno Scarlet French Avenue.webp' },
+      { id: 'versace-eros-edp', name: 'Versace Eros EDP 50 ml', brand: 'Versace', image: 'Versace Eros EDP 50 ml.jpg' },
+      { id: 'versace-eros-edt', name: 'Versace Eros EDT 100 ml', brand: 'Versace', image: 'Versace Eros EDT 100 ml.jpg' },
+      { id: 'versace-eros-flame', name: 'Versace Eros Flame 50 ml', brand: 'Versace', image: 'Versace Eros Flame 50 ml.webp' },
+      { id: 'victoria-lattafa', name: 'Victoria Lattafa', brand: 'Lattafa', image: 'Victoria Lattafa.webp' },
+      { id: 'victoria-secret-angel-gold', name: 'Victoria Secret Angel Gold 100 ml', brand: 'Victoria\'s Secret', image: 'Victoria Secret Angel Gold 100 ml.webp' },
+      { id: 'victoria-secret-bombshell', name: 'Victoria Secret Bombshell 100 ml', brand: 'Victoria\'s Secret', image: 'Victoria Secret Bombshell 100 ml.webp' },
+      { id: 'victoria-secret-love-edp-100ml', name: 'Victoria Secret Love 100 ml EDP', brand: 'Victoria\'s Secret', image: 'Victoria Secret Love 100 ml EDP.webp' },
+      { id: 'victoria-secret-love-edp-42ml', name: 'Victoria Secret Love 42 ml EDP', brand: 'Victoria\'s Secret', image: 'Victoria Secret Love 42 ml EDP.webp' },
+      { id: 'victorio-flor-oriental', name: 'Victorio Flor Oriental', brand: 'Victorio', image: 'Victorio Flor Oriental.webp' },
+      { id: 'victorio-iris-luminoso', name: 'Victorio Iris Luminoso', brand: 'Victorio', image: 'Victorio Iris Luminoso.webp' },
+      { id: 'victorio-jazmin-exotico', name: 'Victorio Jazmin Exotico', brand: 'Victorio', image: 'Victorio Jazmin Exotico.webp' },
+      { id: 'victorio-rosa-fresca', name: 'Victorio Rosa Fresca', brand: 'Victorio', image: 'Victorio Rosa Fresca.webp' },
+      { id: 'victorio-vitamina-apasionada', name: 'Victorio Vitamina Apasionada', brand: 'Victorio', image: 'Victorio Vitamina Apasionada.webp' },
+      { id: 'victorio-vitamina-citrica', name: 'Victorio Vitamina Citrica', brand: 'Victorio', image: 'Victorio Vitamina Citrica.webp' },
+      { id: 'victorio-vitamina-exotica', name: 'Victorio Vitamina Exotica', brand: 'Victorio', image: 'Victorio Vitamina Exotica.jpg' },
+      { id: 'victorioso-maison', name: 'Victorioso Maison Alhambra', brand: 'Maison Alhambra', image: 'Victorioso Maison Alhambra.webp' },
+      { id: 'vintage-radio', name: 'Vintage Radio Lattafa 100 ml', brand: 'Lattafa', image: 'Vintage Radio Lattafa 100 ml.webp' },
+      { id: 'voce-viva', name: 'Voce Viva Valentino 100 ml', brand: 'Valentino', image: 'Voce Viva Valentino 100 ml.webp' },
+      { id: 'vulcan-baie', name: 'Vulcan Baie', brand: 'Vulcan', image: 'Vulcan Baie.webp' },
+      { id: 'y-ysl-edp', name: 'Y Yves Saint Laurent EDP 100 ml', brand: 'Yves Saint Laurent', image: 'Y Yves Saint Laurent EDP 100 ml.webp' },
+      { id: 'yara-candy', name: 'Yara Candy', brand: 'Lattafa', image: 'Yara Candy.webp' },
+      { id: 'yara-moi', name: 'Yara Moi', brand: 'Lattafa', image: 'Yara Moi.webp' },
+      { id: 'yara-rosa', name: 'Yara Rosa 100 ml EDP', brand: 'Lattafa', image: 'Yara Rosa 100 ml EDP.webp' },
+      { id: 'yara-tous', name: 'Yara Tous', brand: 'Lattafa', image: 'Yara Tous.webp' },
+      { id: 'yum-yum-armaf', name: 'Yum Yum Armaf', brand: 'Armaf', image: 'Yum Yum Armaf.webp' }
+    ];
 
     const bestsellers = [
-      { id: 'lattafa-khamrah', name: 'Khamrah', brand: 'Lattafa', price: '1990' },
-      { id: 'honor-glory', name: 'Honor And Glory', brand: 'Al Wataniah', price: '1990' },
-      { id: 'mandarin-sky', name: 'Mandarin Sky', brand: 'Armaf Odyssey', price: '2190' },
-      { id: 'ysl-y-edp', name: 'Y EDP', brand: 'Yves Saint Laurent', price: '6999' },
-      { id: 'fakhar-black', name: 'Fakhar Black', brand: 'Lattafa', price: '2090' }
+      { id: 'honor-and-glory', price: '1990' },
+      { id: 'lattafa-khamrah', price: '1990' },
+      { id: 'lattafa-mandarin-sky', price: '1990' },
+      { id: 'lattafa-pride-fakhar-black', price: '2090' }
     ];
 
     let cart = [];
     let filteredProducts = [];
-    let currentFilters = { gender: '', type: '', brand: '' };
 
-    // INITIALIZE
-    async function init() {
+    // ========== INITIALIZATION ==========
+    function init() {
       loadCartFromStorage();
-      await loadAllProducts();
+      filteredProducts = [...catalog];
       renderProducts(filteredProducts);
       renderBestsellers();
       populateBrandFilter();
       setupSearch();
-      lucide.createIcons();
+      setupCatalogSearch();
     }
 
-    function loadAllProducts() {
-      filteredProducts = [...catalog.arabe, ...catalog.nicho, ...catalog.diseñador];
-    }
-
-    function renderBestsellers() {
-      const list = document.getElementById('bestsellersList');
-      list.innerHTML = bestsellers.map(item => {
-        const product = getAllProducts().find(p => p.id === item.id) || item;
-        return createBestsellerHTML({ ...product, price: item.price });
-      }).join('');
-      lucide.createIcons();
-    }
-
-    function getAllProducts() {
-      return [...catalog.arabe, ...catalog.nicho, ...catalog.diseñador];
-    }
-
+    // ========== RENDER PRODUCTS ==========
     function renderProducts(products) {
       const list = document.getElementById('productsList');
-      list.innerHTML = products.length ? products.map(p => createProductHTML(p)).join('') : '<p style="grid-column: 1/-1; text-align: center; color: rgba(224, 224, 224, 0.6);">No se encontraron productos</p>';
-      lucide.createIcons();
+      if (products.length === 0) {
+        list.innerHTML = '<div class="no-products">No se encontraron productos</div>';
+        return;
+      }
+      list.innerHTML = products.map(p => createProductHTML(p)).join('');
     }
 
     function createProductHTML(product) {
       return `
         <div class="product-card">
-          <div class="product-image">${product.image}</div>
+          <div class="product-image-wrapper">
+            <img src="${product.image}" alt="${product.name}" loading="lazy" class="product-image" onerror="this.style.background='linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0.02) 100%)';">
+          </div>
           <div class="product-info">
             <div class="product-brand">${product.brand}</div>
             <div class="product-name">${product.name}</div>
-            <div class="product-category">${product.category}</div>
             <div class="product-footer">
-              <div class="product-price" style="font-size: 12px; color: rgba(192, 192, 192, 0.8);">Consultar precio</div>
-              <button class="btn-add-cart" onclick="addToCart('${product.id}')" title="Consultar por WhatsApp">
-                <i data-lucide="plus" style="width: 14px; height: 14px;"></i>
-                <i data-lucide="shopping-cart" style="width: 14px; height: 14px;"></i>
-              </button>
+              <div class="product-price">Consultar</div>
+              <button class="btn-add-to-cart" onclick="addToCart('${product.id}')" title="Agregar al carrito">+ 🛒</button>
             </div>
           </div>
         </div>
       `;
+    }
+
+    // ========== RENDER BESTSELLERS ==========
+    function renderBestsellers() {
+      const list = document.getElementById('bestsellersList');
+      const items = bestsellers.map(item => {
+        const product = catalog.find(p => p.id === item.id);
+        if (!product) return null;
+        return createBestsellerHTML({ ...product, price: item.price });
+      }).filter(Boolean);
+      list.innerHTML = items.join('');
     }
 
     function createBestsellerHTML(product) {
       return `
         <div class="product-card">
-          <div class="product-image">${product.image}</div>
+          <div class="product-image-wrapper">
+            <img src="${product.image}" alt="${product.name}" loading="lazy" class="product-image" onerror="this.style.background='linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0.02) 100%)';">
+          </div>
           <div class="product-info">
             <div class="product-brand">${product.brand}</div>
             <div class="product-name">${product.name}</div>
-            <div class="product-category">${product.category || 'Perfume'}</div>
             <div class="product-footer">
               <div class="product-price">$${product.price}</div>
-              <button class="btn-add-cart" onclick="addToCart('${product.id}')" title="Agregar al carrito">
-                <i data-lucide="plus" style="width: 14px; height: 14px;"></i>
-                <i data-lucide="shopping-cart" style="width: 14px; height: 14px;"></i>
-              </button>
+              <button class="btn-add-to-cart" onclick="addToCart('${product.id}')" title="Agregar al carrito">+ 🛒</button>
             </div>
           </div>
         </div>
       `;
     }
 
+    // ========== CART FUNCTIONS ==========
     function addToCart(productId) {
-      const product = getAllProducts().find(p => p.id === productId);
+      const product = catalog.find(p => p.id === productId);
+      if (!product) return;
       const existing = cart.find(item => item.id === productId);
-      
-      // Crear animación de confirmación
-      const button = event.target.closest('.btn-add-cart');
-      if (button) {
-        const originalHTML = button.innerHTML;
-        button.innerHTML = '<i data-lucide="check" style="width: 14px; height: 14px;"></i> ✓';
-        button.style.background = 'linear-gradient(135deg, rgba(34, 197, 94, 0.9), rgba(34, 197, 94, 0.6))';
-        button.style.borderColor = '#22c55e';
-        button.style.color = '#ffffff';
-        button.style.transform = 'scale(1.2)';
-        
-        // Efecto de chispa múltiple que sale hacia el carrito
-        const rect = button.getBoundingClientRect();
-        const startX = rect.left + rect.width / 2;
-        const startY = rect.top + rect.height / 2;
-        
-        // Crear múltiples chispas en diferentes direcciones
-        for (let i = 0; i < 6; i++) {
-          setTimeout(() => {
-            createCartSparkle(startX, startY);
-          }, i * 50);
-        }
-        
-        setTimeout(() => {
-          button.innerHTML = originalHTML;
-          button.style.background = '';
-          button.style.borderColor = '';
-          button.style.color = '';
-          button.style.transform = '';
-          lucide.createIcons();
-        }, 1200);
-      }
-      
       if (existing) {
         existing.quantity++;
       } else {
@@ -1186,53 +1111,6 @@ const catalog = [
       saveCartToStorage();
       updateCart();
     }
-
-    function createCartSparkle(x, y) {
-      const sparkle = document.createElement('div');
-      const angle = Math.random() * Math.PI * 2;
-      const velocity = 2 + Math.random() * 3;
-      
-      sparkle.style.position = 'fixed';
-      sparkle.style.left = x + 'px';
-      sparkle.style.top = y + 'px';
-      sparkle.style.width = '6px';
-      sparkle.style.height = '6px';
-      sparkle.style.background = `hsl(${210 + Math.random() * 20}, 100%, ${50 + Math.random() * 20}%)`;
-      sparkle.style.borderRadius = '50%';
-      sparkle.style.pointerEvents = 'none';
-      sparkle.style.zIndex = '9999';
-      sparkle.style.boxShadow = `0 0 ${8 + Math.random() * 6}px rgba(30, 58, 138, 0.9)`;
-      
-      const endX = x + Math.cos(angle) * (100 + Math.random() * 50);
-      const endY = y - 200 - Math.random() * 100;
-      
-      sparkle.style.setProperty('--endX', endX + 'px');
-      sparkle.style.setProperty('--endY', endY + 'px');
-      sparkle.style.animation = `sparkleFloat ${0.7 + Math.random() * 0.3}s ease-out forwards`;
-      
-      document.body.appendChild(sparkle);
-      
-      setTimeout(() => sparkle.remove(), 1200);
-    }
-
-    // Actualizar estilos para la animación de chispa mejorada
-    const styleSheet = document.createElement('style');
-    styleSheet.textContent = `
-      @keyframes sparkleFloat {
-        0% {
-          transform: translate(0, 0) scale(1);
-          opacity: 1;
-        }
-        50% {
-          opacity: 1;
-        }
-        100% {
-          transform: translate(calc(var(--endX) - var(--startX, 0px)), calc(var(--endY) - var(--startY, 0px))) scale(0);
-          opacity: 0;
-        }
-      }
-    `;
-    document.head.appendChild(styleSheet);
 
     function removeFromCart(productId) {
       cart = cart.filter(item => item.id !== productId);
@@ -1279,9 +1157,7 @@ const catalog = [
         cartBadge.textContent = cart.length;
         cartBadge.style.display = 'flex';
       }
-
       cartTotal.textContent = cart.length;
-      lucide.createIcons();
     }
 
     function openCart() {
@@ -1294,7 +1170,7 @@ const catalog = [
 
     function checkout() {
       if (cart.length === 0) return;
-      const message = `Hola, quiero información sobre estos perfumes:\n\n${cart.map(item => `• ${item.name} (${item.brand})`).join('\n')}\n\n¿Cuál es el precio actual?`;
+      const message = `Hola, quiero información sobre estos perfumes:\n\n${cart.map(item => `• ${item.name} (${item.brand}) - Cantidad: ${item.quantity}`).join('\n')}\n\n¿Cuál es el precio actual?`;
       const encoded = encodeURIComponent(message);
       window.open(`https://wa.me/59892436816?text=${encoded}`, '_blank');
     }
@@ -1315,31 +1191,19 @@ const catalog = [
       }
     }
 
-    function filterByCategory(type) {
-      if (type === 'all') {
-        currentFilters = { gender: '', type: '', brand: '' };
-        document.querySelectorAll('.filter-select').forEach(el => el.value = '');
-      } else if (['hombre', 'mujer', 'unisex'].includes(type)) {
-        currentFilters.gender = type;
-        document.getElementById('genderFilter').value = type;
-      } else if (['arabe', 'nicho', 'diseñador'].includes(type)) {
-        currentFilters.type = type;
-        document.getElementById('typeFilter').value = type;
-      }
-      applyFilters();
+    // ========== FILTERS & SEARCH ==========
+    function populateBrandFilter() {
+      const brands = [...new Set(catalog.map(p => p.brand))].sort();
+      const select = document.getElementById('brandFilter');
+      select.innerHTML = '<option value="">Marca: Todas</option>' + brands.map(b => `<option value="${b}">${b}</option>`).join('');
     }
 
     function applyFilters() {
-      currentFilters.gender = document.getElementById('genderFilter').value;
-      currentFilters.type = document.getElementById('typeFilter').value;
-      currentFilters.brand = document.getElementById('brandFilter').value;
+      const brand = document.getElementById('brandFilter').value;
       const sort = document.getElementById('sortFilter').value;
+      let result = [...catalog];
 
-      let result = getAllProducts();
-
-      if (currentFilters.gender) result = result.filter(p => p.gender === currentFilters.gender);
-      if (currentFilters.type) result = result.filter(p => p.category === typeToCategory(currentFilters.type));
-      if (currentFilters.brand) result = result.filter(p => p.brand === currentFilters.brand);
+      if (brand) result = result.filter(p => p.brand === brand);
 
       if (sort === 'name') result.sort((a, b) => a.name.localeCompare(b.name));
       else if (sort === 'brand') result.sort((a, b) => a.brand.localeCompare(b.brand));
@@ -1348,14 +1212,20 @@ const catalog = [
       renderProducts(result);
     }
 
-    function typeToCategory(type) {
-      return { 'arabe': 'Perfumes Árabes', 'nicho': 'De Nicho', 'diseñador': 'De Diseñador' }[type] || '';
-    }
-
-    function populateBrandFilter() {
-      const brands = [...new Set(getAllProducts().map(p => p.brand))].sort();
-      const select = document.getElementById('brandFilter');
-      select.innerHTML = '<option value="">Marca: Todas</option>' + brands.map(b => `<option value="${b}">${b}</option>`).join('');
+    function setupCatalogSearch() {
+      const input = document.getElementById('catalogSearch');
+      input.addEventListener('input', function() {
+        const query = this.value.toLowerCase().trim();
+        let result = catalog;
+        if (query.length > 0) {
+          result = catalog.filter(p => 
+            p.name.toLowerCase().includes(query) || 
+            p.brand.toLowerCase().includes(query)
+          );
+        }
+        filteredProducts = result;
+        renderProducts(result);
+      });
     }
 
     function setupSearch() {
@@ -1369,25 +1239,23 @@ const catalog = [
           return;
         }
 
-        const matches = getAllProducts().filter(p => 
+        const matches = catalog.filter(p => 
           p.name.toLowerCase().includes(query) || 
-          p.brand.toLowerCase().includes(query) ||
-          p.category.toLowerCase().includes(query)
+          p.brand.toLowerCase().includes(query)
         ).slice(0, 8);
 
         if (matches.length) {
           results.innerHTML = matches.map(p => `
             <div class="search-result-item" onclick="selectSearchResult('${p.id}')">
               <div class="result-name">${p.name}</div>
-              <div class="result-brand">${p.brand} • ${p.category}</div>
+              <div class="result-brand">${p.brand}</div>
             </div>
           `).join('');
           results.style.display = 'block';
         } else {
-          results.innerHTML = '<div class="search-result-item" style="text-align: center; color: rgba(224, 224, 224, 0.5);">Sin resultados</div>';
+          results.innerHTML = '<div class="search-result-item" style="text-align: center; color: rgba(232, 232, 232, 0.5);">Sin resultados</div>';
           results.style.display = 'block';
         }
-        lucide.createIcons();
       });
 
       document.addEventListener('click', function(e) {
@@ -1402,17 +1270,19 @@ const catalog = [
       openCart();
     }
 
+    // ========== UTILITIES ==========
     function scrollToSection(id) {
       const element = document.getElementById(id);
       if (element) element.scrollIntoView({ behavior: 'smooth' });
     }
 
+    // ========== EVENT LISTENERS ==========
     document.getElementById('cartToggle').addEventListener('click', openCart);
 
-    // Element SDK Integration
+    // ========== ELEMENT SDK ==========
     const defaultConfig = {
       store_name: 'Kafatemor Perfumes',
-      tagline: 'Perfumes árabes, de nicho y de diseñador al mejor precio.',
+      tagline: 'Descubre nuestra colección exclusiva de perfumes',
       about_text: 'Somos una perfumería online con base en Montevideo y Rocha.'
     };
 
@@ -1439,16 +1309,13 @@ const catalog = [
       ])
     };
 
-    window.elementSdk.init(elementConfig);
+    if (window.elementSdk) {
+      window.elementSdk.init(elementConfig);
+    }
 
     // Initialize
     init();
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9dc86b0f45ed634f',t:'MTc3MzU0NTIwMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9dcdb9c2f146634f',t:'MTc3MzYwMDg1NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
 
-    init();
-  </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9dc8604cf4a3db36',t:'MTc3MzU0NDc2Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
-</html>

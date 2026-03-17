@@ -1566,20 +1566,12 @@
     }
 
     function setupCatalogSearch() {
-      const input = document.getElementById('catalogSearch');
-      input.addEventListener('input', function() {
-        const query = this.value.toLowerCase().trim();
-        let result = catalog;
-        if (query.length > 0) {
-          result = catalog.filter(p => 
-            p.name.toLowerCase().includes(query) || 
-            p.brand.toLowerCase().includes(query)
-          );
-        }
-        filteredProducts = result;
-        applyFilters();
-      });
-    }
+  const input = document.getElementById('catalogSearch');
+
+  input.addEventListener('input', function() {
+    applyFilters();
+  });
+}
 
     function setupSearch() {
       const input = document.getElementById('searchInput');

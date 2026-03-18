@@ -1478,36 +1478,50 @@ document.getElementById('priceFilter')?.addEventListener('change', applyFilters)
     }
 
     function updateCart() {
-      const itemsList = document.getElementById('cartItemsList');
-      const checkoutBtn = document.getElementById('checkoutBtn');
-      const cartBadge = document.getElementById('cartBadge');
-      const cartTotal = document.getElementById('cartTotal');
+   function updateCart() {
+  const itemsList = document.getElementById('cartItemsList');
+  const checkoutBtn = document.getElementById('checkoutBtn');
+  const cartBadge = document.getElementById('cartBadge');
+  const cartTotal = document.getElementById('cartTotal');
 
-      if (cart.length === 0) {
-        itemsList.innerHTML = '<div class="empty-cart"><div class="empty-cart-icon">🛍️</div><p>Tu carrito está vacío</p></div>';
-        checkoutBtn.disabled = true;
-        cartBadge.style.display = 'none';
-      } else {
-        itemsList.innerHTML = cart.map(item => `
-          <div class="cart-item">
-            <div class="cart-item-info">
-              <div class="cart-item-name">${item.name}</div>
-              <div class="cart-item-brand">${item.brand}</div>
-            </div>
-            <div class="cart-item-controls">
-              <button class="qty-btn" onclick="updateQuantity('${item.id}', -1)">−</button>
-              <span class="cart-qty">${item.quantity}</span>
-              <button class="qty-btn" onclick="updateQuantity('${item.id}', 1)">+</button>
-              <button class="cart-remove" onclick="removeFromCart('${item.id}')">Quitar</button>
-            </div>
-          </div>
-        `).join('');
-        checkoutBtn.disabled = false;
-        cartBadge.textContent = cart.length;
-        cartBadge.style.display = 'flex';
-      }
-      cartTotal.textContent = cart.length;
-    }
+  let total = 0;
+
+  if (cart.length === 0) {
+    itemsList.innerHTML = '<div class="empty-cart"><div class="empty-cart-icon">🛍️</div><p>Tu carrito está vacío</p></div>';
+    checkoutBtn.disabled = true;
+    cartBadge.style.display = 'none';
+    cartTotal.textContent = '$0';
+    return;
+  }
+
+  itemsList.innerHTML = cart.map(item => {
+    const price = Number(prices[item.id]) || 0;
+    const subtotal = price * item.quantity;
+    total += subtotal;
+
+    return `
+      <div class="cart-item">
+        <div class="cart-item-info">
+          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-brand">${item.brand}</div>
+          <div style="color:#d4af37; font-size:12px;">$${price} x ${item.quantity} = $${subtotal}</div>
+        </div>
+        <div class="cart-item-controls">
+          <button class="qty-btn" onclick="updateQuantity('${item.id}', -1)">−</button>
+          <span class="cart-qty">${item.quantity}</span>
+          <button class="qty-btn" onclick="updateQuantity('${item.id}', 1)">+</button>
+          <button class="cart-remove" onclick="removeFromCart('${item.id}')">Quitar</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  checkoutBtn.disabled = false;
+  cartBadge.textContent = cart.length;
+  cartBadge.style.display = 'flex';
+
+  cartTotal.textContent = `$${total}`;
+}
 
     function openCart() {
       document.getElementById('cartSidebar').classList.add('active');
@@ -1518,6 +1532,7 @@ document.getElementById('priceFilter')?.addEventListener('change', applyFilters)
     }
 
     function checkout() {
+  function checkout() {
   if (cart.length === 0) return;
 
   let total = 0;

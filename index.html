@@ -699,13 +699,31 @@
      <div class="filter-bar">
       <div class="search-box"><input type="text" id="catalogSearch" class="search-input-full" placeholder="🔍 Buscar por nombre o marca...">
       </div>
-<select class="filter-select" id="sortFilter" onchange="applyFilters()">
-  <option value="name">Ordenar: A-Z</option>
-  <option value="brand">Por Marca</option>
-  <option value="popularity">Más Popular</option>
-  <option value="price-asc">Precio: menor a mayor</option>
-  <option value="price-desc">Precio: mayor a menor</option>
-</select>
+<div class="filters">
+
+  <!-- 🏷️ FILTRO POR MARCA -->
+  <select id="brandFilter" class="filter-select" onchange="applyFilters()">
+    <option value="">Marca: Todas</option>
+  </select>
+
+  <!-- 💰 FILTRO POR PRECIO -->
+  <select id="priceFilter" class="filter-select" onchange="applyFilters()">
+    <option value="">Precio: Todos</option>
+    <option value="0-2000">Menos de $2000</option>
+    <option value="2000-4000">$2000 - $4000</option>
+    <option value="4000-8000">$4000 - $8000</option>
+    <option value="8000-99999">Más de $8000</option>
+  </select>
+
+  <!-- 🔽 ORDENAMIENTO -->
+  <select id="sortFilter" class="filter-select" onchange="applyFilters()">
+    <option value="name">Ordenar: A-Z</option>
+    <option value="brand">Por Marca</option>
+    <option value="price-asc">Precio: menor a mayor</option>
+    <option value="price-desc">Precio: mayor a menor</option>
+  </select>
+
+</div>
       </div>
      </div>
      <div id="productsList" class="products-grid"></div>
@@ -1366,8 +1384,10 @@
       populateBrandFilter();
       setupSearch();
       setupCatalogSearch();
+    document.getElementById('brandFilter')?.addEventListener('change', applyFilters);
+document.getElementById('sortFilter')?.addEventListener('change', applyFilters);
+document.getElementById('priceFilter')?.addEventListener('change', applyFilters);
     }
-
     // ========== RENDER PRODUCTS ==========
     function renderProducts(products) {
       const list = document.getElementById('productsList');
@@ -1498,11 +1518,23 @@
     }
 
     function checkout() {
-      if (cart.length === 0) return;
-      const message = `Hola, quiero información sobre estos perfumes:\n\n${cart.map(item => `• ${item.name} (${item.brand}) - Cantidad: ${item.quantity}`).join('\n')}\n\n¿Cuál es el precio actual?`;
-      const encoded = encodeURIComponent(message);
-      window.open(`https://wa.me/59892833236?text=${encoded}`, '_blank');
-    }
+  if (cart.length === 0) return;
+
+  let total = 0;
+
+  const itemsText = cart.map(item => {
+    const price = Number(prices[item.id]) || 0;
+    const subtotal = price * item.quantity;
+    total += subtotal;
+
+    return `• ${item.name} (${item.brand}) x${item.quantity} = $${subtotal}`;
+  }).join('\n');
+
+  const message = `Hola! Quiero comprar:\n\n${itemsText}\n\n💰 Total: $${total}`;
+
+  const encoded = encodeURIComponent(message);
+  window.open(`https://wa.me/59892833236?text=${encoded}`, '_blank');
+}
 
     function saveCartToStorage() {
       localStorage.setItem('kafatemor-cart', JSON.stringify(cart));
@@ -1524,14 +1556,17 @@
 function populateBrandFilter() {
   const brands = [...new Set(catalog.map(p => p.brand))].sort();
   const select = document.getElementById('brandFilter');
+  if (!select) return;
+
   select.innerHTML = '<option value="">Marca: Todas</option>' + 
     brands.map(b => `<option value="${b}">${b}</option>`).join('');
 }
 
 function applyFilters() {
-  const brand = document.getElementById('brandFilter').value;
-  const sort = document.getElementById('sortFilter').value;
-  const searchQuery = document.getElementById('catalogSearch').value.toLowerCase().trim();
+  const brand = document.getElementById('brandFilter')?.value;
+  const sort = document.getElementById('sortFilter')?.value;
+  const searchQuery = document.getElementById('catalogSearch')?.value.toLowerCase().trim() || '';
+  const priceRange = document.getElementById('priceFilter')?.value;
 
   let result = [...catalog];
 
@@ -1548,7 +1583,17 @@ function applyFilters() {
     result = result.filter(p => p.brand === brand);
   }
 
-  // 🔽 ORDENAMIENTO (FIX REAL)
+  // 💰 FILTRO POR PRECIO
+  if (priceRange) {
+    const [min, max] = priceRange.split('-').map(Number);
+
+    result = result.filter(p => {
+      const price = Number(prices[p.id]) || 0;
+      return price >= min && price <= max;
+    });
+  }
+
+  // 🔽 ORDENAMIENTO
   if (sort === 'name') {
     result.sort((a, b) => a.name.localeCompare(b.name));
   } 
@@ -1572,19 +1617,22 @@ function applyFilters() {
 
   filteredProducts = result;
   renderProducts(result);
+ console.log(`Productos encontrados: ${result.length}`);
 }
 
 function setupCatalogSearch() {
   const input = document.getElementById('catalogSearch');
+  if (!input) return;
 
   input.addEventListener('input', function() {
-    applyFilters(); // 🔥 SIEMPRE usar esto
+    applyFilters();
   });
 }
 
 function setupSearch() {
   const input = document.getElementById('searchInput');
   const results = document.getElementById('searchResults');
+  if (!input || !results) return;
 
   input.addEventListener('input', function() {
     const query = this.value.toLowerCase().trim();

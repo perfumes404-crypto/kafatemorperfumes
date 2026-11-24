@@ -1,0 +1,3 @@
+import {configured,supa} from '../src/db.js';import products from '../data/catalog.json' with {type:'json'};import settings from '../data/settings.json' with {type:'json'};
+if(!configured())throw new Error('Completá las variables de entorno antes de importar.');
+for(let i=0;i<products.length;i+=100)await supa('/rest/v1/products?on_conflict=id',{method:'POST',service:true,headers:{Prefer:'resolution=ignore-duplicates,return=minimal'},body:products.slice(i,i+100).map(p=>({id:p.id,data:p}))});await supa('/rest/v1/shop_settings?on_conflict=id',{method:'POST',service:true,headers:{Prefer:'resolution=ignore-duplicates,return=minimal'},body:{id:'main',data:settings}});console.log('Importados los registros faltantes; no se sobrescribieron ediciones existentes.');

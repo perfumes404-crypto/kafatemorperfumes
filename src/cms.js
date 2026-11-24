@@ -1,0 +1,28 @@
+import {supa,configured,getProducts,getSettings} from './db.js';
+import {validateProduct,validateSettings,validImage} from './model.js';
+import {createHash, timingSafeEqual, randomUUID} from 'node:crypto';
+import defaults from '../data/settings.json' with {type:'json'};
+import original from '../data/catalog.json' with {type:'json'};
+export async function workspace(init=false){
+ if(!configured()){const data={products:original,settings:defaults};return {draft:data,published:data,revision:0,published_revision:0};}
+ let rows=await supa('/rest/v1/cms_workspace?id=eq.main&select=*',{service:true});
+ if(rows[0]){const w=rows[0];for(const k of ['draft','published'])w[k].settings={...defaults,...w[k].settings};return w;}
+ const products=await getProducts(),settings=await getSettings();const data={products:products.length?products:original,settings:{...defaults,...settings}};
+ if(!init)return {draft:data,published:data,revision:0,published_revision:0};
+ await supa('/rest/v1/cms_workspace?on_conflict=id',{method:'POST',service:true,headers:{Prefer:'resolution=ignore-duplicates,return=minimal'},body:{id:'main',draft:data,published:data}});
+ rows=await supa('/rest/v1/cms_workspace?id=eq.main&select=*',{service:true});if(!rows[0])throw Error('No se pudo inicializar el CMS');return rows[0];
+}
+export const pending=w=>JSON.stringify(w.draft)!==JSON.stringify(w.published);
+export const details=w=>({revision:w.revision,publishedRevision:w.published_revision,pending:pending(w),changedAt:w.changed_at,changedBy:w.changed_by});
+export async function commit(w,operation,user,next=w.draft,restoreId=null){try{return await supa('/rest/v1/rpc/cms_commit',{method:'POST',service:true,body:{expected:w.revision,next_draft:next,operation,actor_email:user.email,restore_id:restoreId}})}catch(e){if(e.status===409)throw Object.assign(Error('Hubo cambios en otro dispositivo. Recargá antes de guardar.'),{status:409});throw e}}
+export function checkRevision(w,b){if(!Number.isSafeInteger(b.revision)||b.revision!==w.revision)throw Object.assign(Error('Hay una versión más reciente. Recargá antes de guardar.'),{status:409})}
+export async function history(){return await supa('/rest/v1/cms_versions?select=id,revision,actor,created_at,action&order=id.desc&limit=100',{service:true})}
+const cloud=()=>({name:process.env.CLOUDINARY_CLOUD_NAME,key:process.env.CLOUDINARY_API_KEY,secret:process.env.CLOUDINARY_API_SECRET});
+export const mediaReady=()=>{const c=cloud();return /^[a-zA-Z0-9_-]+$/.test(c.name||'')&&!!c.key&&!!c.secret};
+const sign=(params,secret)=>createHash('sha256').update(Object.keys(params).sort().map(k=>`${k}=${params[k]}`).join('&')+secret).digest('hex');
+export function uploadTicket(){if(!mediaReady())throw Error('Configurá Cloudinary para subir imágenes y convertir HEIC/HEIF.');const c=cloud();const params={timestamp:Math.floor(Date.now()/1000),public_id:'kafatemor/'+randomUUID(),overwrite:'false',allowed_formats:'heic,heif,jpg,jpeg,png,webp,avif',format:'webp',transformation:'a_auto/c_limit,w_1800,h_1800/q_auto:good,fl_force_strip'};return {url:`https://api.cloudinary.com/v1_1/${c.name}/image/upload`,fields:{...params,api_key:c.key,signature:sign(params,c.secret)}}}
+export async function registerMedia(b){const c=cloud();if(!mediaReady()||!/^kafatemor\/[a-f0-9-]{36}$/.test(b.public_id||'')||!/^\d{1,15}$/.test(String(b.version)))throw Error('Imagen inválida');const sig=String(b.signature||'');const payload=`public_id=${b.public_id}&version=${b.version}${c.secret}`;const valid=['sha1','sha256'].some(alg=>{const expected=createHash(alg).update(payload).digest('hex');return sig.length===expected.length&&timingSafeEqual(Buffer.from(sig),Buffer.from(expected))});if(!valid)throw Error('Firma multimedia inválida');
+ // Verificar metadatos contra API autenticada, no confiar en los valores enviados por el navegador.
+ const res=await fetch(`https://api.cloudinary.com/v1_1/${c.name}/resources/image/upload/${encodeURIComponent(b.public_id)}`,{headers:{Authorization:'Basic '+Buffer.from(c.key+':'+c.secret).toString('base64')},signal:AbortSignal.timeout(12000)});if(!res.ok)throw Error('No se pudo verificar la imagen cargada.');const asset=await res.json();if(asset.format!=='webp'||asset.version!==Number(b.version)||asset.width>1800||asset.height>1800||asset.width<1||asset.height<1)throw Error('La imagen no fue normalizada correctamente.');const url=`https://res.cloudinary.com/${c.name}/image/upload/v${asset.version}/${b.public_id}.webp`;const data={url,name:String(b.name||'Fotografía').slice(0,180),alt:'',folder:'',width:asset.width,height:asset.height,bytes:asset.bytes,format:'webp',archived:false};await supa('/rest/v1/cms_media?on_conflict=id',{method:'POST',service:true,headers:{Prefer:'resolution=ignore-duplicates,return=minimal'},body:{id:b.public_id,data}});return data;}
+export async function listMedia(){let all=[];for(let i=0;i<10000;i+=500){const r=await supa(`/rest/v1/cms_media?select=id,data,created_at&order=created_at.desc&limit=500&offset=${i}`,{service:true});all.push(...r);if(r.length<500)break}return all}
+export async function editMedia(b,w){const rows=await listMedia(),item=rows.find(x=>x.id===b.id);if(!item)throw Error('Imagen no encontrada');if(b.archived===true&&JSON.stringify([w.published,w.draft]).includes(item.data.url))throw Error('La imagen está en uso. Quitala del contenido y publicá antes de archivarla.');const data={...item.data,name:String(b.name??item.data.name).slice(0,180),alt:String(b.alt??item.data.alt).slice(0,250),folder:String(b.folder??item.data.folder).slice(0,100),archived:b.archived===true};await supa('/rest/v1/cms_media?id=eq.'+encodeURIComponent(b.id),{method:'PATCH',service:true,body:{data}});return data;}

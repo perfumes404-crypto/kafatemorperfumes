@@ -1,4 +1,6 @@
 import fs from 'node:fs/promises';import {execFileSync} from 'node:child_process';import catalog from '../data/catalog.json' with {type:'json'};import {validateProduct} from '../src/model.js';
+await fs.mkdir('public/assets/vendor',{recursive:true});
+for(const [src,dst] of [['node_modules/heic-to/dist/csp/heic-to.js','heic-to.js'],['node_modules/pako/dist/pako.min.js','pako.js'],['node_modules/utif/UTIF.js','utif.js']])await fs.copyFile(src,'public/assets/vendor/'+dst);
 for(const p of catalog){validateProduct(p);for(const x of p.images){await fs.access('public'+x);await fs.access('public'+x.replace('.webp','-thumb.webp'))}}
 for(const x of ['model','view','cms-fields'])await fs.copyFile(`src/${x}.js`,`public/assets/${x}.js`);
 for(const dir of ['src','public/assets','api','scripts','tests'])for(const file of await fs.readdir(dir))if(file.endsWith('.js'))execFileSync(process.execPath,['--check',`${dir}/${file}`],{stdio:'inherit'});execFileSync(process.execPath,['--check','server.js']);console.log(`Validación de producción: ${catalog.length} productos e imágenes, módulos sintácticamente válidos.`);
